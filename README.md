@@ -1,6 +1,9 @@
 **WhenToMeet**
 https://www.when2meet.com/?6863817-Dy1bm
 
+**Lucichart**
+https://www.lucidchart.com/invitations/accept/eff342fb-fe10-4132-87b1-7918baf8c959
+
 # Garbage-Collector
 **Tutorials here**
 - Github (https://education.github.com/git-cheat-sheet-education.pdf) 
