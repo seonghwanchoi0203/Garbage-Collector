@@ -1,6 +1,7 @@
 # Garbage-Collector
 **Tutorials here**
 - Github (https://education.github.com/git-cheat-sheet-education.pdf) 
+- Git (https://gist.github.com/derhuerst/1b15ff4652a867391f03)
 - Brew (https://brew.sh/)
 - Django (https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/skeleton_website)
 - Postgres   (http://www.postgresql.org)
