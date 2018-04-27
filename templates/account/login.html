@@ -1,0 +1,78 @@
+{% load i18n %}
+{% load account socialaccount %}
+{% load staticfiles %}
+<html lang="en" ng-app="TestApp">
+
+{% block head_title %}
+{% include "header.html" %}
+        <link   rel="stylesheet" 
+                href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+        <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+        <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+        <style type="text/css">
+            html, body {
+                width:100%;
+                height:100%;
+
+            }
+
+            body {
+                padding-top:52px;
+            }
+            .panel {
+                margin-top: 100px;
+                width:30%;
+                height:50%;
+
+            }
+            #panel_primary{
+              display: inline-block;
+              margin-left: auto;
+              margin-right: auto;
+            }
+          </style>
+{% endblock %}
+
+<body style= "text-align:center">
+<div id="fb-root"></div>
+
+
+<div id="panel_primary" class="panel panel-primary" align="center">
+  <div class="panel-heading">
+    <h3 class="panel-title">{% trans "Sign In" %}</h3>
+  </div>
+  <div class="panel-body" align="center">
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %}Sign in using: {% endblocktrans %}</p>
+
+<div class="socialaccount_ballot">
+<a href="/accounts/google/login/?process=login">google</a>
+
+  <div class="login-or">{% trans 'or' %}</div>
+
+</div>
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>{% blocktrans %}If you have not created an account yet, yolo.
+<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+{% endif %}
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+</form>
+<p>
+Or, <a href="{{ signup_url }}">sign up</a>
+for an account.<p>
+  </div>
+</div>
+</body>

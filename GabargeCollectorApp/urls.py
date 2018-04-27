@@ -21,7 +21,8 @@ from userprof import views as userprof_views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url('accounts/', include('django.contrib.auth.urls')),
+    #url('accounts/', include('django.contrib.auth.urls')),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^$', garbage_views.home, name='home'),
 	url('home/', garbage_views.home, name='home'),
 	url('about',garbage_views.about,name = 'about'),

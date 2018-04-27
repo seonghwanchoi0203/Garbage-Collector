@@ -1,0 +1,51 @@
+{% load i18n %}
+{% load account socialaccount %}
+{% load staticfiles %}
+<html lang="en" ng-app="TestApp">
+
+<head>
+{% include "header.html" %}
+        <link   rel="stylesheet" 
+                href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+        <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+        <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+        <style type="text/css">
+            html, body {
+                width:100%;
+                height:100%;
+
+            }
+
+            body {
+                padding-top:52px;
+            }
+            .panel {
+                margin-top: 100px;
+                width:30%;
+                height:50%;
+
+            }
+            #panel_primary{
+              display: inline-block;
+              margin-left: auto;
+              margin-right: auto;
+            }
+          </style>
+</head>
+{% trans "Sign Out" %}
+
+<h1>{% trans "Sign Out" %}</h1>
+
+<p>{% trans 'Are you sure you want to sign out?' %}</p>
+
+<form method="post" action="{% url 'account_logout' %}">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+  {% endif %}
+  <button type="submit">{% trans 'Sign Out' %}</button>
+</form>
+
+
+

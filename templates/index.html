@@ -6,9 +6,10 @@
         <p>Hello World Garbage Collectors</p>
         {% if user.is_authenticated %}
          <a href="/profile"><i class="glyphicon glyphicon-log-in"></i> &nbsp;Profile</a>
+         <a href="/accounts/logout"><i class="glyphicon glyphicon-log-out"></i> &nbsp;Logout</a>
         {% else %}
         <a href="/accounts/login"><i class="glyphicon glyphicon-log-in"></i> &nbsp;Login</a>
-        <a href="/about"><i class="glyphicon glyphicon-question-sign"></i> &nbsp;About</a></li>
+        <a href="/about"><i class="glyphicon glyphicon-question-sign"></i> &nbsp;About</a>
         {% endif %}
     </body>
 </html>
