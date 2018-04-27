@@ -37,13 +37,13 @@ Links to the above packages and dependencies can be found here:
 
 **Enter the developer python environment**
 
--Make sure your python3.6 is named as python3
+Make sure your python3.6 is named as python3
 
 ```sh
-$ source develop.sh
+$ cd Garbage-Collector && source develop.sh
 ```
 
 **Usage**
 ```sh
-cd Garbage-Collector && python3 manage.py runserver
+$ python3 manage.py runserver
 ```
