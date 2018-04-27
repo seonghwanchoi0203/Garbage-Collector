@@ -47,3 +47,10 @@ $ cd Garbage-Collector && source develop.sh
 ```sh
 $ python3 manage.py runserver
 ```
+
+Open a brower and type 
+
+```sh
+$ http://127.0.0.1:8000/
+```
+
