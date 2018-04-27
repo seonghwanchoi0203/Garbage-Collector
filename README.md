@@ -35,3 +35,22 @@ Links to the above packages and dependencies can be found here:
 - python-dev (http://packages.ubuntu.com/precise/python-dev)
 
 
+**Enter the developer python environment**
+
+Make sure your python3.6 is named as python3
+
+```sh
+$ cd Garbage-Collector && source develop.sh
+```
+
+**Usage**
+```sh
+$ python3 manage.py runserver
+```
+
+Open a brower and type 
+
+```sh
+$ http://127.0.0.1:8000/
+```
+
