@@ -23,5 +23,7 @@ urlpatterns = [
     url('accounts/', include('django.contrib.auth.urls')),
     url(r'^$', garbage_views.home, name='home'),
 	url('home/', garbage_views.home, name='home'),
+	url('about',garbage_views.about,name = 'about'),
+	
 ]
 
