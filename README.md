@@ -35,3 +35,7 @@ Links to the above packages and dependencies can be found here:
 - python-dev (http://packages.ubuntu.com/precise/python-dev)
 
 
+**Usage**
+```sh
+cd Garbage-Collector && python3 manage.py runserver
+```
