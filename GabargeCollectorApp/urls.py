@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 from garbage import views as garbage_views
+from userprof import views as userprof_views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
@@ -24,6 +25,6 @@ urlpatterns = [
     url(r'^$', garbage_views.home, name='home'),
 	url('home/', garbage_views.home, name='home'),
 	url('about',garbage_views.about,name = 'about'),
-	
+	url('profile',userprof_views.profile,name = 'profile'),
 ]
 
