@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
+from garbage import views as garbage_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    url('admin/', admin.site.urls),
+    url('accounts/', include('django.contrib.auth.urls')),
+    url(r'^$', garbage_views.home, name='home'),
+	url('home/', garbage_views.home, name='home'),
 ]
 
