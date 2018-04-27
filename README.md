@@ -36,7 +36,9 @@ Links to the above packages and dependencies can be found here:
 
 
 **Enter the developer python environment**
-make sure your python3.6 is named as python3
+
+-Make sure your python3.6 is named as python3
+
 ```sh
 $ source develop.sh
 ```
