@@ -2,47 +2,28 @@
 {% load account socialaccount %}
 {% load staticfiles %}
 <html>
-        <link   rel="stylesheet" 
+        <link   rel="stylesheet"
                 href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
         <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
         <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
-    {% include "header.html" %}
+
     <head>
         <title>Hello world</title>
+        <link rel="stylesheet" href="{% static "bower_components/css/index.css" %}">
     </head>
 
-    <style>
-            html, body {
-                background-color:lightgrey;
-                width:100%;
-                min-height:100%;
-                margin:0;
-                padding:0;
-            }
-            body {
-                padding-top:52px;
-            }
-            #main {
-                position:absolute;
-                bottom:0;
-                top:52px;
-                background-color:white;
-                width:70%;
-                margin-left:15%;
-                margin-right:15%;
-    </style>
     <body>
+      {% include "header.html" %}
+      <p>Hello World</p>
         <div>
-        <p>Hello World Garbage Collectors</p>
-
-        {% if user.is_authenticated %}
-         <a href="/profile"><i class="glyphicon glyphicon-log-in"></i> &nbsp;Profile</a>
-         <a href="/accounts/logout"><i class="glyphicon glyphicon-log-out"></i> &nbsp;Logout</a>
-        {% else %}
-        <a href="/accounts/login"><i class="glyphicon glyphicon-log-in"></i> &nbsp;Login</a>
-        <a href="/about"><i class="glyphicon glyphicon-question-sign"></i> &nbsp;About</a>
-        {% endif %}
+          {% if user.is_authenticated %}
+           <a href="/profile"><i class="glyphicon glyphicon-log-in"></i> &nbsp;Profile</a>
+           <a href="/accounts/logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+          {% else %}
+          <a href="/accounts/login"><i class="glyphicon glyphicon-log-in"></i> Login</a>
+          <a href="/about"><i class="glyphicon glyphicon-question-sign"></i> &nbsp;About</a>
+          {% endif %}
         </div>
+        {% include "footer.html" %}
     </body>
-    {% include "footer.html" %}
 </html>
