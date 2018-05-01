@@ -1,0 +1,60 @@
+body{
+  background-image: url(../../media/a.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color:lightgrey; */
+  width:100%;
+  min-height:100%;
+  margin:0;
+  padding:0;
+}
+
+
+.thumbnail img{
+  width:200px;
+  height: 200px;
+}
+
+#footer_main_page{
+  position: absolute;
+  width: 100%;
+  background-color: black;
+  color:grey;
+  font-size: 20px;
+  margin-bottom: 0;
+  border: 1px solid black;
+}
+
+#footer_sub_page{
+  position: absolute;
+  width: 100%;
+  background-color: black;
+  color:grey;
+  font-size: 20px;
+  bottom:0;
+}
+
+#uhaul_link{
+  color:orange;
+}
+
+#uhaul_icon{
+  height:30px;
+  weight:30px;
+}
+
+#transparent_button{
+  display: block;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 8px;
+  width: 80%;
+  max-width: 200px;
+  background: rgba(30, 52, 142, 0.5);
+  border-radius: 8px;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-out;
+}

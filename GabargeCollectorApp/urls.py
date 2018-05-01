@@ -27,5 +27,6 @@ urlpatterns = [
 	url('home/', garbage_views.home, name='home'),
 	url('about',garbage_views.about,name = 'about'),
 	url('profile',userprof_views.profile,name = 'profile'),
+    url('contact',garbage_views.contact,name = 'contact'),
 ]
 
