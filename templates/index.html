@@ -6,7 +6,6 @@
                 href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
         <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
         <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
-
     <head>
         <title>Hello world</title>
         <link rel="stylesheet" href="{% static "bower_components/css/index.css" %}">
@@ -14,16 +13,93 @@
 
     <body>
       {% include "header.html" %}
-      <p>Hello World!!!</p>
-        <div>
-          {% if user.is_authenticated %}
-           <a href="/profile"><i class="glyphicon glyphicon-log-in"></i> &nbsp;Profile</a>
-           <a href="/accounts/logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-          {% else %}
-          <a href="/accounts/login"><i class="glyphicon glyphicon-log-in"></i> Login</a>
-          <a href="/about"><i class="glyphicon glyphicon-question-sign"></i> &nbsp;About</a>
-          {% endif %}
+      <div class="container">
+        <div class="jumbotron">
+          <h1>Hello World!</h1>
         </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="thumbnail">
+              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+        {% if user.is_authenticated %}
+         <a href="/profile"><i class="glyphicon glyphicon-log-in"></i> &nbsp;Profile</a>
+         <a href="/accounts/logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+        {% else %}
+        <a href="/accounts/login"><i class="glyphicon glyphicon-log-in"></i> Login</a>
+        <a href="/about"><i class="glyphicon glyphicon-question-sign"></i> &nbsp;About</a>
+        {% endif %}
+      </div>
+      <div id="footer">
         {% include "footer.html" %}
+      </div>
     </body>
 </html>
