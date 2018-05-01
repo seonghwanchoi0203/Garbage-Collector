@@ -11,12 +11,21 @@ body{
   height: 200px;
 }
 
-#footer{
-  position:absolute;
+#footer_main_page{
+  position: absolute;
   width: 100%;
-  bottom: 0;
   background-color: black;
   color:grey;
   font-size: 20px;
   text-align: center;
+}
+
+#footer_sub_page{
+  position: absolute;
+  width: 100%;
+  background-color: black;
+  color:grey;
+  font-size: 20px;
+  text-align: center;
+  bottom:0;
 }
