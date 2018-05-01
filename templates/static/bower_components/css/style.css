@@ -18,7 +18,6 @@ body{
   background-color: black;
   color:grey;
   font-size: 20px;
-  text-align: center;
 }
 
 #footer_sub_page{
@@ -27,6 +26,15 @@ body{
   background-color: black;
   color:grey;
   font-size: 20px;
-  text-align: center;
   bottom:0;
+}
+
+#uhaul_link{
+  color:orange;
+  text-align: right;
+}
+
+#uhaul_icon{
+  height:40px;
+  weight:40px;
 }
