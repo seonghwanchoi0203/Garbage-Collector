@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from garbage.models import Garbage
+
 # Register your models here.
-#from .models import garbage 
-#admin.site.register(garbage)
+admin.site.register(Garbage)
