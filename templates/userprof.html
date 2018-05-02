@@ -1,23 +1,28 @@
-{% load staticfiles %}
 <html>
-  <link rel="stylesheet"
-        href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
-  <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
-  <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
-  <link rel="stylesheet" href="{% static "bower_components/css/style.css" %}">
-  <head>
-        <title>User Profile</title>
-  </head>
-  <body>
-    {% include "header.html" %}
-    <div class="container">
-      <ul>
-        <li>Name: {{user.username}}</li>
-        <li>Email: {{user.email}}</li>
-      </ul>
-    </div>
-    <div id="footer_sub_page">
-      {% include "footer.html" %}
-    </div>
-  </body>
+    <head>
+        <title>UserProf</title>
+    </head>
+    <body>
+        <p>UserProf</p>
+         <div>
+                 <div >
+                    {{ user.username }}
+                 </div>
+                 <div>
+                 	{{user.email}}
+                 </div>
+                <div >
+                    {% if user.extendeduser.adminuser.registered %}
+                    <div>
+                        {% if garbage %}
+                            {% for x in garbage %}
+                                <p> {{x.title }}</p>
+                                <p> {{x.cost }}</p>
+                                <p> {{x.owner}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+    </body>
 </html>
