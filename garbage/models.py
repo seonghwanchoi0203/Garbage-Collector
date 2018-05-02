@@ -30,7 +30,7 @@ class Garbage(models.Model):
     owner = models.ForeignKey(AdminUser, on_delete=models.CASCADE, related_name='owner')
     buyer = models.ForeignKey(ExtendedUser, on_delete=models.CASCADE, related_name='buyer', blank=True, null=True)
 
-    postdate = models.DateField()
+    postdate = models.DateField(default=datetime.date)
     soldDate = models.DateField(blank=True, null=True)
 
     sold = models.BooleanField(default=False)

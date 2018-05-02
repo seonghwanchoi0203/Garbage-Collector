@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1da1985-b9aa-41c3-9d49-0200fd099116" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/garbage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/garbage/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/garbage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/garbage/models.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,11 +42,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/garbage/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
-              <caret line="64" selection-end-line="64" />
+            <state relative-caret-position="418">
+              <caret line="32" column="54" lean-forward="true" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -54,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/garbage/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+            <state relative-caret-position="420">
+              <caret line="43" column="31" lean-forward="true" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
               <folding>
                 <element signature="e#2#45#0" expanded="true" />
               </folding>
@@ -121,11 +121,11 @@
         <option value="$PROJECT_DIR$/GabargeCollectorApp/urls.py" />
         <option value="$PROJECT_DIR$/userprof/models.py" />
         <option value="$PROJECT_DIR$/requirement.txt" />
-        <option value="$PROJECT_DIR$/garbage/models.py" />
         <option value="$PROJECT_DIR$/garbage/form.py" />
         <option value="$PROJECT_DIR$/userprof/views.py" />
         <option value="$PROJECT_DIR$/templates/userprof.html" />
         <option value="$PROJECT_DIR$/garbage/views.py" />
+        <option value="$PROJECT_DIR$/garbage/models.py" />
       </list>
     </option>
   </component>
@@ -286,19 +286,6 @@
         <state relative-caret-position="-350" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/garbage/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/garbage/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/userprof/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -349,22 +336,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/garbage/models.py">
+    <entry file="file://$PROJECT_DIR$/garbage/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="64" selection-end-line="64" />
+        <state relative-caret-position="420">
+          <caret line="43" column="31" lean-forward="true" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#2#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/garbage/views.py">
+    <entry file="file://$PROJECT_DIR$/garbage/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/garbage/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+        <state relative-caret-position="75">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
           <folding>
-            <element signature="e#2#45#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/garbage/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="32" column="54" lean-forward="true" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
