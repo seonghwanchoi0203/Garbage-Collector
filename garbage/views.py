@@ -29,7 +29,11 @@ from django.utils.six.moves.urllib.parse import urlparse
 
 # Create your views here.
 def home(request):
-    return render(request, 'index.html')
+    garbages = Garbage.objects.all()
+    context = {
+        'garbage' : garbages
+    }
+    return render(request, 'index.html', context)
 
 
 def about(request):
