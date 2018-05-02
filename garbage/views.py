@@ -36,6 +36,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+<<<<<<< HEAD
 
 @login_required
 def watch(request):
@@ -73,3 +74,7 @@ def new_item(request):
     elif request.method == 'GET':
         form = GarbageAdd()
     return render(request, "editspot.html", {'form': form})
+
+def contact(request):
+    return render(request, 'contact.html')
+

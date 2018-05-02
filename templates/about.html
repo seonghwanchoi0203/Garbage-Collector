@@ -1,11 +1,24 @@
+{% load i18n %}
+{% load account socialaccount %}
+{% load staticfiles %}
 <html>
+  <link rel="stylesheet"
+        href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+  <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+  <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+  <link rel="stylesheet" href="{% static "bower_components/css/style.css" %}">
     <head>
         <title>Hello world</title>
     </head>
     <body>
-        <p>Garbage Collector.Inc</p>
-        <p>GroupMembers</p>
-        <p>abcd</p> 
-        
+      {% include "header.html" %}
+      <div class="container">
+        <div class="jumbotron">
+          <p>Garbage Collector</p>
+        </div>
+      </div>
+      <div id="footer_sub_page">
+        {% include "footer.html" %}
+      </div>
     </body>
 </html>
