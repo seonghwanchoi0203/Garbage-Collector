@@ -1,11 +1,12 @@
 from garbage.models import Garbage
 from django import forms
+from django.forms import ModelForm
 
-
-class GarbageEdit(forms.ModelForm):
+class GarbageEdit(ModelForm):
     class Meta:
         model = Garbage
-        exclude = ['buyer', 'owner', 'location', 'soldDate', 'watched']
+        fields = ('title', 'zipcode', 'cost', 'condition', 'description')
+        #exclude = ['buyer', 'owner', 'location', 'soldDate', 'watched']
 
 
 class ImageUploadForm(forms.Form):
@@ -13,9 +14,10 @@ class ImageUploadForm(forms.Form):
     image = forms.ImageField()
 
 
-class GarbageAdd(forms.ModelForm):
+class GarbageAdd(ModelForm):
     class Meta:
         model = Garbage
+        #fields = ('title', 'zipcode', 'cost', 'condition', 'description')
         exclude = ['buyer', 'owner', 'location', 'soldDate', 'watched']
 
 

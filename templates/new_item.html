@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        {% include "header.html" %}
+
+        <title>Item_Manageer</title>
+
+        <link   rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+        <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+        <meta charset=utf-8 />
+        <style>
+            html, body {
+                width:100%;
+                height:100%;
+                margin:0;
+            }
+
+            body {
+                padding-top:50px;
+            }
+
+            #editItemContainer {
+                margin-top:20px;
+                margin-left:15%;
+                margin-right:15%;
+            }
+
+            #editHeading {
+                background-color:#4da5ff;
+                color:white;
+                font-size:20px;
+            }
+
+            #infoContainer {
+                margin-left:5%;
+                margin-right:5%;
+            }
+
+            #editSpotForm {
+                margin-bottom:20px;
+            }
+
+            #imageContainer {
+                display:inline-block;
+                width:100%;
+                margin-top:20px;
+            }
+
+            #descriptionFieldContainers textarea {
+                vertical-align:top;
+            }
+
+            .editLabels {
+                display:inline-block;
+                width:125px;
+                margin-right:100px;
+            }
+
+            #street_address,
+            #city,
+            #state,
+            #zipcode,
+            #default_num_spots,
+            #cost {
+                background-color:white;
+                display:inline-block;
+                width:200px;
+                height:25px;
+                padding-left:10px;
+                border-style:solid;
+                border-width:1px;
+                border-color:#4da5ff;
+                border-radius:3px;
+            }
+
+            #state {
+                padding-left:7px;
+            }
+
+            #description {
+                width:400px;
+                height:100px;
+                padding-left:10px;
+                padding-right:10px;
+                padding-top:5px;
+                border-style:solid;
+                border-width:1px;
+                border-color:#4da5ff;
+                border-radius:3px;
+            }
+
+            #updateButton {
+                background-color:#4da5ff;
+                color:white;
+                width:120px;
+                height:40px;
+                margin-left:8px;
+                border-style:solid;
+                border-width:1px;
+                border-color:#4da5ff;
+                border-radius:5px;
+            }
+
+            #cancelButton {
+                width:120px;
+                height:40px;
+                margin-right:8px;
+                border-style:solid;
+                border-width:1px;
+                border-color:lightgrey;
+                border-radius:5px;
+            }
+
+            tr.alt{
+                line-height:20px;
+            }
+        </style>
+
+
+    </head>
+
+    <body>
+        <div id="editItemContainer" class="panel panel-default">
+            <div id="editHeading" class="panel-heading" align='center'>Items</div>
+
+            <div id="infoContainer">
+                <form id="editItemForm" action="/new_item" method="post" enctype="multipart/form-data">
+                    <div id="imageContainer">
+                        <img src="{{instance.photos.url}}" alt="Parking Spot Thumbnail" id="parkingThumbnail"> //todo
+
+                        <input  type="file"
+                                id="photoButton"
+                                name="photos">
+                    </div>
+
+                    <hr>
+
+                    <div class="fieldContainers">
+                        <label  class="editLabels"
+                                for="title">title: </label>
+                        <input  id="title"
+                                type="text"
+                                name="title"
+                                value="{{form.title.value}}">
+                    </div>
+
+                    <div class="fieldContainers">
+                        <label  class="editLabels"
+                                for="zipcode">Zipcode: </label>
+                        <input  id="zipcode"
+                                type="text"
+                                name="zipcode"
+                                value="{{form.zipcode.value}}">
+                    </div>
+
+                    <div class="fieldContainers">
+                        <label  class="editLabels"
+                                for="cost">Cost </label>
+                        <input  id="cost"
+                                type="text"
+                                name="{{form.cost.value}}">
+                    </div>
+
+                    <div class="fieldContainers">
+                        <label  class="editLabels"
+                                for="condition">Condition: </label>
+                        <input  id="condition"
+                                type="text"
+                                name="condition"
+                                value="{{form.condition.value}}">
+                    </div>
+
+                    <hr>
+
+                    <div id="descriptionFieldContainers" class="fieldContainers">
+                        <label  class="editLabels"
+                                for="description">Description: </label>
+                        <textarea   id="description"
+                                    type="text"
+                                    name="description">{{form.description.value}}</textarea>
+                    </div>
+
+                    <hr>
+
+                    <button name="cancel"
+                            type="button"
+                            id="cancelButton"
+                            onClick="history.go(-1);">Cancel</button>
+
+                    <button name="send"
+                            type="send"
+                            id="updateButton"
+                            value="{{pid}}">Confirm</button>
+                    {% csrf_token %}
+                </form>
+            </div>
+        </div>
+    </body>
+
+</html>

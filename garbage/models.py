@@ -19,7 +19,7 @@ class Garbage(models.Model):
     # miss a uni key
     title = models.CharField(max_length=30, blank=True)
     description = models.CharField(max_length=256)
-    cost = models.IntegerField(blank=True, null=True, default=5)
+    cost = models.IntegerField(blank=True, null=True)
     photos = models.ImageField(default='%s/default.png' % settings.MEDIA_URL, upload_to=get_image_path)
     zipcode = models.IntegerField(blank=True, null=True)
     condition = models.IntegerField(blank=True, null=True, default=5)
