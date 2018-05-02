@@ -16,6 +16,13 @@
       <div class="container">
         <div class="jumbotron">
           <h1>Hello World!</h1>
+          {% if garbage %}
+          {% for i in garbage %}
+                <p>{{i.title}}</p>
+                <p>{{i.cost}}</p>
+                <p>{{i.owner}}</p>
+          {% endfor %}
+          {% endif %}
           {% if user.is_authenticated %}
 
           {% else %}
