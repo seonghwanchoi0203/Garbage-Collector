@@ -30,5 +30,7 @@ urlpatterns = [
     url('contact',garbage_views.contact,name = 'contact'),
     url('new_item',garbage_views.new_item,name = 'new_item'),
     url('edit_item', garbage_views.edit_item, name='edit_item'),
+    url('watch', garbage_views.watch, name='watch'),
+    url('editBio',userprof_views.editBio,name = 'editBio'),
 ]
 

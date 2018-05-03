@@ -58,7 +58,7 @@ MIDDLEWARE = [
 ]
 
 SITE_ID = 1
-ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 SOCIALACCOUNT_QUERY_EMAIL = True
 LOGIN_REDIRECT_URL = "/"
@@ -90,6 +90,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
                 # allauth specific context processors
             ],
         },

@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 
 class ExtendedUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
+    bio = models.CharField(max_length=500, blank=True, null=True)
+    location = models.CharField(max_length=30, blank=True, null=True)
 
     # birth_date = models.DateField(null=True, blank=True)
     def __str__(self):
@@ -28,6 +28,7 @@ class AdminUser(models.Model):
 
     def get_allauth_user(self):
         return self.extended_user.user
+
 
 
 @receiver(user_signed_up)

@@ -34,7 +34,7 @@ class Garbage(models.Model):
     soldDate = models.DateField(blank=True, null=True)
 
     sold = models.BooleanField(default=False)
-    watched = models.ManyToManyField(ExtendedUser, blank=True, null=True)
+    watched = models.ManyToManyField(ExtendedUser, blank=True, null=True, through='Watch')
 
     def reserve(self, user, date):
         if self.sold:
@@ -46,19 +46,27 @@ class Garbage(models.Model):
         return 1
 
     # def save(self, *args, **kwargs):
-        # only update location if null. Edit garbage page can handle updating location.
-        # if not self.location:
-        # g = GoogleV3()
-        # p = g.geocode("{}, {}, {} {}".format(self.street_address, self.city, self.state, self.zipcode))
-        # self.location = Point(p.longitude, p.latitude)
+    # only update location if null. Edit garbage page can handle updating location.
+    # if not self.location:
+    # g = GoogleV3()
+    # p = g.geocode("{}, {}, {} {}".format(self.street_address, self.city, self.state, self.zipcode))
+    # self.location = Point(p.longitude, p.latitude)
 
-        # hopefully solves the issue of django default string
-        #   if isinstance(self.amenities, str):
-        #       self.amenities = json.loads(self.amenities)
-        #   if isinstance(self.parking_spot_avail, str):
-        #       self.parking_spot_avail = json.loads(self.parking_spot_avail)
-        #   super(Garbage, self).save(*args, **kwargs)
-
+    # hopefully solves the issue of django default string
+    #   if isinstance(self.amenities, str):
+    #       self.amenities = json.loads(self.amenities)
+    #   if isinstance(self.parking_spot_avail, str):
+    #       self.parking_spot_avail = json.loads(self.parking_spot_avail)
+    #   super(Garbage, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
+
+
+class Watch(models.Model):
+    user = models.ForeignKey(ExtendedUser, on_delete=models.CASCADE)
+    garbage = models.ForeignKey(Garbage, on_delete=models.CASCADE)
+    date_watch = models.DateField()
+
+    def __str__(self):
+        return self.garbage.description

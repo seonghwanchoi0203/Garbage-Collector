@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from garbage.models import Garbage
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
 from userprof.models import ExtendedUser, AdminUser
+from userprof.form import BioForm
 # from message.models import Message, ResMessage
 from django.shortcuts import get_object_or_404
 import datetime
@@ -40,7 +40,8 @@ def profile(request):
         # "incoming_requests" : incoming_requests,
         # "outgoing_requests" : outgoing_requests,
         # "messages"  : messages,
-        "admin_user": admin_user,
+        "admin_user": a_user,
+        "extended_user": m_user,
         # "history": history
     }
     return render(request, "userprof.html", context)
@@ -59,3 +60,39 @@ def admin_page(request, message=None, success=None):
     context = dict(garbage=garbage)
 
     return render(request, "sellerProfile.html", context)
+
+
+def editBio(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login')
+    current_user = request.user
+    e_user = ExtendedUser.objects.get(user=current_user)
+    try:
+        a_user = get_object_or_404(AdminUser, extended_user=e_user)
+    except:
+        return redirect('/home')
+    if a_user.registered is not True:
+        return redirect('/home')
+
+    if request.method == 'POST':
+        e_user = ExtendedUser.objects.get(user=current_user)
+        instance = User.objects.get(email=request.user.email)
+        form = BioForm(request.POST)
+        print('form : ', form.as_p())
+        print("Posted")
+
+        if form.is_valid():
+            e_user.bio = form.cleaned_data['bio']
+            e_user.save()
+            print("form is valid!!!")
+            #form.save()
+
+            message_type = True
+            message = "Item created successfully."
+            request.session['message'] = message
+            request.session['message_type'] = message_type
+            return redirect('/profile')
+    elif request.method == 'GET':
+        form = BioForm()
+
+    return render(request, "bio.html", {'form': form})

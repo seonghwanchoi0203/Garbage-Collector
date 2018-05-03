@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response, get_object_or_404
 from userprof.models import ExtendedUser, AdminUser
 from django.shortcuts import render
-from garbage.models import Garbage
+from garbage.models import Garbage, Watch
 from userprof.views import profile
 from garbage.form import GarbageAdd, GarbageEdit
 # from django.contrib.gis.measure import D #
@@ -24,7 +24,7 @@ import os
 import json
 
 from django.contrib.auth.decorators import login_required
-from django.utils.six.moves.urllib.parse import urlparse
+# from django.utils.six.moves.urllib.parse import urlparse
 
 
 # Create your views here.
@@ -47,11 +47,13 @@ def watch(request):
     current_user = request.user
     e_user = ExtendedUser.objects.get(user=current_user)
     if request.method == 'POST':
-        pid = int(request.POST['send'])
+        #print(request.POST['pid'])
+        pid = int(request.POST['id'])
         print(pid)
-        instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
-        form = GarbageEdit(request.POST, request.FILES, instance=instance)
-        form.watch = e_user
+        garbage = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+        w = Watch(ExtendedUser=e_user, Garbage=garbage, date_watch = datetime.date.today())
+        w.save()
+    return render(request,'userprof.html')
 
 
 def edit_item(request):
@@ -69,17 +71,19 @@ def edit_item(request):
     if request.method == 'POST':
         pid = int(request.POST['send'])
         print(pid)
-        instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+        instance = Garbage.object.get(id=pid)  # TODO, switch to ID
         form = GarbageEdit(request.POST, request.FILES, instance=instance)
-        form.owner = a_user
 
         if form.is_valid():
+            instance.cost = form.cleaned_data['cost']
+            instance.title = form.cleaned_data['title']
+            instance.description = form.cleaned_data['description']
+            instance.zipcode = form.cleaned_data['zipcode']
             # form.photos = form.cleaned_data['photos']
-            # form.save()
-            return render(request, "new_item.html", {'form': form, 'pid': pid, 'instance': instance})
+            instance.save()
+            return render(request, "new_item.html")
     elif request.method == 'GET':
         pid = int(request.GET['edit'])
-        print(pid)
         instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
         print(instance)
         form = GarbageEdit(instance=instance)
@@ -95,6 +99,7 @@ def new_item(request):
         a_user = get_object_or_404(AdminUser, extended_user=e_user)
     except:
         return redirect('/home')
+    print(a_user.extended_user.user.email)
     if a_user.registered is not True:
         return redirect('/home')
     if request.method == 'POST':
