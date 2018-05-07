@@ -16,90 +16,31 @@
       <div class="container">
         <div class="jumbotron">
           <h1>Hello World!</h1>
+        </div>
+
+        <div class="container">
           {% if garbage %}
           {% for i in garbage %}
-                <p>{{i.title}}</p>
+                <div style="border: 1px solid blue" class="col-sm-6">
+                  <p style="color:red; text-align:center; font-size:20px">Title: {{i.title}}</p>
+                  <div class="thumbnail">
+                    <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
+                  </div>
+                  <p style="color:red;">
+                    <span style="float:left;">Price: ${{i.cost}}</span>
+                    <span style="float:right;">Seller: {{i.owner}}</span>
+                  </p>
+                </div>
+                <!-- <p>{{i.title}}</p>
                 <p>{{i.cost}}</p>
-                <p>{{i.owner}}</p>
+                <p>{{i.owner}}</p> -->
           {% endfor %}
           {% endif %}
           {% if user.is_authenticated %}
-
           {% else %}
-          <button id="transparent_button" type="button" class="btn btn-primary"><a href="/accounts/login"></a>Primary</button>
           {% endif %}
-        </div>
 
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
-            </div>
-          </div>
         </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
-            </div>
-          </div>
-        </div>
-        <div class="row" id="lastRow">
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
-            </div>
-          </div>
-        </div>
-      </div>
-
 
       <div class="container">
         {% if user.is_authenticated %}
