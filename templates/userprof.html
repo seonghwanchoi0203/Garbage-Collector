@@ -24,9 +24,9 @@
       <!-- for fixed side bar menu -->
       <div class="sidenav">
         <a class="profPic" href="profile"><img src="{% static "media/default_profile_pic.png" %}" /></a>
-        <a href="#"><i class="glyphicon glyphicon-user"></i> Bio</a>
+        <a href="profile"><i class="glyphicon glyphicon-user"></i> Bio</a>
         <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Buyer</a>
-        <a href="#"><i class="glyphicon glyphicon-tag"></i> Seller</a>
+        <a href="/sell"><i class="glyphicon glyphicon-tag"></i> Seller</a>
         <a href="#"><i class="glyphicon glyphicon-list"></i> History</a>
         <a href="home"><i class="glyphicon glyphicon-th"></i> Settings</a>
       </div>
@@ -76,67 +76,6 @@
           </form>
           {% endif %}
           </div>
-
-
-         <div>
-
-                <div >
-                    {% if admin_user.registered %}
-                    <div class="col-md-9" id="itemListContainer">
-                         <div id="newItemContainer">
-                             <form method="link" action="/new_item" id="new_item_Form">
-                                <button name="new_item"
-                                        type="text"
-                                        id="new_item_button"
-                                        onClick="form.submit()"><i class="glyphicon glyphicon-plus"></i> Add</button>
-                            </form>
-                        </div>
-
-                        <div id="itemContainer">
-                            {% if garbage %}
-                                {% for x in garbage %}
-                                <p>{{x.title}}</p>
-                                    <div class="item">
-                                        <p class="itemImageContainer">
-                                            <img class="itemImage" src="{% static "media/{{x.photos.url}}" %}" alt="Item Image">
-                                        </p>
-                                        <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
-                                            <div class="editButtonContainer">
-                                                <button name="edit"
-                                                        type="submit"
-                                                        class="editButton"
-                                                        value="{{ x.id }}">Edit</button>
-                                            </div>
-                                            {% csrf_token %}
-                                        </form>
-
-                                         <form method="link"  onsubmit="" action='../watch/' enctype="multipart/form-data">
-                                            <div class="editButtonContainer">
-                                                <button name="send"
-                                                        type="send"
-                                                        class="editButton"
-                                                        value="{{ x.id }}">watch</button>
-                                                <input type="submit" value="submit" />
-                                            </div>
-                                             {% csrf_token %}
-                                        </form>
-
-
-                                        <div id="popDiv" class="ontop">
-                                            <div class="popup">
-                                                <p><b>Description:</b></p>
-                                                <p>{{x.description}}</p>
-                                                <p><a href="#" onClick="hide('popDiv')">Close</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endif %}
-         </div>
-       </div>
       </div>
 
 
