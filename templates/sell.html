@@ -1,0 +1,146 @@
+{% load staticfiles %}
+<html>
+         <link   rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+        <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+        <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
+
+    <head>
+      <!-- fixed side bar menu -->
+      <!-- if pushing animated side bar is wanted, use "bower_components/css/pushingSidebar_style.css"
+      <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/pushingSidebar_style.css" %}"s>
+      -->
+      <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/fixedSidebar_style.css" %}">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>{{user.username}}'s Profile</title>
+    </head>
+
+    <body>
+      {% include "header.html" %}
+
+      <!-- for fixed side bar menu -->
+      <div class="sidenav">
+        <a class="profPic" href="profile"><img src="{% static "media/default_profile_pic.png" %}" /></a>
+        <a href="profile"><i class="glyphicon glyphicon-user"></i> Bio</a>
+        <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Buyer</a>
+        <a href="/sell"><i class="glyphicon glyphicon-tag"></i> Seller</a>
+        <a href="#"><i class="glyphicon glyphicon-list"></i> History</a>
+        <a href="home"><i class="glyphicon glyphicon-th"></i> Settings</a>
+      </div>
+
+<!--
+      for pushing animated side bar menu
+      (if pushing side bar is wanted, comment out the above sidenav div, and uncomment this)
+
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Bio</a>
+        <a href="#">Buyer</a>
+        <a href="#">Seller</a>
+        <a href="about">About</a>
+      </div>
+
+      <div id="main">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; User Profile</span>
+-->
+      <div class="main"> <!-- For pushing animated side bar, comment out this line -->
+         <div>
+
+                <div >
+                    {% if admin_user.registered %}
+                    <div class="col-md-9" id="itemListContainer">
+                         <div id="newItemContainer">
+                             <form method="link" action="/new_item" id="new_item_Form">
+                                <button name="new_item"
+                                        type="text"
+                                        id="new_item_button"
+                                        onClick="form.submit()"><i class="glyphicon glyphicon-plus"></i> Add</button>
+                            </form>
+                        </div>
+
+                        <div id="itemContainer">
+                            {% if garbage %}
+                                {% for x in garbage %}
+                                <p>{{x.title}}</p>
+                                    <div class="item">
+                                        <p class="itemImageContainer">
+                                            <img class="itemImage" src="../static/media/{{x.photos.url}}"  alt="Item Image">
+                                        </p>
+                                        <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
+                                            <div class="editButtonContainer">
+                                                <button name="edit"
+                                                        type="submit"
+                                                        class="editButton"
+                                                        value="{{ x.id }}">Edit</button>
+                                            </div>
+                                            {% csrf_token %}
+                                        </form>
+
+                                         <form method="link"  onsubmit="" action='../watch/' enctype="multipart/form-data">
+                                            <div class="editButtonContainer">
+                                                <button name="send"
+                                                        type="send"
+                                                        class="editButton"
+                                                        value="{{ x.id }}">watch</button>
+                                                <input type="submit" value="submit" />
+                                            </div>
+                                             {% csrf_token %}
+                                        </form>
+
+
+                                        <div id="popDiv" class="ontop">
+                                            <div class="popup">
+                                                <p><b>Description:</b></p>
+                                                <p>{{x.description}}</p>
+                                                <p><a href="#" onClick="hide('popDiv')">Close</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+         </div>
+       </div>
+      </div>
+
+
+      <script>
+            // function for pushing bar feature
+            function openNav() {
+              document.getElementById("mySidenav").style.width = "250px";
+              document.getElementById("main").style.marginLeft = "250px";
+            }
+
+            // function for closing side bar feature
+            function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("main").style.marginLeft = "0";
+            }
+
+            //Function To Display Popup
+            function pop(div) {
+                document.getElementById(div).style.display = 'block';
+            }
+
+            //Function to close popup
+            function hide(div) {
+                document.getElementById(div).style.display = 'none';
+            }
+
+            //To detect escape button
+            document.onkeydown = function(evt) {
+                evt = evt || window.event;
+                if (evt.keyCode == 27) {
+                    hide('popDiv');
+                }
+            };
+
+        </script>
+
+    </body>
+</html>
