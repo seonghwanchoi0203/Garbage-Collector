@@ -32,5 +32,6 @@ urlpatterns = [
     url('edit_item', garbage_views.edit_item, name='edit_item'),
     url('watch', garbage_views.watch, name='watch'),
     url('editBio',userprof_views.editBio,name = 'editBio'),
-    url('sendEmail',garbage_views.sendEmail, name = 'sendEmail')
+    url('sendEmail',garbage_views.sendEmail, name = 'sendEmail'),
+    url('ItemDetails',garbage_views.ItemDetails, name = 'ItemDetails'),
 ]
