@@ -27,7 +27,11 @@
                 <div style="border-radius: 25px; border: 2px solid white; margin:29px" class="col-sm-5">
                     <p style="color:red; text-align:center; font-size:20px"><a href='/ItemDetails?grabage={{i.id}}'>Title: {{i.title}}</a></p>
                   <div class="thumbnail" style="padding:0px;">
+<<<<<<< HEAD
                     <img src="{{i.get_image_path}}">
+=======
+                    <img src="{% static "media/{{i.photos.url}}" %}">
+>>>>>>> 3a210ab72e19a5c3d6d571e4e6244c1e4a42ae6e
                   </div>
                   <p style="color:red;">
                     <span style="float:left;">Price: ${{i.cost}}</span>

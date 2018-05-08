@@ -98,7 +98,7 @@
                                 <p>{{x.title}}</p>
                                     <div class="item">
                                         <p class="itemImageContainer">
-                                            <img class="itemImage" src="{{x.photos.url}}" alt="Item Image">
+                                            <img class="itemImage" src="{% static "media/{{x.photos.url}}" %}" alt="Item Image">
                                         </p>
                                         <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
                                             <div class="editButtonContainer">
