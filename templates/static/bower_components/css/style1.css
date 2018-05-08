@@ -1,0 +1,163 @@
+body{
+  background: -webkit-linear-gradient(to right, #0BFAF2, #0B6BFA);
+  background: linear-gradient(to right, #0BFAF2, #0B6BFA);
+}
+
+h1{
+  text-align: center;
+}
+
+.thumbnail img{
+  width:200px;
+  height: 200px;
+}
+
+#footer_main_page{
+  position: absolute;
+  width: 100%;
+  background-color: black;
+  color:grey;
+  font-size: 20px;
+  margin-bottom: 0;
+  border: 1px solid black;
+}
+
+#footer_sub_page{
+  position: absolute;
+  width: 100%;
+  background-color: black;
+  color:grey;
+  font-size: 20px;
+  bottom:0;
+  border: 1px solid black;
+}
+
+#uhaul_link{
+  color:orange;
+}
+
+#uhaul_icon{
+  height:30px;
+  weight:30px;
+}
+
+#transparent_button{
+  display: block;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 8px;
+  width: 80%;
+  max-width: 200px;
+  background: rgba(30, 52, 142, 0.5);
+  border-radius: 8px;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-out;
+}
+
+
+.fieldContainers {
+    display:inline-block;
+    width:100%;
+    height:auto;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.inputLabels {
+    display:inline-block;
+    padding-top:7px;
+}
+
+#itemListContainer {
+
+}
+
+#new_item_Form {
+    text-align:left;
+}
+#new_item_button {
+    background-color:white;
+    margin-top:5px;
+    width:70px;
+    height:30px;
+    border-width:0;
+}
+
+#new_item_button:hover {
+    color:#4da5ff;
+}
+.popUpLink:visited  {color:black; text-decoration:none; background-color:none;}
+.popUpLink:link     {color:black; text-decoration:none; background-color:none;}
+.popUpLink:hover    {color:blue; text-decoration:none; background-color:none;}
+.popUpLink:active   {color:red; text-decoration:underline; background-color:none;}
+
+
+
+#itemContainer {
+    text-align:center;
+    margin-top:10px;
+    width:100%;
+}
+
+.parkingSpots {
+    display:inline-block;
+    width:42%;
+    margin-bottom:30px;
+    margin-right:25px;
+    margin-left:25px;
+}
+
+.itemImageContainer, .itemImage {
+    display:inline-block;
+    width:100%;
+    height:175px;
+    float:left;
+}
+
+.editButtonContainer {
+    float:left;
+    clear:left;
+    font-style:italic;
+    padding-bottom:10px;
+}
+
+ .editButton {
+    background-color:#4da5ff;
+    color:white;
+    width:100px;
+    height:40px;
+    border-style:solid;
+    border-width:1px;
+    border-color:#4da5ff;
+    border-radius:5px;
+}
+
+#searchForm{
+  text-align: center;
+}
+
+#searchBar{
+  text-align: center;
+  width:180px;
+  border-radius: 25px;
+  border: 2px solid black;
+  height:40px;
+}
+
+#searchBar:focus{
+  width:50%;
+}
+
+#searchBarButton{
+  outline:none;
+  border:none;
+  background-color: inherit;
+  font-size: 20px;
+}
+
+#searchBarButton:hover{
+  color: blue;
+}

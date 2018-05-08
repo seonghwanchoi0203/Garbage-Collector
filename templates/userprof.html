@@ -1,112 +1,49 @@
 {% load staticfiles %}
 <html>
-    <head>
-        <title>UserProf</title>
          <link   rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
         <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
         <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+        <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
 
-         <style type="text/css">
-
-
-            .fieldContainers {
-                display:inline-block;
-                width:100%;
-                height:auto;
-                margin-top:5px;
-                margin-bottom:5px;
-            }
-
-            .inputLabels {
-                display:inline-block;
-                padding-top:7px;
-            }
-
-            #itemListContainer {
-
-            }
-
-            #new_item_Form {
-                text-align:left;
-            }
-            #new_item_button {
-                background-color:white;
-                margin-top:5px;
-                width:70px;
-                height:30px;
-                border-width:0;
-            }
-
-            #new_item_button:hover {
-                color:#4da5ff;
-            }
-            .popUpLink:visited  {color:black; text-decoration:none; background-color:none;}
-            .popUpLink:link     {color:black; text-decoration:none; background-color:none;}
-            .popUpLink:hover    {color:blue; text-decoration:none; background-color:none;}
-            .popUpLink:active   {color:red; text-decoration:underline; background-color:none;}
-
-
-
-            #itemContainer {
-                text-align:center;
-                margin-top:10px;
-                width:100%;
-            }
-
-            .parkingSpots {
-                display:inline-block;
-                width:42%;
-                margin-bottom:30px;
-                margin-right:25px;
-                margin-left:25px;
-            }
-
-            .itemImageContainer, .itemImage {
-                display:inline-block;
-                width:100%;
-                height:175px;
-                float:left;
-            }
-
-            .editButtonContainer {
-                float:left;
-                clear:left;
-                font-style:italic;
-                padding-bottom:10px;
-            }
-
-             .editButton {
-                background-color:#4da5ff;
-                color:white;
-                width:100px;
-                height:40px;
-                border-style:solid;
-                border-width:1px;
-                border-color:#4da5ff;
-                border-radius:5px;
-            }
-
-         </style>
+    <head>
+      <title>{{user.username}}'s Profile</title>
     </head>
     <body>
-        <p>UserProf</p>
-         <div>
-                 <div>
-                  this is {{extended_user.bio}}
-                </div>
-                 <div>
-                   <a href="/editBio"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit Bio</button></a>
-                 </div>
-                 <div >
-                    {{ user.username }}
-                 </div>
+      {% include "header.html" %}
+        <div class="container">
+          <div class="jumbotron">
+            <p style="text-align:center;">Welcome to your profile page! <b>{{extended_user.bio}}</b></p>
+          </div>
+        </div>
 
-                this is {{admin_user.registered}}
-                 <div>
-                 	{{user.email}}
-                 </div>
+        <div class="container">
+          {% if user.extendeduser.adminuser.registered %}
+          <form action="/editBio" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="realName">Name:</label>
+              <input type="text" class="form-control" name="realName" value="{{form.user.extendeduser.realName.value}}" id="realName" placeholder="{{extended_user.bio}}">
+            </div>
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" value="{{form.user.extendeduser.username.value}}" id="username" placeholder="{{user.username}}">
+            </div>
+            <div class="form-group">
+              <label for="emailAddress">Email Address:</label>
+              <input type="text" class="form-control" value="{{form.user.extendeduser.emailAddress.value}}" id="emailAddress" placeholder="{{user.email}}">
+            </div>
+            <div style="text-align:right;">
+              <button class="btn btn-primary" type="submit">Save Changes</button>
+              <!-- <a href="/editBio"><button style="margin-top:20px" type="button" class="btn btn-primary">Save Changes</button> </a> -->
+            </div>
+          </form>
+          {% endif %}
+          </div>
+
+        </div>
+         <div>
 
                 <div >
                     {% if admin_user.registered %}
