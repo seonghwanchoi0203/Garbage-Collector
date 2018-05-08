@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load account socialaccount %}
+{% load staticfiles %}
+<html lang="en">
+    <link   rel="stylesheet"
+                href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+        <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+        <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+        <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+</head>
+<body>
+    {% include "header.html" %}
+      <div class="container">
+        <div class="jumbotron">
+          <h1>Welcome!</h1>
+        </div>
+      </div>
+
+
+    <div class="container">
+        <div>
+          <p>{{title}}</p>
+          <p>{{owner}}</p>
+          <div class="thumbnail" style="padding:0px;">
+              <img src="{{i.get_image_path}}">
+          </div>
+        </div>
+    </div>
+
+    <!--instance = get_object_or_404(Garbage, id=url)  # TODO, switch to ID-->
+    <!--console.log(instance)-->
+</body>
+</html>

@@ -145,3 +145,22 @@ def sendEmail(request):
         send_mail(subject, message, from_email, to_email,fail_silently = True)
 
     return render(request,'contact.html')
+
+def ItemDetails(request):
+    pid = request.GET.get('grabage')
+    instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+    context = {
+        'title': instance.title,
+        'description': instance.description,
+        'cost': instance.cost,
+        'photos': instance.photos,
+        'zipcode': instance.zipcode,
+        'condition': instance.condition,
+        'distance': instance.distance,
+        'owner':instance.owner,
+        'postdate': instance.postdate,
+        'solddate': instance.soldDate,
+        'watched': instance.watched,
+
+    }
+    return render(request, 'ItemDetails.html', context)
