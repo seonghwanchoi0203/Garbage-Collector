@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from garbage.models import Garbage
+from garbage.models import Garbage, Watch
 from django.contrib.auth.models import User
 from userprof.models import ExtendedUser, AdminUser
 from userprof.form import BioForm
@@ -32,6 +32,9 @@ def profile(request):
     # messages = Message.objects.filter(receiver=current_user, is_reservation=False).order_by('-date')
     # outgoing_requests = ResMessage.objects.filter(message__sender=current_user).order_by('res_date')
     now = datetime.datetime.now()
+    watch = []
+    watch = Watch.objects.filter(user=m_user)
+    print(watch)
     # history = ResMessage.objects.filter(message__sender=current_user, res_date__lte = now, is_approved=True).order_by('res_date')
     context = {
         "garbage": garbage,
@@ -39,7 +42,7 @@ def profile(request):
         # "message_type" : message_type,
         # "incoming_requests" : incoming_requests,
         # "outgoing_requests" : outgoing_requests,
-        # "messages"  : messages,
+        "watch":watch,
         "admin_user": a_user,
         "extended_user": m_user,
         # "history": history
@@ -96,3 +99,4 @@ def editBio(request):
         form = BioForm()
 
     return render(request, "bio.html", {'form': form})
+
