@@ -18,10 +18,9 @@
       <title>{{user.username}}'s Profile</title>
     </head>
 
-    <body>
+    <body >
       {% include "header.html" %}
-
-      <!-- for fixed side bar menu -->
+         <!-- for fixed side bar menu -->
       <div class="sidenav">
         <a class="profPic" href="profile"><img src="{% static "media/default_profile_pic.png" %}" /></a>
         <a href="profile"><i class="glyphicon glyphicon-user"></i> Bio</a>
@@ -30,84 +29,110 @@
         <a href="#"><i class="glyphicon glyphicon-list"></i> History</a>
         <a href="home"><i class="glyphicon glyphicon-th"></i> Settings</a>
       </div>
-
-<!--
-      for pushing animated side bar menu
-      (if pushing side bar is wanted, comment out the above sidenav div, and uncomment this)
-
-      <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Bio</a>
-        <a href="#">Buyer</a>
-        <a href="#">Seller</a>
-        <a href="about">About</a>
+      <div id="itemContainer">
+      {% if admin_user.registered %}
+      <form method="link" action="/new_item" id="new_item_Form">
+                  <button name="new_item"
+                          type="text"
+                          id="new_item_button"
+                          style="float:right"
+                          onClick="form.submit()"><i class="glyphicon glyphicon-plus"></i> Add</button>
+            </form>
+      {% endif %}
       </div>
-
-      <div id="main">
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; User Profile</span>
--->
-      <div class="main"> <!-- For pushing animated side bar, comment out this line -->
-         <div>
-
-                <div >
-                    {% if admin_user.registered %}
-                    <div class="col-md-9" id="itemListContainer">
-                         <div id="newItemContainer">
-                             <form method="link" action="/new_item" id="new_item_Form">
-                                <button name="new_item"
-                                        type="text"
-                                        id="new_item_button"
-                                        onClick="form.submit()"><i class="glyphicon glyphicon-plus"></i> Add</button>
-                            </form>
-                        </div>
-
-                        <div id="itemContainer">
-                            {% if garbage %}
-                                {% for x in garbage %}
-                                <p>{{x.title}}</p>
-                                    <div class="item">
-                                        <p class="itemImageContainer">
-                                            <img class="itemImage" src="../static/media/{{x.photos.url}}"  alt="Item Image">
-                                        </p>
-                                        <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
-                                            <div class="editButtonContainer">
-                                                <button name="edit"
-                                                        type="submit"
-                                                        class="editButton"
-                                                        value="{{ x.id }}">Edit</button>
-                                            </div>
+      {% if garbage %}
+        <div id="itemContainer" style="margin-top:100px">
+          {% for x in garbage %}
+            <div style="margin: 0; padding: 0;">
+              <table align="center" border="1" cellpadding="0" cellspacing="0" width="800">
+                <tr>
+                  <td>
+                    <table align="center" border="1" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
+                      <tr>
+                        <td>
+                          <table align="center" border="1" cellpadding="0" cellspacing="0" width="600">
+                            <tr>
+                              <td align="center" bgcolor="#70bbd9" style="padding: 40px 0 30px 0;">
+                                <img src="../static/media/{{x.photos.url}}"  alt="Item Image" width="300" height="230" style="display: block;" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+                                <table border="1" cellpadding="0" cellspacing="0" width="100%">
+                                  <tr>
+                                    <table border="1" cellpadding="0" cellspacing="0" width="100%">
+                                      <tr>
+                                      <td width="260" valign="top">
+                                        <h5><strong>Title: </strong>{{x.title}}</h5>
+                                      </td>
+                                      <td style="font-size: 0; line-height: 0;" width="20">
+                                       &nbsp;
+                                      </td>
+                                      <td width="260" valign="top">
+                                        <h5><strong>Price: </strong>{{x.price}}</h5>
+                                      </td>
+                                      </tr>
+                                    </table>
+                                    <table border="1" cellpadding="0" cellspacing="0" width="100%">
+                                      <tr>
+                                      <td width="260" valign="top">
+                                        <h5><strong>Zip Code: </strong>{{x.zipcode}}</h5>
+                                      </td>
+                                      <td style="font-size: 0; line-height: 0;" width="20">
+                                       &nbsp;
+                                      </td>
+                                      <td width="260" valign="top">
+                                        <h5><strong>Condition: </strong>{{x.condition}}</h5>
+                                      </td>
+                                      </tr>
+                                    </table>
+                                      <table border="1" cellpadding="0" cellspacing="0" width="100%">
+                                      <tr>
+                                      <td width="260" valign="top">
+                                        <h5><strong>Decription: </strong>{{x.decription}}</h5>
+                                      </td>
+                                      </tr>
+                                    </table>
+                                    <div>
+                                      <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
+                                        <div style="float:right">
+                                          <button name="edit"
+                                                  type="submit"
+                                                  class="editButton"
+                                                  value="{{ x.id }}"
+                                                  style="width: 5.5em;  height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Edit</button>
+                                         </div>
                                             {% csrf_token %}
-                                        </form>
-
-                                         <form method="link"  onsubmit="" action='../watch/' enctype="multipart/form-data">
-                                            <div class="editButtonContainer">
-                                                <button name="send"
-                                                        type="send"
-                                                        class="editButton"
-                                                        value="{{ x.id }}">watch</button>
-                                                <input type="submit" value="submit" />
-                                            </div>
-                                             {% csrf_token %}
-                                        </form>
-
-
-                                        <div id="popDiv" class="ontop">
-                                            <div class="popup">
-                                                <p><b>Description:</b></p>
-                                                <p>{{x.description}}</p>
-                                                <p><a href="#" onClick="hide('popDiv')">Close</a></p>
-                                            </div>
+                                       </form>
+                                       <form method="link"  onsubmit="" action='../watch/' enctype="multipart/form-data">
+                                        <div style="float:right;">
+                                          <button name="send"
+                                                  type="send"
+                                                  class="editButton"
+                                                  value="{{ x.id }}"
+                                                  style="width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">watch</button>
+                                          <input type="submit" value="submit" style="width: 5.5em;  height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform" />
                                         </div>
+                                        {% csrf_token %}
+                                      </form> 
                                     </div>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endif %}
-         </div>
-       </div>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        {% endfor %}
       </div>
-
+     {% endif %}
+    </body>
 
       <script>
             // function for pushing bar feature
@@ -144,3 +169,4 @@
 
     </body>
 </html>
+
