@@ -36,6 +36,7 @@ class Garbage(models.Model):
     sold = models.BooleanField(default=False)
     watched = models.ManyToManyField(ExtendedUser, blank=True, null=True, through='Watch')
 
+
     def reserve(self, user, date):
         if self.sold:
             return 0
@@ -69,4 +70,5 @@ class Watch(models.Model):
     date_watch = models.DateField()
 
     def __str__(self):
-        return self.garbage.description
+        return "%s" % self.user
+
