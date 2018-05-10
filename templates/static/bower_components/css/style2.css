@@ -15,7 +15,7 @@ body {
 }
 
 .jumbotron p{
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .jumbotron{
@@ -23,7 +23,7 @@ body {
 }
 
 #panel_login{
-  margin-top:0px;
+  margin-top:20px;
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
@@ -31,9 +31,17 @@ body {
 }
 
 #panel_signup{
-  margin-top:0px;
+  margin-top:20px;
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
   height: 400px;
+}
+
+#panel_logout{
+  margin-top:0px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 150px;
 }
