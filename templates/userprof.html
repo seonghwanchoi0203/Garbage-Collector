@@ -1,91 +1,95 @@
 {% load staticfiles %}
 <html>
-    <head>
-        <title>UserProf</title>
          <link   rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
         <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
         <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+        <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
 
-         <style type="text/css">
+    <head>
+      <!-- fixed side bar menu -->
+      <!-- if pushing animated side bar is wanted, use "bower_components/css/pushingSidebar_style.css"
+      <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/pushingSidebar_style.css" %}">
+      -->
+      <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/fixedSidebar_style.css" %}">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>{{user.username}}'s Profile</title>
+    </head>
+
+    <body>
+      {% include "header.html" %}
+
+      <!-- for fixed side bar menu -->
+      <div class="sidenav">
+        <a class="profPic" href="profile"><img src="{% static "media/default_profile_pic.png" %}" /></a>
+        <a href="profile"><i class="glyphicon glyphicon-user"></i> Bio</a>
+        <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Buyer</a>
+        <a href="/sell"><i class="glyphicon glyphicon-tag"></i> Seller</a>
+        <a href="#"><i class="glyphicon glyphicon-list"></i> History</a>
+        <a href="home"><i class="glyphicon glyphicon-th"></i> Settings</a>
+      </div>
+
+<!--
+      for pushing animated side bar menu
+      (if pushing side bar is wanted, comment out the above sidenav div, and uncomment this)
+
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Bio</a>
+        <a href="#">Buyer</a>
+        <a href="#">Seller</a>
+        <a href="about">About</a>
+      </div>
+
+      <div id="main">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; User Profile</span>
+-->
+      <div class="main"> <!-- For pushing animated side bar, comment out this line -->
+        <div class="container">
+          <div class="jumbotron">
+            <p style="text-align:center;">Welcome to your profile page! <b>{{extended_user.bio}}</b></p>
+          </div>
+        </div>
+
+        <div class="container">
+          {% if user.extendeduser.adminuser.registered %}
+          <form action="/editBio" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="realName">Name:</label>
+              <input type="text" class="form-control" name="realName" value="{{form.user.extendeduser.realName.value}}" id="realName" placeholder="{{extended_user.bio}}">
+            </div>
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" value="{{form.user.extendeduser.username.value}}" id="username" placeholder="{{user.username}}">
+            </div>
+            <div class="form-group">
+              <label for="emailAddress">Email Address:</label>
+              <input type="text" class="form-control" value="{{form.user.extendeduser.emailAddress.value}}" id="emailAddress" placeholder="{{user.email}}">
+            </div>
+            <div style="text-align:right;">
+              <button class="btn btn-primary" type="submit">Save Changes</button>
+              <!-- <a href="/editBio"><button style="margin-top:20px" type="button" class="btn btn-primary">Save Changes</button> </a> -->
+            </div>
+          </form>
+          {% endif %}
+          </div>
+      </div>
 
 
-            .fieldContainers {
-                display:inline-block;
-                width:100%;
-                height:auto;
-                margin-top:5px;
-                margin-bottom:5px;
+      <script>
+            // function for pushing bar feature
+            function openNav() {
+              document.getElementById("mySidenav").style.width = "250px";
+              document.getElementById("main").style.marginLeft = "250px";
             }
 
-            .inputLabels {
-                display:inline-block;
-                padding-top:7px;
-            }
-
-            #itemListContainer {
-
-            }
-
-            #new_item_Form {
-                text-align:left;
-            }
-            #new_item_button {
-                background-color:white;
-                margin-top:5px;
-                width:70px;
-                height:30px;
-                border-width:0;
-            }
-
-            #new_item_button:hover {
-                color:#4da5ff;
-            }
-            .popUpLink:visited  {color:black; text-decoration:none; background-color:none;}
-            .popUpLink:link     {color:black; text-decoration:none; background-color:none;}
-            .popUpLink:hover    {color:blue; text-decoration:none; background-color:none;}
-            .popUpLink:active   {color:red; text-decoration:underline; background-color:none;}
-
-
-
-            #itemContainer {
-                text-align:center;
-                margin-top:10px;
-                width:100%;
-            }
-
-            .parkingSpots {
-                display:inline-block;
-                width:42%;
-                margin-bottom:30px;
-                margin-right:25px;
-                margin-left:25px;
-            }
-
-            .itemImageContainer, .itemImage {
-                display:inline-block;
-                width:100%;
-                height:175px;
-                float:left;
-            }
-
-            .editButtonContainer {
-                float:left;
-                clear:left;
-                font-style:italic;
-                padding-bottom:10px;
-            }
-
-             .editButton {
-                background-color:#4da5ff;
-                color:white;
-                width:100px;
-                height:40px;
-                border-style:solid;
-                border-width:1px;
-                border-color:#4da5ff;
-                border-radius:5px;
+            // function for closing side bar feature
+            function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("main").style.marginLeft = "0";
             }
 
          </style>
