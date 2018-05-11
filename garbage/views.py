@@ -40,6 +40,9 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def orderComplete(request):
+    return render(request, 'orderComplete.html')
+
 
 @login_required
 def watch(request):
