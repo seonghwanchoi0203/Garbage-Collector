@@ -122,7 +122,7 @@ def new_item(request):
             return redirect(profile)
     elif request.method == 'GET':
         form = GarbageAdd()
-    return render(request, "new_item.html", {'form': form})
+    return render(request, "new_item.html")
 
 
 
