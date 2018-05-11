@@ -106,7 +106,7 @@ def reserve(request):
         if form.is_valid():
             garbage = form.cleaned_data['garbage']
             inquiry_out = Inquiry(sender=e_user, receiver=garbage.owner)
-
+            
             inquiry_out.res_date = datetime.date.today()
             if garbage.sold:
                 inquiry_out.title = "It is Sold"
@@ -124,7 +124,7 @@ def reserve(request):
                 offer_out.title = "Success"
                 offer_out.content = "The Item has been successfully reserved"
                 offer_out.save()
-    return redirect('/profile')
+return redirect('/profile')
 
 
 

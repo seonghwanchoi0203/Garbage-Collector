@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 class ExtendedUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=500, blank=True, null=True)
-    location = models.CharField(max_length=30, blank=True, null=True)
+    #location = models.CharField(max_length=30, blank=True, null=True)
     #photos = models.ImageField(default='%s/default.png' % settings.MEDIA_URL, upload_to=get_image_path)
 
     # birth_date = models.DateField(null=True, blank=True)

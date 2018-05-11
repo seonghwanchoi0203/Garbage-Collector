@@ -24,7 +24,7 @@ class Inquiry(models.Model):
         return self.garbage
 
     def __str__(self):
-        return self.sender
+        return "%s" % self.sender
 
 
 
@@ -37,10 +37,13 @@ class Offer(models.Model):
     #is_approved = models.BooleanField(default=False)
     #has_responded = models.BooleanField(default=False)
     #reviewed = models.ForeignKey(Review, null=True, blank=True)
+    title = models.CharField(max_length=80, blank=True)
+    content = models.CharField(max_length=1000, blank=True)
     negotiate_price = models.FloatField(default=0)
     transaction_id = models.CharField(max_length=255, null=True, blank=True)
     continueMessage = models.BooleanField(blank=True,default=True)
     decline = models.BooleanField(blank=True,default=False)
+    read = models.BooleanField(default=False)
 
     def __str__(self):
-        return "%s -> %s, %s" % (self.message.sender, self.message.receiver, self.garbage)
+        return "%s -> %s" % (self.inquiry.sender, self.inquiry.receiver)

@@ -6,100 +6,44 @@
                 href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
         <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
         <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
-        <link rel="stylesheet" href="{% static "bower_components/css/style.css" %}">
+        <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
     <head>
-        <title>Hello world</title>
+        <title>GC</title>
     </head>
 
     <body>
       {% include "header.html" %}
       <div class="container">
         <div class="jumbotron">
-          <h1>Hello World!</h1>
-          {% if garbage %}
-          {% for i in garbage %}
-                <p>{{i.title}}</p>
-                <p>{{i.cost}}</p>
-                <p>{{i.owner}}</p>
-          {% endfor %}
-          {% endif %}
-          {% if user.is_authenticated %}
-
-          {% else %}
-          <button id="transparent_button" type="button" class="btn btn-primary"><a href="/accounts/login"></a>Primary</button>
-          {% endif %}
-        </div>
-
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
-            </div>
-          </div>
-        </div>
-        <div class="row" id="lastRow">
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonicpokemon/images/e/e0/Charmander_AG_anime.png/revision/latest?cb=20130714191911">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="thumbnail">
-              <img src="https://vignette.wikia.nocookie.net/sonic-pokemon-unipedia/images/4/4d/7-1.png/revision/latest?cb=20131031034850">
-            </div>
-          </div>
+          <h1>Welcome!</h1>
+          {% include "searchBar.html" %}
         </div>
       </div>
 
+
+        <div class="container">
+          {% if garbage %}
+          {% for i in garbage %}
+                <div style="border-radius: 25px; border: 2px solid white; margin:29px" class="col-sm-5">
+                    <p style="color:red; text-align:center; font-size:20px"><a href='/ItemDetails?grabage={{i.id}}'>Title: {{i.title}}</a></p>
+                  <div class="thumbnail" style="padding:0px;">
+                    <img src="{% static "media/{{i.photos.url}}" %}">
+                  </div>
+                  <p style="color:red;">
+                    <span style="float:left;">Price: ${{i.cost}}</span>
+                    <span style="float:right;">Seller: {{i.owner}}</span>
+                  </p>
+                </div>
+                <!-- <p>{{i.title}}</p>
+                <p>{{i.cost}}</p>
+                <p>{{i.owner}}</p> -->
+          {% endfor %}
+          {% endif %}
+          {% if user.is_authenticated %}
+          {% else %}
+          {% endif %}
+
+        </div>
 
       <div class="container">
         {% if user.is_authenticated %}
@@ -110,8 +54,8 @@
         <!-- <a href="/about"><i class="glyphicon glyphicon-question-sign"></i> &nbsp;About</a> -->
         {% endif %}
       </div>
-      <nav id="footer_main_page" class="navbar navbar-default navbar-static-top">
+      <!-- <nav id="footer_main_page" class="navbar navbar-default navbar-static-top">
         {% include "footer.html" %}
-      </nav>
+      </nav> -->
     </body>
 </html>

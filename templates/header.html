@@ -13,10 +13,11 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
       <ul class="nav navbar-nav">
-          <li class="#"><a href="/home"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+          <!-- <li class="#"><a href="/home"><i class="glyphicon glyphicon-home"></i> Home</a></li> -->
           <li class="#"><a href="/about"><i class="glyphicon glyphicon-question-sign"></i> About</a> </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="/contact"><i class="glyphicon glyphicon-phone-alt"></i> &nbsp;Contact Us</a></li>
         {% if user.is_authenticated %}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-menu-hamburger"></i> &nbsp;{{user.username}}</a>
@@ -25,7 +26,6 @@
               <li><a href="../accounts/password/change"><i class="glyphicon glyphicon-cog"></i> &nbsp;Settings</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="/about"><i class="glyphicon glyphicon-question-sign"></i> &nbsp;About</a></li>
-              <li><a href="/contact"><i class="glyphicon glyphicon-phone-alt"></i> &nbsp;Contact Us</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="/accounts/logout"><i class="glyphicon glyphicon-log-out"></i> &nbsp;Logout</a></li>
           </ul>

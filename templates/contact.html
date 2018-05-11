@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
     <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
     <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
-    <link rel="stylesheet" href="{% static "bower_components/css/style.css" %}">
+    <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
     <head>
         <title>Contact us</title>
     </head>
@@ -23,8 +23,18 @@
 
             </div>
         </div>
-        <nav id="footer_sub_page" class="navbar navbar-default navbar-static-top">
-          {% include "footer.html" %}
-        </nav>
+
+        <div style="text-align:center;" class="container">
+          <form action="/sendEmail" method="POST">
+            {% csrf_token %}
+            <input style="width:200px;" class="messageInput" type="text" name="name" placeholder="Please enter your name" required><br>
+            <input style="width:200px;" class="messageInput" type="text" name="email" placeholder="abc123@example.com" required><br>
+            <textarea style="margin-top:10px" name="message" rows="20" cols="80" type="text" placeholder="Ask us anything..."></textarea><br>
+            <button style="margin-top:10px; color:blue; background-color:white;" type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+        <!-- <nav id="footer_sub_page" class="navbar navbar-default navbar-static-top"> -->
+          <!-- {% include "footer.html" %} -->
+        <!-- </nav> -->
     </body>
 </html>

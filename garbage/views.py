@@ -1,5 +1,6 @@
-
-
+from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import get_template
 from django.contrib.auth.models import User
 
 import datetime
@@ -125,3 +126,41 @@ def new_item(request):
 def contact(request):
     return render(request, 'contact.html')
 
+def sendEmail(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+
+        subject = "Garbage Collector Questions"
+        from_email = email
+        to_email = [settings.DEFAULT_FROM_EMAIL]
+
+        context = {
+        'user': name,
+        'email': email,
+        'message':message
+        }
+
+        send_mail(subject, message, from_email, to_email,fail_silently = True)
+
+    return render(request,'contact.html')
+
+def ItemDetails(request):
+    pid = request.GET.get('grabage')
+    instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+    context = {
+        'title': instance.title,
+        'description': instance.description,
+        'cost': instance.cost,
+        'photos': instance.photos,
+        'zipcode': instance.zipcode,
+        'condition': instance.condition,
+        'distance': instance.distance,
+        'owner':instance.owner,
+        'postdate': instance.postdate,
+        'solddate': instance.soldDate,
+        'watched': instance.watched,
+
+    }
+    return render(request, 'ItemDetails.html', context)

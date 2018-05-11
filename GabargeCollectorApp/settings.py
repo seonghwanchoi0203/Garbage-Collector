@@ -104,11 +104,22 @@ WSGI_APPLICATION = 'GabargeCollectorApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'test',
+        'USER':'test',
+        'PASSWORD':'test',
+        'HOST':'127.0.0.1',
+        'PORT':5432,
+}
 }
 
 
@@ -157,3 +168,13 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 
 
+#Sendgrid Settings
+SEND_GRID_API_KEY = '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'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'jack12171992'
+EMAIL_HOST_PASSWORD = 'ashleyang520'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'chunhsienlee17@gmail.com'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'chunhsienlee17@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
