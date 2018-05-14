@@ -8,13 +8,16 @@
   <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
   <link rel="stylesheet" href="{% static "bower_components/css/style.css" %}">
     <head>
-        <title>Hello world</title>
+      {% include "header.html" %}
+      <title>Hello world</title>
     </head>
     <body>
-      {% include "header.html" %}
       <div class="container">
         <div class="jumbotron">
           <p>Garbage Collector</p>
+          <p>We are world's fastest growing Second Hand Item Trading Platform.</p>
+          <p>Here, you can buy and sell any products you are interested in.</p>
+          <p>Thank you!</p>
         </div>
       </div>
       <nav id="footer_sub_page" class="navbar navbar-default navbar-static-top">
