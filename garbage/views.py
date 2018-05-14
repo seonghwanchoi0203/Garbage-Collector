@@ -49,10 +49,10 @@ def watch(request):
     e_user = ExtendedUser.objects.get(user=current_user)
     if request.method == 'POST':
         #print(request.POST['pid'])
-        pid = int(request.POST['id'])
+        pid = request.POST['edit']
         print(pid)
         garbage = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
-        w = Watch(ExtendedUser=e_user, Garbage=garbage, date_watch = datetime.date.today())
+        w = Watch(user=e_user, garbage=garbage, date_watch = datetime.date.today())
         w.save()
     return render(request,'userprof.html')
 
@@ -166,6 +166,7 @@ def ItemDetails(request):
         'postdate': instance.postdate,
         'solddate': instance.soldDate,
         'watched': instance.watched,
+        'id': instance.id,
 
     }
     return render(request, 'ItemDetails.html', context)

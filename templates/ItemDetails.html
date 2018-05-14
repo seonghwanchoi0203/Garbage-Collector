@@ -94,11 +94,21 @@
                 </div>
 
                 <div class="panel panel-default" style="height: 250px">
-                    <div style="width: 50%; float: left; position: relative">
-                        <button type="button" class="btn btn-default button ele" style="margin-top: 25%">Watch</button>
-                    </div>
+
+                     <form method="post"  onsubmit="" action='/watch/' enctype="multipart/form-data">
+                         <div class="editButtonContainer">
+                             <button name="edit"
+                                     type="submit"
+                                     class="editButton"
+                                     value="{{id}}">Watch</button>
+                         </div>
+                         {% csrf_token %}
+                     </form>
+
                     <div style="width: 50%; float: right; position: relative">
-                        <button type="button" class="btn btn-default button ele" style="margin-top: 25%">Inquiry</button>
+                        <button type="button"
+                                class="btn btn-default button ele"
+                                style="margin-top: 25%">Inquiry</button>
                     </div>
                 </div>
               </div>
