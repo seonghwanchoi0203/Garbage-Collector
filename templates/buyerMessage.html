@@ -49,7 +49,7 @@
       <div class="main"> <!-- For pushing animated side bar, comment out this line -->
 
 
-        <div class="container">
+       
           {% if user.extendeduser.adminuser.registered %}
           <div class="chatbox">
             <div class="chatlogs">
@@ -75,24 +75,10 @@
           {% endif %}
           </div>
       </div>
+    </div>
 
 
-      <script>
-            // function for pushing bar feature
-            function openNav() {
-              document.getElementById("mySidenav").style.width = "250px";
-              document.getElementById("main").style.marginLeft = "250px";
-            }
 
-            // function for closing side bar feature
-            function closeNav() {
-              document.getElementById("mySidenav").style.width = "0";
-              document.getElementById("main").style.marginLeft = "0";
-            }
-
-         </style>
-    
-        </script>
 
     </body>
 </html>
