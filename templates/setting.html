@@ -1,0 +1,78 @@
+{% load staticfiles %}
+<html>
+  <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+  <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+{% include "header.html" %}
+
+
+  <body>
+    <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/fixedSidebar_style.css" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- for fixed side bar menu -->
+    <div class="sidenav">
+      <a class="profPic" href="profile"><img src="{% static "media/default_profile_pic.png" %}" /></a>
+      <a href="profile"><i class="glyphicon glyphicon-user"></i> Bio</a>
+      <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Buyer</a>
+      <a href="/sell"><i class="glyphicon glyphicon-tag"></i> Seller</a>
+      <a href="#"><i class="glyphicon glyphicon-list"></i> History</a>
+      <a href="/setting"><i class="glyphicon glyphicon-th"></i> Settings</a>
+    </div>
+
+
+    <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/settingSplit.css" %}">
+    <div class="split left">
+      <div class="centered">
+        <a href="{% static "../accounts/password/change" %}">
+          <img src="{% static "media/LockImage.png" %}">
+          <h2 style="color:white">Change Password</h2>
+      </div>
+    </div>
+
+    <div class="split right">
+      <div class="centered">
+        <a href="{% static "../accounts/payment/change" %}">
+          <img src="{% static "media/bank-cards.png" %}">
+          <h2 style="color:black">Update Payment Method</h2>
+      </div>
+    </div>
+
+
+    <script>
+      // function for pushing bar feature
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+      }
+
+      // function for closing side bar feature
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+      }
+
+      //Function To Display Popup
+      function pop(div) {
+        document.getElementById(div).style.display = 'block';
+      }
+
+      //Function to close popup
+      function hide(div) {
+        document.getElementById(div).style.display = 'none';
+      }
+
+      //To detect escape button
+      document.onkeydown = function(evt) {
+        evt = evt || window.event;
+        if (evt.keyCode == 27) {
+          hide('popDiv');
+        }
+      };
+
+    </script>
+
+  </body>
+</html>

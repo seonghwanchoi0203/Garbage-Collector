@@ -1,0 +1,84 @@
+{% load staticfiles %}
+<html>
+         <link   rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+        <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+        <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
+
+    <head>
+      <!-- fixed side bar menu -->
+      <!-- if pushing animated side bar is wanted, use "bower_components/css/pushingSidebar_style.css"
+      <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/pushingSidebar_style.css" %}">
+      -->
+      <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/fixedSidebar_style.css" %}">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>{{user.username}}'s Profile</title>
+    </head>
+
+    <body>
+      {% include "header.html" %}
+
+      <!-- for fixed side bar menu -->
+      <div class="sidenav">
+        <a class="profPic" href="profile"><img src="{% static "media/default_profile_pic.png" %}" /></a>
+        <a href="profile"><i class="glyphicon glyphicon-user"></i> Bio</a>
+        <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Buyer</a>
+        <a href="/sell"><i class="glyphicon glyphicon-tag"></i> Seller</a>
+        <a href="#"><i class="glyphicon glyphicon-list"></i> History</a>
+        <a href="home"><i class="glyphicon glyphicon-th"></i> Settings</a>
+      </div>
+
+<!--
+      for pushing animated side bar menu
+      (if pushing side bar is wanted, comment out the above sidenav div, and uncomment this)
+
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Bio</a>
+        <a href="#">Buyer</a>
+        <a href="#">Seller</a>
+        <a href="about">About</a>
+      </div>
+
+      <div id="main">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; User Profile</span>
+-->
+      <div class="main"> <!-- For pushing animated side bar, comment out this line -->
+
+
+       
+          {% if user.extendeduser.adminuser.registered %}
+          <div class="chatbox">
+            <div class="chatlogs">
+              <div class="chat">
+                <div class="user-photo"></div>
+                  <p class="chat-message">Test1</p>
+                </div>
+                <div class="chat">
+                  <div class=user-photo"><div>
+                    <p class="chat-message">test2</p>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+          
+            </div>
+       
+          {% endif %}
+          </div>
+      </div>
+    </div>
+
+
+
+
+    </body>
+</html>
