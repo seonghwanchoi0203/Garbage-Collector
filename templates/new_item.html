@@ -133,7 +133,7 @@
             <div id="editHeading" class="panel-heading" align='center'>Items</div>
 
             <div id="infoContainer">
-                <form id="editItemForm" action="/new_item" method="post" enctype="multipart/form-data">
+                <form id="editItemForm" action="." method="post" enctype="multipart/form-data">
                     <div id="imageContainer">
                         <img src="{{instance.photos.url}}" alt="Parking Spot Thumbnail" id="parkingThumbnail"> //todo
 
@@ -164,10 +164,11 @@
 
                     <div class="fieldContainers">
                         <label  class="editLabels"
-                                for="cost">Cost </label>
+                                for="cost">Condition: </label>
                         <input  id="cost"
                                 type="text"
-                                name="{{form.cost.value}}">
+                                name="cost"
+                                value="{{form.cost.value}}">
                     </div>
 
                     <div class="fieldContainers">
@@ -179,17 +180,15 @@
                                 value="{{form.condition.value}}">
                     </div>
 
-                    <hr>
-
                     <div id="descriptionFieldContainers" class="fieldContainers">
                         <label  class="editLabels"
                                 for="description">Description: </label>
-                        <textarea   id="description"
-                                    type="text"
-                                    name="description">{{form.description.value}}</textarea>
+                        <input   id="description"
+                                 type="text"
+                                 name="description"
+                                 value = "{{form.description.value}}">
+                  
                     </div>
-
-                    <hr>
 
                     <button name="cancel"
                             type="button"

@@ -69,7 +69,7 @@
                                        &nbsp;
                                       </td>
                                       <td width="260" valign="top">
-                                        <h5><strong>Price: </strong>{{x.price}}</h5>
+                                        <h5><strong>Price: </strong>{{x.cost}}</h5>
                                       </td>
                                       </tr>
                                     </table>
@@ -89,7 +89,7 @@
                                       <table border="1" cellpadding="0" cellspacing="0" width="100%">
                                       <tr>
                                       <td width="260" valign="top">
-                                        <h5><strong>Decription: </strong>{{x.decription}}</h5>
+                                        <h5><strong>Description: </strong>{{x.description}}</h5>
                                       </td>
                                       </tr>
                                     </table>
@@ -110,8 +110,7 @@
                                                   type="send"
                                                   class="editButton"
                                                   value="{{ x.id }}"
-                                                  style="width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">watch</button>
-                                          <input type="submit" value="submit" style="width: 5.5em;  height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform" />
+                                                  style="width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Watch</button>
                                         </div>
                                         {% csrf_token %}
                                       </form> 

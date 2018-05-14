@@ -10,6 +10,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello world</title>
+    <style>
+        .gradient1{
+            background-image: -webkit-gradient(linear,
+                0 0, 100% 100%,
+                color-stop(.25, rgba(255, 255, 255, .2)),
+                color-stop(.25, transparent),
+                color-stop(.5, transparent),
+                color-stop(.5, rgba(255, 255, 255, .2)),
+                color-stop(.75, rgba(255, 255, 255, .2)),
+                color-stop(.75, transparent),
+                to(transparent));
+            background-color: #f8f8f8;
+            background-size: 10px 10px;
+        }
+        .ele {
+	        position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .eleXY {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .usualLi {
+            font-size: 22px;
+            line-height: 45px;
+        }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+
+        }
+
+    </style>
 </head>
 <body>
     {% include "header.html" %}
@@ -19,13 +62,47 @@
         </div>
       </div>
 
+    <div class="panel panel-default" style="margin-bottom: 40px;border: 1px solid black;">
+        <span style="margin-left: 60px;color:red; text-align:left; font-size:30px"><i class="glyphicon glyphicon-user"></i> {{owner}} </span>
+    </div>
 
-    <div class="container">
-        <div>
-          <p>{{title}}</p>
-          <p>{{owner}}</p>
-          <div class="thumbnail" style="padding:0px;">
-              <img src="{{i.get_image_path}}">
+    <div id="container">
+        <div class="jumbotron" style="padding:0px">
+
+          <div class="thumbnail" style="padding:0px; display:flex;display: -webkit-flex;">
+              <div class="panel panel-default" style="padding:0px;-webkit-flex: 1;flex: 1;margin-top:10px;">
+                <div class="gradient1" style="height: 80%; float: top;position: relative">
+                   <img src="{{i.get_image_path}}" class="ele" style="width:400px;height:400px;">
+                </div>
+                <div style="height: 20%; float: top">
+                    <p >{{description}}</p>
+                </div>
+
+              </div>
+              <div style="-webkit-flex: 1;flex: 1; " >
+                <ul style="list-style-type:none">
+                    <h1 class="usualLi">{{title}}</h1>
+                    <li class="usualLi" style="font-size: 18px"><span>Price: </span><span><b>&#36; </b><em style="color: red;font-size: 26px">{{cost}}</em></span>
+                        <span style="float: right">{{watched}} people are watching this item! </span></li>
+
+                    <li class="usualLi"><span>Post date: {{postdate}}</span></li>
+                    <li class="usualLi"><span>Condition: {{condition}}</span></li>
+                </ul>
+
+                <div class="panel panel-default" style="height: 250px">
+                    <p>It's the place for Google Map! </p>
+                </div>
+
+                <div class="panel panel-default" style="height: 250px">
+                    <div style="width: 50%; float: left; position: relative">
+                        <button type="button" class="btn btn-default button ele" style="margin-top: 25%">Watch</button>
+                    </div>
+                    <div style="width: 50%; float: right; position: relative">
+                        <button type="button" class="btn btn-default button ele" style="margin-top: 25%">Inquiry</button>
+                    </div>
+                </div>
+              </div>
+
           </div>
         </div>
     </div>

@@ -70,23 +70,24 @@ def edit_item(request):
     if a_user.registered is not True:
         return redirect('/home')
     if request.method == 'POST':
-        pid = int(request.POST['send'])
+        pid = request.POST['send']
         print(pid)
-        instance = Garbage.object.get(id=pid)  # TODO, switch to ID
-        form = GarbageEdit(request.POST, request.FILES, instance=instance)
-
+        form = GarbageEdit(request.POST)
+        print(form)
         if form.is_valid():
-            instance.cost = form.cleaned_data['cost']
+            instance = get_object_or_404(Garbage, id=pid)
+            instance.cost = int(form.cleaned_data['cost'])
             instance.title = form.cleaned_data['title']
+            instance.condition = int(form.cleaned_data['condition'])
             instance.description = form.cleaned_data['description']
-            instance.zipcode = form.cleaned_data['zipcode']
+            instance.zipcode = int(form.cleaned_data['zipcode'])
             # form.photos = form.cleaned_data['photos']
-            instance.save()
-            return render(request, "new_item.html")
+            instance.save(force_update=True)
+            return render(request, "sell.html")
     elif request.method == 'GET':
-        pid = int(request.GET['edit'])
+        pid = request.GET['edit']
         instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
-        print(instance)
+        #print(instance)
         form = GarbageEdit(instance=instance)
     return render(request, "new_item.html", {'form': form, 'pid': pid})
 
@@ -105,13 +106,17 @@ def new_item(request):
         return redirect('/home')
     if request.method == 'POST':
         instance = Garbage(owner=a_user)
-        form = GarbageAdd(request.POST, request.FILES, instance=instance)
+        form = GarbageAdd(request.POST)
+        print(form)
         form.owner = a_user
         if form.is_valid():
-            instance.save()
-            #instance.photos = form.cleaned_data['photos']
-            #instance.save()
-            form.save()
+            instance.cost = int(form.cleaned_data['cost'])
+            instance.title = form.cleaned_data['title']
+            instance.condition = int(form.cleaned_data['condition'])
+            instance.description = form.cleaned_data['description']
+            instance.zipcode =int(form.cleaned_data['zipcode'])
+            print(form.cleaned_data['cost'])
+            instance.save();
             message_type = True
             message = "Item created successfully."
             request.session['message'] = message
@@ -119,7 +124,7 @@ def new_item(request):
             return redirect(profile)
     elif request.method == 'GET':
         form = GarbageAdd()
-    return render(request, "new_item.html", {'form': form})
+    return render(request, "new_item.html", {'pid':Garbage.id })
 
 
 
@@ -147,7 +152,7 @@ def sendEmail(request):
     return render(request,'contact.html')
 
 def ItemDetails(request):
-    pid = request.GET.get('grabage')
+    pid = int(request.GET.get('garbage'))
     instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
     context = {
         'title': instance.title,
