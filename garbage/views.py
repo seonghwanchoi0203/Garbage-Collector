@@ -152,7 +152,7 @@ def sendEmail(request):
     return render(request,'contact.html')
 
 def ItemDetails(request):
-    pid = int(request.GET.get('garbage'))
+    pid = request.GET.get('garbage')
     instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
     context = {
         'title': instance.title,
