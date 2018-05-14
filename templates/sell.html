@@ -29,109 +29,98 @@
         <a href="#"><i class="glyphicon glyphicon-list"></i> History</a>
         <a href="home"><i class="glyphicon glyphicon-th"></i> Settings</a>
       </div>
+      <div class="container">
+        {% if garbage %}
+          {% for i in garbage reversed %}
+            <div style="border: 2px solid white; margin:2px">
+              <div>
+                <form method="link"  onsubmit="" action='../watch/' enctype="multipart/form-data">
+                <button name="send"
+                                type="send"
+                                class="editButton"
+                                value="{{ i.id }}"
+                                style="display:inline-block;float:right;width: 5.5em; height: 2em;color: red;background-color: transparent;border: 2px solid red; border-radius: 5px; text-transform;margin-bottom:1px">Accept</button>
+                </form>
+                <form method="link"  onsubmit="" action='../watch/' enctype="multipart/form-data">
+                <button name="send"
+                                type="send"
+                                class="editButton"
+                                value="{{ i.id }}"
+                                style="display:inline-block;float:right;width: 5.5em; height: 2em;color: red;background-color: transparent;border: 2px solid red; border-radius: 5px; text-transform;margin-bottom:1px">WithDraw</button>
+                </form>
+                  <p>{{i}}</p>
+                </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
       <div id="itemContainer">
       {% if admin_user.registered %}
       <form method="link" action="/new_item" id="new_item_Form">
                   <button name="new_item"
                           type="text"
                           id="new_item_button"
-                          style="float:right"
+                          style="float:right; margin-right:300px"
                           onClick="form.submit()"><i class="glyphicon glyphicon-plus"></i> Add</button>
-            </form>
+      </form>
       {% endif %}
       </div>
-      {% if garbage %}
-        <div id="itemContainer" style="margin-top:100px">
-          {% for x in garbage %}
-            <div style="margin: 0; padding: 0;">
-              <table align="center" border="1" cellpadding="0" cellspacing="0" width="800">
-                <tr>
-                  <td>
-                    <table align="center" border="1" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
-                      <tr>
-                        <td>
-                          <table align="center" border="1" cellpadding="0" cellspacing="0" width="600">
-                            <tr>
-                              <td align="center" bgcolor="#70bbd9" style="padding: 40px 0 30px 0;">
-                                <img src="../static/media/{{x.photos.url}}"  alt="Item Image" width="300" height="230" style="display: block;" />
-                              </td>
-                            </tr>
-                            <tr>
-                              <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
-                                <table border="1" cellpadding="0" cellspacing="0" width="100%">
-                                  <tr>
-                                    <table border="1" cellpadding="0" cellspacing="0" width="100%">
-                                      <tr>
-                                      <td width="260" valign="top">
-                                        <h5><strong>Title: </strong>{{x.title}}</h5>
-                                      </td>
-                                      <td style="font-size: 0; line-height: 0;" width="20">
-                                       &nbsp;
-                                      </td>
-                                      <td width="260" valign="top">
-                                        <h5><strong>Price: </strong>{{x.price}}</h5>
-                                      </td>
-                                      </tr>
-                                    </table>
-                                    <table border="1" cellpadding="0" cellspacing="0" width="100%">
-                                      <tr>
-                                      <td width="260" valign="top">
-                                        <h5><strong>Zip Code: </strong>{{x.zipcode}}</h5>
-                                      </td>
-                                      <td style="font-size: 0; line-height: 0;" width="20">
-                                       &nbsp;
-                                      </td>
-                                      <td width="260" valign="top">
-                                        <h5><strong>Condition: </strong>{{x.condition}}</h5>
-                                      </td>
-                                      </tr>
-                                    </table>
-                                      <table border="1" cellpadding="0" cellspacing="0" width="100%">
-                                      <tr>
-                                      <td width="260" valign="top">
-                                        <h5><strong>Decription: </strong>{{x.decription}}</h5>
-                                      </td>
-                                      </tr>
-                                    </table>
-                                    <div>
-                                      <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
-                                        <div style="float:right">
-                                          <button name="edit"
-                                                  type="submit"
-                                                  class="editButton"
-                                                  value="{{ x.id }}"
-                                                  style="width: 5.5em;  height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Edit</button>
-                                         </div>
-                                            {% csrf_token %}
-                                       </form>
-                                       <form method="link"  onsubmit="" action='../watch/' enctype="multipart/form-data">
-                                        <div style="float:right;">
-                                          <button name="send"
-                                                  type="send"
-                                                  class="editButton"
-                                                  value="{{ x.id }}"
-                                                  style="width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">watch</button>
-                                          <input type="submit" value="submit" style="width: 5.5em;  height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform" />
-                                        </div>
-                                        {% csrf_token %}
-                                      </form> 
-                                    </div>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-     {% endif %}
+        <div class="container">
+          {% if garbage %}
+          {% for i in garbage reversed %}
+                <div style="border-radius: 25px; border: 2px solid white; margin:29px " class="col-sm-5">
+                    <p style="color:red; text-align:center; font-size:20px"><a href='/ItemDetails?grabage={{i.id}}'>Title: {{i.title}}</a></p>
+                  <div class="thumbnail" style="padding:0px;">
+                    <img src="{% static "media/{{i.photos.url}}" %}">
+                  </div>
+                  <p style="color:red;">
+                    <span style="float:left;">Price: ${{i.cost}}</span>
+                    <span style="float:right; ">Condition: {{i.condition}}</span><br>
+                  </p>
+                  <p style="color:red">Zip Code: {{i.zipcode}}</p>
+                    <p style="color:red">Description:</p>
+                  <p style="color:red; 
+                            background: auto;
+                            padding: 5px;
+                            width: 100%;
+                            height: 50px;
+                            float: left;
+                            margin: 5px;
+                            overflow-y: auto">{{i.description}}</p>
+                  <div>   
+                    <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
+                      <div style="float:right">
+                        <button name="edit"
+                                type="submit"
+                                class="editButton"
+                                value="{{ x.id }}"
+                                style="width: 5.5em;  height: 2.5em;color: red;background-color: transparent;border: 2px solid red; border-radius: 5px; text-transform; margin-bottom:1px">Edit</button>
+                      </div>
+                      {% csrf_token %}
+                    </form>
+                    <form method="link"  onsubmit="" action='../watch/' enctype="multipart/form-data">
+                      <div style="float:right;">
+                        <button name="send"
+                                type="send"
+                                class="editButton"
+                                value="{{ x.id }}"
+                                style="width: 5.5em; height: 2.5em;color: red;background-color: transparent;border: 2px solid red; border-radius: 5px; text-transform;margin-bottom:1px">watch</button>
+                        <input type="submit" value="submit" style="width: 5.5em;  height: 2.5em;color: red;background-color: transparent;border: 2px solid red; border-radius: 5px; text-transform; margin-bottom:1px" />
+                     </div>
+                    {% csrf_token %}
+                    </form>
+                  </div>
+                </div>
+                <!-- <p>{{i.title}}</p>
+                <p>{{i.cost}}</p>
+                <p>{{i.owner}}</p> -->
+          {% endfor %}
+          {% endif %}
+          {% if user.is_authenticated %}
+          {% else %}
+          {% endif %}
+
+        </div>
     </body>
 
       <script>
