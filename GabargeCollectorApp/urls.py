@@ -35,7 +35,5 @@ urlpatterns = [
     url('sendEmail',garbage_views.sendEmail, name = 'sendEmail'),
     url('ItemDetails',garbage_views.ItemDetails, name = 'ItemDetails'),
     url('sell', userprof_views.sell, name='sell'),
-    url('orderComplete', garbage_views.orderComplete, name = 'orderComplete'),
-    url('inAppTransaction', garbage_views.inAppTransaction, name = 'inAppTransaction')
-
+    url('orderComplete', garbage_views.orderComplete, name = 'orderComplete')
 ]

@@ -43,8 +43,6 @@ def about(request):
 def orderComplete(request):
     return render(request, 'orderComplete.html')
 
-def inAppTransaction(request):
-    return render(request, 'inAppTransaction.html')
 
 @login_required
 def watch(request):
