@@ -23,7 +23,7 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     #url('accounts/', include('django.contrib.auth.urls')),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^$', garbage_views.home, name='home'),
+    url(r'^$', garbage_views.Welcome, name='welcome'),
 	url('home/', garbage_views.home, name='home'),
 	url('about',garbage_views.about,name = 'about'),
 	url('profile',userprof_views.profile,name = 'profile'),

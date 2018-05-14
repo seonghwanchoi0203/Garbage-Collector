@@ -172,3 +172,10 @@ def ItemDetails(request):
 
     }
     return render(request, 'ItemDetails.html', context)
+
+
+def Welcome(request):
+
+    return render(request, 'welcome.html')
+
+
