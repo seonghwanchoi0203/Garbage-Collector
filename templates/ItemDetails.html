@@ -138,11 +138,11 @@
                     </div>
                     <div style="width: 50%; float: right; position: relative">
                         <button id = "inquiry" type="button" class="btn btn-default button ele" style="margin-top: 25%">Inquiry</button>
-                        <div id = "modal" class = "modal">
+                        <div id = "popmodal" class = "modal">
                           <div class = "modal-content">
                             <p>This is the textfield.</p>
                             <button id = "submit">Submit</button>
-                            <button id = "cancle">Cancel</button>
+                            <button id = "cancel">Cancel</button>
                           </div>
                         </div>
                     </div>
@@ -157,12 +157,11 @@
     <!--console.log(instance)-->
 </body>
 <script>
-<script>
 // Get the modal
-var modal = document.getElementById('modal');
+var modal = document.getElementById('popmodal');
 
 // Get the button that opens the modal
-var btn = document.getElementById("inquiry");
+var btnInq = document.getElementById("inquiry");
 
 var btnSub = document.getElementById("submit");
 var btnCan = document.getElementById("cancel");
@@ -171,7 +170,7 @@ var btnCan = document.getElementById("cancel");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, op en the modal
-btn.onclick = function() {
+btnInq.onclick = function() {
     modal.style.display = "block";
 }
 
