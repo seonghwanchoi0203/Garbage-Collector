@@ -19,3 +19,7 @@ class BioForm(forms.ModelForm):
             self.fields['content'].label =
                 "What do you want to say?"
                 '''
+
+
+class ScoreAdd(forms.Form):
+        rate = forms.CharField(max_length=30)

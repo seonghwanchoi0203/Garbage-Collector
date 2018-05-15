@@ -24,6 +24,8 @@ class ExtendedUser(models.Model):
 class AdminUser(models.Model):
     registered = models.BooleanField(default=False)
     extended_user = models.OneToOneField(ExtendedUser, primary_key=True, on_delete=models.CASCADE)
+    rate = models.FloatField(blank=True, null=True, default=3)
+    numberOfRate = models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
         return self.extended_user.user.username

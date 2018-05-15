@@ -33,8 +33,8 @@ class Inquiry(models.Model):
 class Offer(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     inquiry = models.ForeignKey(Inquiry,on_delete=models.CASCADE,related_name='inquiry')
-    sender = models.ForeignKey(ExtendedUser, on_delete=models.CASCADE, related_name='ExtendedUser_offer')
-    receiver = models.ForeignKey(AdminUser, on_delete=models.CASCADE, related_name='AdminUser_offer')
+    receiver = models.ForeignKey(ExtendedUser, on_delete=models.CASCADE, related_name='ExtendedUser_offer')
+    sender = models.ForeignKey(AdminUser, on_delete=models.CASCADE, related_name='AdminUser_offer')
     garbage = models.ForeignKey(Garbage,on_delete=models.CASCADE)
     res_date = models.DateTimeField(blank=True, null=True)
     #is_approved = models.BooleanField(default=False)

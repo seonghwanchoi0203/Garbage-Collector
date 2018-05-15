@@ -35,4 +35,5 @@ urlpatterns = [
     url('sendEmail',garbage_views.sendEmail, name = 'sendEmail'),
     url('ItemDetails',garbage_views.ItemDetails, name = 'ItemDetails'),
     url('sell', userprof_views.sell, name='sell'),
+    url('rate', userprof_views.rate, name='rate'),
 ]
