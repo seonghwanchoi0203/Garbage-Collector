@@ -72,10 +72,10 @@ def edit_item(request):
     if request.method == 'POST':
         pid = request.POST['send']
         print(pid)
-        form = GarbageEdit(request.POST)
+        instance = get_object_or_404(Garbage, id=pid)
+        form = GarbageEdit(request.POST, request.FILES, instance = instance)
         print(form)
         if form.is_valid():
-            instance = get_object_or_404(Garbage, id=pid)
             instance.cost = int(form.cleaned_data['cost'])
             instance.title = form.cleaned_data['title']
             instance.condition = int(form.cleaned_data['condition'])
@@ -90,7 +90,7 @@ def edit_item(request):
         instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
         #print(instance)
         form = GarbageEdit(instance=instance)
-    return render(request, "new_item.html", {'form': form, 'pid': pid})
+    return render(request, "new_item.html", {'form': form, 'instance':instance,'pid': pid})
 
 
 def new_item(request):
@@ -106,16 +106,18 @@ def new_item(request):
     if a_user.registered is not True:
         return redirect('/home')
     if request.method == 'POST':
-        form = GarbageAdd(request.POST)
+        instance = Garbage(owner=a_user)
+        form = GarbageAdd(request.POST, request.FILES, instance=instance)
+        #form = GarbageAdd(request.POST)
         #imageForm = ImageUploadForm(request.POST, request.FILES)
         print(form)
         if form.is_valid():
-            instance = Garbage(owner=a_user)
             instance.cost = int(form.cleaned_data['cost'])
             instance.title = form.cleaned_data['title']
             instance.condition = int(form.cleaned_data['condition'])
             instance.description = form.cleaned_data['description']
             instance.zipcode =int(form.cleaned_data['zipcode'])
+            print(form.cleaned_data['photos'])
             instance.photos = form.cleaned_data['photos']
             instance.save()
             message_type = True
