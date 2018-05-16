@@ -29,8 +29,10 @@
         <a href="#"><i class="glyphicon glyphicon-list"></i> History</a>
         <a href="/setting"><i class="glyphicon glyphicon-th"></i> Settings</a>
       </div>
-      <div class="container">
-        {% if garbage %}
+      <div class="container" style=" height: 200px;
+                        overflow-y: scroll;
+                        overflow-x:hidden">
+        {% if garbage %} 
           {% for i in garbage reversed %}
             <div style="border: 2px solid white; margin:2px">
               <div>
@@ -54,6 +56,7 @@
           {% endfor %}
         {% endif %}
       </div>
+        
       <div id="itemContainer">
       {% if admin_user.registered %}
       <form method="link" action="/new_item" id="new_item_Form">
@@ -98,6 +101,7 @@
                       </div>
                       {% csrf_token %}
                     </form>
+                    <!--
                     <form method="link"  onsubmit="" action='../watch/' enctype="multipart/form-data">
                       <div style="float:right;">
                         <button name="send"
@@ -106,9 +110,9 @@
                                 value="{{ x.id }}"
                                 style="width: 5.5em; height: 2.5em;color: red;background-color: transparent;border: 2px solid red; border-radius: 5px; text-transform;margin-bottom:1px">watch</button>
                         <input type="submit" value="submit" style="width: 5.5em;  height: 2.5em;color: red;background-color: transparent;border: 2px solid red; border-radius: 5px; text-transform; margin-bottom:1px" />
-                     </div>
+                     </div> 
                     {% csrf_token %}
-                    </form>
+                    </form> -->
                   </div>
                 </div>
                 <!-- <p>{{i.title}}</p>
