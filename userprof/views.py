@@ -154,7 +154,7 @@ def sell(request):
         # "incoming_requests" : incoming_requests,
         # "outgoing_requests" : outgoing_requests,
         # "messages"  : messages,
-        #"admin_user": a_user,
+        "admin_user": a_user,
         "extended_user": m_user,
         # "history": history
     }

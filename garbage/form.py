@@ -6,7 +6,7 @@ from django.forms import ModelForm
 class GarbageEdit(ModelForm):
     class Meta:
         model = Garbage
-        fields = ['title', 'description', 'cost','zipcode','condition']
+        fields = ['title', 'description', 'cost','zipcode','condition','photos']
 
 
 class ImageUploadForm(forms.Form):
@@ -14,14 +14,17 @@ class ImageUploadForm(forms.Form):
     image = forms.ImageField()
 
 
-class GarbageAdd(forms.Form):
+class GarbageAdd(ModelForm):
+    class Meta:
+        model = Garbage
+        fields = ['title', 'description','cost','zipcode','condition','photos']
 
-    title = forms.CharField(max_length=30)
-    description = forms.CharField(max_length=256)
-    cost = forms.CharField()
-    # photos = forms.ImageField(default='%s/default.png' % settings.MEDIA_URL, upload_to=get_image_path)
-    zipcode = forms.CharField()
-    condition = forms.CharField()
+    #title = forms.CharField(max_length=30)
+    #description = forms.CharField(max_length=256)
+    #cost = forms.CharField()
+    #photos = forms.ImageField()
+    #zipcode = forms.CharField()
+    #condition = forms.CharField()
 
 
 class ImageUploadForm(forms.Form):

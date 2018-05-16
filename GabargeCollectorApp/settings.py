@@ -66,6 +66,7 @@ LOGIN_REDIRECT_URL = "/"
 ROOT_URLCONF = 'GabargeCollectorApp.urls'
 
 
+
 AUTHENTICATION_BACKENDS = (
 
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -77,6 +78,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+MEDIA_ROOT = os.path.join(PROJECT_DIRECTORY, 'media')
 MEDIA_URL = '/media/'
 TEMPLATES = [
     {

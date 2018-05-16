@@ -10,7 +10,7 @@ from userprof.models import ExtendedUser, AdminUser
 from django.shortcuts import render
 from garbage.models import Garbage, Watch
 from userprof.views import profile
-from garbage.form import GarbageAdd, GarbageEdit
+from garbage.form import GarbageAdd, GarbageEdit,ImageUploadForm
 # from django.contrib.gis.measure import D #
 # from django.contrib.gis.geos import Point
 # from django.contrib.gis.geoip import GeoIP
@@ -81,7 +81,8 @@ def edit_item(request):
             instance.condition = int(form.cleaned_data['condition'])
             instance.description = form.cleaned_data['description']
             instance.zipcode = int(form.cleaned_data['zipcode'])
-            # form.photos = form.cleaned_data['photos']
+            print(form.cleaned_data['photos'])
+            instance.photos = form.cleaned_data['photos']
             instance.save(force_update=True)
             return render(request, "sell.html")
     elif request.method == 'GET':
@@ -93,6 +94,7 @@ def edit_item(request):
 
 
 def new_item(request):
+    print(request.method)
     if not request.user.is_authenticated:
         return redirect('/accounts/login')
     current_user = request.user
@@ -101,22 +103,21 @@ def new_item(request):
         a_user = get_object_or_404(AdminUser, extended_user=e_user)
     except:
         return redirect('/home')
-    print(a_user.extended_user.user.email)
     if a_user.registered is not True:
         return redirect('/home')
     if request.method == 'POST':
-        instance = Garbage(owner=a_user)
         form = GarbageAdd(request.POST)
+        #imageForm = ImageUploadForm(request.POST, request.FILES)
         print(form)
-        form.owner = a_user
         if form.is_valid():
+            instance = Garbage(owner=a_user)
             instance.cost = int(form.cleaned_data['cost'])
             instance.title = form.cleaned_data['title']
             instance.condition = int(form.cleaned_data['condition'])
             instance.description = form.cleaned_data['description']
             instance.zipcode =int(form.cleaned_data['zipcode'])
-            print(form.cleaned_data['cost'])
-            instance.save();
+            instance.photos = form.cleaned_data['photos']
+            instance.save()
             message_type = True
             message = "Item created successfully."
             request.session['message'] = message
@@ -124,12 +125,12 @@ def new_item(request):
             return redirect(profile)
     elif request.method == 'GET':
         form = GarbageAdd()
-    return render(request, "new_item.html", {'pid':Garbage.id })
-
+    return render(request, "new_item.html", {'form': form})
 
 
 def contact(request):
     return render(request, 'contact.html')
+
 
 def sendEmail(request):
     if request.method == "POST":
@@ -150,6 +151,7 @@ def sendEmail(request):
         send_mail(subject, message, from_email, to_email,fail_silently = True)
 
     return render(request,'contact.html')
+
 
 def ItemDetails(request):
     pid = request.GET.get('garbage')

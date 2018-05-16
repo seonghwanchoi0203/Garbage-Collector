@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 from garbage import views as garbage_views
+from django.conf import settings
 from userprof import views as userprof_views
+from django.conf.urls.static import static
 
 urlpatterns = [
     url('admin/', admin.site.urls),
@@ -37,3 +39,7 @@ urlpatterns = [
     url('sell', userprof_views.sell, name='sell'),
     url('rate', userprof_views.rate, name='rate'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

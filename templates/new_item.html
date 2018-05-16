@@ -123,6 +123,12 @@
             tr.alt{
                 line-height:20px;
             }
+
+            #itemThumbnail {
+                width:300px;
+                height:150px;
+                margin-bottom:20px;
+            }
         </style>
 
 
@@ -133,20 +139,18 @@
             <div id="editHeading" class="panel-heading" align='center'>Items</div>
 
             <div id="infoContainer">
-                <form id="editItemForm" action="." method="post" enctype="multipart/form-data">
+                <form id="editItemForm" action=" " method="POST" enctype="multipart/form-data">
                     <div id="imageContainer">
-                        <img src="{{instance.photos.url}}" alt="Parking Spot Thumbnail" id="parkingThumbnail"> //todo
+                        <img src="{{instance.photos.url}}" alt="Item" id="itemThumbnail">
 
                         <input  type="file"
                                 id="photoButton"
                                 name="photos">
                     </div>
 
-                    <hr>
-
                     <div class="fieldContainers">
                         <label  class="editLabels"
-                                for="title">title: </label>
+                                for="title">Title: </label>
                         <input  id="title"
                                 type="text"
                                 name="title"
@@ -164,7 +168,7 @@
 
                     <div class="fieldContainers">
                         <label  class="editLabels"
-                                for="cost">Condition: </label>
+                                for="cost">Cost: </label>
                         <input  id="cost"
                                 type="text"
                                 name="cost"
@@ -193,11 +197,12 @@
                     <button name="cancel"
                             type="button"
                             id="cancelButton"
-                            onClick="history.go(-1);">Cancel</button>
+                            onClick="history.go(-1)">Cancel</button>
 
                     <button name="send"
-                            type="send"
+                            type="submit"
                             id="updateButton"
+                            formaction = "."
                             value="{{pid}}">Confirm</button>
                     {% csrf_token %}
                 </form>
