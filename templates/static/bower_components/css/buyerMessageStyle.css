@@ -80,15 +80,17 @@ body {
 }
 
 
-.button-decline button{
-	background: #1ddced;
-	padding: 5px 15px;
-	font-size: 30px;
-	color: #fff;
-	border: none;
+.accept {
+	float: right;
+}
 
-	border-radius: 3px;
-	box-shadow: 0 3px 0 #0eb2c1;
-	cursor: pointer;
+.price{
+	font-size: 30px;
+	margin-left:70%;
+	width: 150px;
+	height: 50px;
+	border: 1px solid blue;
+	box-sizing: border-box;
+	text-align:center;
 
 }
