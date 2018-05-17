@@ -25,7 +25,7 @@ class Garbage(models.Model):
     condition = models.IntegerField(blank=True, null=True, default=5)
 
     distance = None
-    # location = models.PointField(null=True, blank=True)
+    #location = models.PointField(null=True, blank=True)
 
     owner = models.ForeignKey(AdminUser, on_delete=models.CASCADE, related_name='owner')
     buyer = models.ForeignKey(ExtendedUser, on_delete=models.CASCADE, related_name='buyer', blank=True, null=True)

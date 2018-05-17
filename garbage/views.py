@@ -9,7 +9,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from userprof.models import ExtendedUser, AdminUser
 from django.shortcuts import render
 from garbage.models import Garbage, Watch
-from userprof.views import profile
+from userprof.views import profile,sell
 from garbage.form import GarbageAdd, GarbageEdit,ImageUploadForm
 # from django.contrib.gis.measure import D #
 # from django.contrib.gis.geos import Point
@@ -54,7 +54,8 @@ def watch(request):
         garbage = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
         w = Watch(user=e_user, garbage=garbage, date_watch = datetime.date.today())
         w.save()
-    return render(request,'userprof.html')
+    return render(request, 'ItemDetails.html')
+
 
 
 def edit_item(request):
@@ -84,7 +85,7 @@ def edit_item(request):
             print(form.cleaned_data['photos'])
             instance.photos = form.cleaned_data['photos']
             instance.save(force_update=True)
-            return render(request, "sell.html")
+            return redirect(sell)
     elif request.method == 'GET':
         pid = request.GET['edit']
         instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
@@ -124,7 +125,7 @@ def new_item(request):
             message = "Item created successfully."
             request.session['message'] = message
             request.session['message_type'] = message_type
-            return redirect(profile)
+            return redirect(sell)
     elif request.method == 'GET':
         form = GarbageAdd()
     return render(request, "new_item.html", {'form': form})
@@ -158,6 +159,16 @@ def sendEmail(request):
 def ItemDetails(request):
     pid = request.GET.get('garbage')
     instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+    current_user = request.user
+    if current_user == None:
+        watched = False
+    else:
+        e_user = ExtendedUser.objects.get(user=current_user)
+        watch_list = Watch.objects.filter(user=e_user,garbage=instance)
+        if watch_list == None:
+            watched = False
+        else:
+            watched = True
     context = {
         'title': instance.title,
         'description': instance.description,
@@ -168,8 +179,7 @@ def ItemDetails(request):
         'distance': instance.distance,
         'owner':instance.owner,
         'postdate': instance.postdate,
-        'solddate': instance.soldDate,
-        'watched': instance.watched,
+        'watched': watched,
         'id': instance.id,
 
     }
