@@ -46,43 +46,51 @@ def watch(request):
     if not request.user.is_authenticated:
         return redirect("/accounts/login")
     current_user = request.user
-    e_user = ExtendedUser.objects.get(user=current_user)
-    if request.method == 'POST':
-        #print(request.POST['pid'])
+    try:
+        e_user = get_object_or_404(ExtendedUser,user=current_user)
         pid = request.POST['edit']
-        print(pid)
         instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
-        w = Watch(user=e_user, garbage=instance, date_watch = datetime.date.today())
+        w = Watch(user=e_user, garbage=instance, date_watch=datetime.date.today())
         w.save()
-        context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
-        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
-        'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate, 'watched': True,
-        'id': instance.id}
-    return render(request, 'ItemDetails.html', context)
+        if request.method == 'POST':
+            context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
+                       'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
+                       'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
+                       'watched': True, 'id': instance.id}
+            return render(request, 'ItemDetails.html', context)
+    except:
+        redirect("/accounts/login")
+
+    return redirect("/accounts/login")
 
 
 def unwatch(request):
     if not request.user.is_authenticated:
         return redirect("/accounts/login")
     current_user = request.user
-    e_user = ExtendedUser.objects.get(user=current_user)
-    if request.method == 'POST':
-        #print(request.POST['pid'])
-        pid = request.POST['unwatch']
-        print(pid)
-        instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+    try:
+        e_user = get_object_or_404(ExtendedUser,user=current_user)
+        if request.method == 'POST':
+            # print(request.POST['pid'])
+            pid = request.POST['unwatch']
+            print(pid)
+            instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
 
-        context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
-                   'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
-                   'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
-                   'watched': False, 'id': instance.id}
-        try:
-            watch_list = Watch.objects.filter(user=e_user, garbage=instance)
-            watch_list.delete()
-        except:
-            pass
+            context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
+                       'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
+                       'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
+                       'watched': False, 'id': instance.id}
+            try:
+                watch_list = Watch.objects.filter(user=e_user, garbage=instance)
+                watch_list.delete()
+            except:
+                pass
+            return render(request, 'ItemDetails.html', context)
+    except:
+        redirect("/accounts/login")
 
-    return render(request, 'ItemDetails.html', context)
+    redirect("/accounts/login")
+
 
 def edit_item(request):
     if not request.user.is_authenticated:
@@ -186,15 +194,22 @@ def ItemDetails(request):
     pid = request.GET.get('garbage')
     instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
     current_user = request.user
-    if current_user == None:
+    try:
+        e_user = get_object_or_404(ExtendedUser,user=current_user)
+    except:
+        context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
+            'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
+            'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate, 'watched': False,
+            'id': instance.id,
+
+        }
+        return render(request, 'ItemDetails.html', context)
+
+    watch_list = Watch.objects.filter(user=e_user,garbage=instance)
+    if watch_list:
         watched = False
     else:
-        e_user = ExtendedUser.objects.get(user=current_user)
-        watch_list = Watch.objects.filter(user=e_user,garbage=instance)
-        if watch_list == None:
-            watched = False
-        else:
-            watched = True
+        watched = True
     context = {
         'title': instance.title,
         'description': instance.description,
