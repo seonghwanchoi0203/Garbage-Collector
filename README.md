@@ -12,7 +12,7 @@ https://www.lucidchart.com/invitations/accept/eff342fb-fe10-4132-87b1-7918baf8c9
 - Django (https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/skeleton_website)
 - Postgres   (http://www.postgresql.org)
 
-**Install sytem packages**
+**Install system packages**
 
 Ubuntu:
 ```sh
@@ -34,6 +34,12 @@ Links to the above packages and dependencies can be found here:
 - libpq-dev  (https://packages.debian.org/sid/libpq-dev)
 - python-dev (http://packages.ubuntu.com/precise/python-dev)
 
+
+**Install Postgis**
+
+```sh
+brew install postgis
+```
 
 **Database**
 ```sh
