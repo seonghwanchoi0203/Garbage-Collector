@@ -33,11 +33,13 @@ urlpatterns = [
     url('new_item',garbage_views.new_item,name = 'new_item'),
     url('edit_item', garbage_views.edit_item, name='edit_item'),
     url('watch', garbage_views.watch, name='watch'),
+    url('unwatch', garbage_views.unwatch, name='unwatch'),
     url('editBio',userprof_views.editBio,name = 'editBio'),
     url('sendEmail',garbage_views.sendEmail, name = 'sendEmail'),
     url('ItemDetails',garbage_views.ItemDetails, name = 'ItemDetails'),
     url('sell', userprof_views.sell, name='sell'),
     url('rate', userprof_views.rate, name='rate'),
+
 ]
 
 if settings.DEBUG:

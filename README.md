@@ -35,6 +35,17 @@ Links to the above packages and dependencies can be found here:
 - python-dev (http://packages.ubuntu.com/precise/python-dev)
 
 
+**Database**
+```sh
+postgres=# CREATE DATABASE testdb;
+postgres=# CREATE USER test WITH PASSWORD 'test';
+postgres=# GRANT ALL PRIVILEGES ON DATABASE test to test;
+postgres=# \connect test;
+testdb=# CREATE EXTENSION postgis;
+testdb=# CREATE EXTENSION postgis_topology;
+testdb=#\q
+```
+
 **Enter the developer python environment**
 
 Make sure your python3.6 is named as python3

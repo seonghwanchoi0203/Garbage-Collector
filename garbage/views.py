@@ -51,12 +51,38 @@ def watch(request):
         #print(request.POST['pid'])
         pid = request.POST['edit']
         print(pid)
-        garbage = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
-        w = Watch(user=e_user, garbage=garbage, date_watch = datetime.date.today())
+        instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+        w = Watch(user=e_user, garbage=instance, date_watch = datetime.date.today())
         w.save()
-    return render(request, 'ItemDetails.html')
+        context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
+        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
+        'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate, 'watched': True,
+        'id': instance.id}
+    return render(request, 'ItemDetails.html', context)
 
 
+def unwatch(request):
+    if not request.user.is_authenticated:
+        return redirect("/accounts/login")
+    current_user = request.user
+    e_user = ExtendedUser.objects.get(user=current_user)
+    if request.method == 'POST':
+        #print(request.POST['pid'])
+        pid = request.POST['unwatch']
+        print(pid)
+        instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+
+        context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
+                   'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
+                   'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
+                   'watched': False, 'id': instance.id}
+        try:
+            watch_list = Watch.objects.filter(user=e_user, garbage=instance)
+            watch_list.delete()
+        except:
+            pass
+
+    return render(request, 'ItemDetails.html', context)
 
 def edit_item(request):
     if not request.user.is_authenticated:

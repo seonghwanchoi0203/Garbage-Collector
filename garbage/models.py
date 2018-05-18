@@ -6,6 +6,9 @@ from jsonfield import JSONField
 import os
 import datetime
 import uuid
+from django.contrib.gis.db import models
+from geopy.geocoders import GoogleV3
+from django.contrib.gis.geos import Point
 
 # Create your models here.
 #
