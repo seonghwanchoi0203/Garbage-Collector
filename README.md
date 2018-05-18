@@ -43,7 +43,7 @@ brew install postgis
 
 **Database**
 ```sh
-postgres=# CREATE DATABASE testdb;
+postgres=# CREATE DATABASE test;
 postgres=# CREATE USER test WITH PASSWORD 'test';
 postgres=# GRANT ALL PRIVILEGES ON DATABASE test to test;
 postgres=# \connect test;
