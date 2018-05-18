@@ -47,9 +47,9 @@ postgres=# CREATE DATABASE test;
 postgres=# CREATE USER test WITH PASSWORD 'test';
 postgres=# GRANT ALL PRIVILEGES ON DATABASE test to test;
 postgres=# \connect test;
-testdb=# CREATE EXTENSION postgis;
-testdb=# CREATE EXTENSION postgis_topology;
-testdb=#\q
+test=# CREATE EXTENSION postgis;
+test=# CREATE EXTENSION postgis_topology;
+test=#\q
 ```
 
 **Enter the developer python environment**
