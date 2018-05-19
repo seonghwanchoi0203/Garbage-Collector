@@ -159,3 +159,6 @@ def sell(request):
         # "history": history
     }
     return render(request, "sell.html", context)
+
+def setting(request):
+    return render(request, 'setting.html')

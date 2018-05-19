@@ -25,7 +25,7 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     #url('accounts/', include('django.contrib.auth.urls')),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^$', garbage_views.home, name='home'),
+    url(r'^$', garbage_views.Welcome, name='welcome'),
 	url('home/', garbage_views.home, name='home'),
 	url('about',garbage_views.about,name = 'about'),
 	url('profile',userprof_views.profile,name = 'profile'),
@@ -38,6 +38,10 @@ urlpatterns = [
     url('ItemDetails',garbage_views.ItemDetails, name = 'ItemDetails'),
     url('sell', userprof_views.sell, name='sell'),
     url('rate', userprof_views.rate, name='rate'),
+    url('orderComplete', garbage_views.orderComplete, name = 'orderComplete'),
+    url('inAppTransaction', garbage_views.inAppTransaction, name = 'inAppTransaction'),
+    url('setting', userprof_views.setting, name='setting'),
+    url('buyerMessage', garbage_views.buyerMessage, name='buyerMessage')
 ]
 
 if settings.DEBUG:

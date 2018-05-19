@@ -28,7 +28,7 @@
         <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Buyer</a>
         <a href="/sell"><i class="glyphicon glyphicon-tag"></i> Seller</a>
         <a href="#"><i class="glyphicon glyphicon-list"></i> History</a>
-        <a href="home"><i class="glyphicon glyphicon-th"></i> Settings</a>
+        <a href="/setting"><i class="glyphicon glyphicon-th"></i> Settings</a>
       </div>
 
 <!--
@@ -54,6 +54,7 @@
         </div>
 
         <div class="container">
+          {% if user.extendeduser.adminuser.registered %}
           <form action="/editBio" method="POST">
             {% csrf_token %}
             <div class="form-group">
@@ -73,38 +74,7 @@
               <!-- <a href="/editBio"><button style="margin-top:20px" type="button" class="btn btn-primary">Save Changes</button> </a> -->
             </div>
           </form>
-          <div>
-            <!-- garbage -->
-            <p>jajjasjjsdasa</p>
-            {%for w in watch%}
-            {{w.garbage.title}}
-            {% endfor %}
-        </div>
-
-         <div>
-            <!-- rate -->
-            {%for h in history %}
-              {{h.garbage.title}}
-              {{h.garbage.id}}
-                <form action="rate" onsubmit="" method="POST"  enctype="multipart/form-data">
-                  <div class="fieldContainers">
-                        <label  class="editLabels"
-                                for="rate">rate: </label>
-                        <input  id="rate"
-                                type="text"
-                                name="rate"
-                                value="{{ form.rate.value}}">
-                    </div>
-                     <div class="editButtonContainer">
-                             <button name="edit"
-                                     type="submit"
-                                     class="editButton"
-                                     value="{{h.garbage.id}}">rate</button>
-                         </div>
-                         {% csrf_token %}
-                </form>
-            {%endfor%}
-         </div>
+          {% endif %}
           </div>
       </div>
 

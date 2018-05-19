@@ -40,6 +40,14 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def orderComplete(request):
+    return render(request, 'orderComplete.html')
+
+def inAppTransaction(request):
+    return render(request, 'inAppTransaction.html')
+
+def buyerMessage(request):
+    return render(request, 'buyerMessage.html')
 
 @login_required
 def watch(request):
@@ -154,9 +162,8 @@ def sendEmail(request):
 
     return render(request,'contact.html')
 
-
 def ItemDetails(request):
-    pid = request.GET.get('garbage')
+    pid = request.GET.get('grabage')
     instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
     context = {
         'title': instance.title,
@@ -172,5 +179,9 @@ def ItemDetails(request):
         'watched': instance.watched,
         'id': instance.id,
 
-    }
     return render(request, 'ItemDetails.html', context)
+
+
+def Welcome(request):
+
+    return render(request, 'welcome.html')
