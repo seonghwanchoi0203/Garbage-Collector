@@ -1,6 +1,7 @@
 body{
-  background: -webkit-linear-gradient(to right, #0BFAF2, #0B6BFA);
-  background: linear-gradient(to right, #0BFAF2, #0B6BFA);
+  /*background: -webkit-linear-gradient(to right, #0BFAF2, #0B6BFA);
+  background: linear-gradient(to right, #0BFAF2, #0B6BFA);*/
+  background-color: #FAFAFA;
 }
 
 h1{
