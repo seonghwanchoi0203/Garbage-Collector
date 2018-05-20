@@ -122,12 +122,12 @@
 <body>
       <div class="container">
         <div class="jumbotron">
-          <h1>Welcome!</h1>
+          <h1>{{watched}}</h1>
         </div>
       </div>
 
     <!--<p class="like" onclick="sa"> &#10084;</p>-->
-
+    <div class=" container">
     <div class="panel panel-default" style="margin-bottom: 40px;border: 1px solid black;">
         <span style="margin-left: 60px;color:red; text-align:left; font-size:30px"><i class="glyphicon glyphicon-user"></i> {{owner}} </span>
     </div>
@@ -168,33 +168,29 @@
 
                 <div class="panel-default" style="height: 250px">
                      {% if watched %}
-                     <form method="post"  onsubmit="" action='/watch/' enctype="multipart/form-data">
+                    <p>lalalala</p>
+                      <form method="post"  action="./unwatch/" enctype="multipart/form-data">
                          <div style="width: 50%; float: left; position: relative">
-
-                             <button name="edit"
+                             <button name="unwatch"
                                      type="submit"
+                                     class="btn btn-default ele button"
+                                     style="margin-top: 25%"
+                                     value="{{id}}" onclick="sa"><p class="cs" onclick="sa">&#10084; </p> unWatch</button>
+
+                         </div>
+                         {% csrf_token %}
+                     </form>
+                    {% else %}
+                    <form method="post"  action='../watch/' enctype="multipart/form-data">
+                         <div style="width: 50%; float: left; position: relative">
+                             <button name="edit"
+                                     type="send"
                                      class="btn btn-default ele button"
                                      style="margin-top: 25%"
                                      value="{{id}}" onclick="sa"><p class="like" onclick="sa">&#10084; </p> Watch</button>
-
                          </div>
                          {% csrf_token %}
                      </form>
-
-                    {% else %}
-                    <form method="post"  onsubmit="" action='/unwatch/' enctype="multipart/form-data">
-                         <div style="width: 50%; float: left; position: relative">
-
-                             <button name="edit"
-                                     type="submit"
-                                     class="btn btn-default ele button"
-                                     style="margin-top: 25%"
-                                     value="{{id}}" onclick="sa"><p class="cs" onclick="sa">&#10084; </p> Watch</button>
-
-                         </div>
-                         {% csrf_token %}
-                     </form>
-
                     {% endif %}
 
                     <div style="width: 50%; float: right; position: relative">
@@ -219,6 +215,7 @@
               </div>
           </div>
         </div>
+    </div>
     </div>
 
 

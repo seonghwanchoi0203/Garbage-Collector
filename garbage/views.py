@@ -13,13 +13,15 @@ from userprof.views import profile,sell
 from garbage.form import GarbageAdd, GarbageEdit,ImageUploadForm
 from datetime import date
 from django.contrib.gis.geos import Point
+from django.urls import reverse
+
+
 # from django.contrib.gis.measure import D #
 # from django.contrib.gis.geos import Point
 # from django.contrib.gis.geoip import GeoIP
 
 from django.forms.models import model_to_dict
 
-from geopy.geocoders import GoogleV3
 # from message.models import Message, ResMessage
 from django.contrib.auth.models import User
 
@@ -102,20 +104,22 @@ def watch(request):
     pid = request.POST['edit']
     print(pid)
     instance = get_object_or_404(Garbage, id=pid)
-    print(instance)
+    print('------')
     w = Watch(user=e_user, garbage=instance, date_watch=date.today())
     print(w)
     w.save()
     try:
-
         if request.method == 'POST':
             context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
                        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
                        'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
                        'watched': True, 'id': instance.id}
             return render(request, 'ItemDetails.html', context)
+            #redirect(ItemDetails,context)
+            #reverse('ItemDetails', kwargs={'garbage': instance.id})
     except:
         print("no exteneduser or garbage")
+        #reverse('ItemDetails', kwargs={'garbage': instance.id})
         redirect("/accounts/login")
 
     return redirect("/accounts/login")
@@ -128,20 +132,22 @@ def unwatch(request):
     try:
         e_user = get_object_or_404(ExtendedUser,user=current_user)
         if request.method == 'POST':
-            # print(request.POST['pid'])
             pid = request.POST['unwatch']
             print(pid)
             instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
-
             context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
                        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
                        'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
-                       'watched': False, 'id': instance.id}
+                       'watched': False, 'id': instance.id,'garbage':instance.id}
             try:
                 watch_list = Watch.objects.filter(user=e_user, garbage=instance)
                 watch_list.delete()
+                print('???')
+                return render(request, 'ItemDetails.html', context)
             except:
                 pass
+            watch_list = Watch.objects.filter(user=e_user, garbage=instance)
+            watch_list.delete()
             return render(request, 'ItemDetails.html', context)
     except:
         redirect("/accounts/login")
@@ -263,8 +269,8 @@ def ItemDetails(request):
         }
         return render(request, 'ItemDetails.html', context)
 
-    watch_list = Watch.objects.filter(user=e_user,garbage=instance)
-    if watch_list:
+    watch_list = list(Watch.objects.filter(user=e_user,garbage=instance))
+    if len(watch_list) == 0:
         watched = False
     else:
         watched = True

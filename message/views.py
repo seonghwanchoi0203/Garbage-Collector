@@ -153,7 +153,7 @@ def buyer_accepet(request):
             garbage = get_object_or_404(Garbage, id=int(form.cleaned_data['garbage_id']))
             inquiry_from_buyer = get_object_or_404(Inquiry, id=int(form.cleaned_data['inqury_id']))
             transaction_id = form.cleaned_data['transaction_id']
-            negotiate_price = fform.cleaned_data['negotiate_price']
+            negotiate_price = form.cleaned_data['negotiate_price']
 
             ## Message to BUYER
             offer_out = Offer(sender=garbage.owner, receiver=e_user)
