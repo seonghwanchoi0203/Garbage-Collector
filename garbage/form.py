@@ -19,7 +19,8 @@ class GarbageAdd(ModelForm):
         model = Garbage
         fields = ['title', 'description','cost','zipcode','condition','photos']
 
-    #title = forms.CharField(max_length=30)
+    Latitude = forms.FloatField(required=False)
+    Longitude = forms.FloatField(required=False)
     #description = forms.CharField(max_length=256)
     #cost = forms.CharField()
     #photos = forms.ImageField()

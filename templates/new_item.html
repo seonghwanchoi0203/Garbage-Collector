@@ -129,6 +129,9 @@
                 height:150px;
                 margin-bottom:20px;
             }
+
+            .hideClass
+            {display:none;}
         </style>
 
 
@@ -139,7 +142,7 @@
             <div id="editHeading" class="panel-heading" align='center'>Items</div>
 
             <div id="infoContainer">
-                <form id="editItemForm" action=" " method="POST" enctype="multipart/form-data">
+                <form id="editItemForm" action="." method="POST" enctype="multipart/form-data">
                     <div id="imageContainer">
                         <img src="{{instance.photos.url}}" alt="Item" id="itemThumbnail">
 
@@ -162,6 +165,15 @@
               <button class="btn btn-default" type="button" name="cancel" id="cancelButton" onClick="history.go(-1);">Cancel</button>
             </div>
             -->
+
+                    <div class="fieldContainers">
+                        <label  class="editLabels"
+                                for="title">title: </label>
+                        <input  id="title"
+                                type="text"
+                                name="title"
+                                value="{{form.title.value}}">
+                    </div>
 
                     <div class="fieldContainers">
                         <label  class="editLabels"
@@ -190,10 +202,20 @@
                                  value = "{{form.description.value}}">
                     </div>
 
+                    <div id="divSample" class="hideClass">Latitude:
+                         <input type="text" id="Latitude" name="Latitude" value="">
+                         <br>
+                         <br>Longitude:
+                         <input type="text" id="Longitude" name="Longitude" value="">
+                         <br>
+                    </div>
+
                     <button name="cancel"
                             type="button"
                             id="cancelButton"
                             onClick="history.go(-1)">Cancel</button>
+
+                    <input type="button" value="Get Location" onclick="getLocationConstant()" />
 
                     <button name="send"
                             type="submit"
@@ -205,5 +227,26 @@
             </div>
         </div>
     </body>
+
+    <script type="text/javascript">
+        function getLocationConstant() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+            } else {
+                alert("Your browser or device doesn't support Geolocation");
+            }
+        }
+
+        // If we have a successful location update
+        function onGeoSuccess(event) {
+            document.getElementById("Latitude").value = event.coords.latitude;
+            document.getElementById("Longitude").value = event.coords.longitude;
+
+        }
+
+        function onGeoError(event) {
+            alert("Error code " + event.code + ". " + event.message);
+        }
+    </script>
 
 </html>

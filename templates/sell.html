@@ -60,11 +60,11 @@
 
       <div id="itemContainer">
       {% if admin_user.registered %}
-      <form method="link" action="/new_item" id="new_item_Form">
+      <form method="get" action="../new_item/">
                   <button name="new_item"
                           type="text"
                           id="new_item_button"
-                          style="float:right; margin-right:300px"
+                          style="float:right"
                           onClick="form.submit()"><i class="glyphicon glyphicon-plus"></i> Add</button>
       </form>
       </div>
@@ -90,13 +90,14 @@
                             float: left;
                             margin: 5px;
                             overflow-y: auto">{{i.description}}</p>
+                  <p>{{ i.id }}</p>
                   <div>
                     <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
                       <div style="float:right">
                         <button name="edit"
                                 type="submit"
                                 class="editButton"
-                                value="{{ x.id }}"
+                                value="{{ i.id }}"
                                 style="width: 5.5em;  height: 2.5em;color: red;background-color: transparent;border: 2px solid red; border-radius: 5px; text-transform; margin-bottom:1px">Edit</button>
                       </div>
                       {% csrf_token %}

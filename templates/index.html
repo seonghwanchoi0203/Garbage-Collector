@@ -2,16 +2,24 @@
 {% load account socialaccount %}
 {% load staticfiles %}
 <html>
+    <head>
         {% include "header.html" %}
         <link   rel="stylesheet"
                 href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
         <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
         <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
         <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
-
-    <head>
+         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="UTF-8"/>
         <style>
-
+            #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
             #itemTotalontainer {
                 position:absolute;
                 top:51px;
@@ -20,12 +28,13 @@
                 float:left;
                 overflow-y:scroll;
             }
+
             #itemContainer {
                 text-align:center;
                 margin-top:30px;
                 width:100%;
             }
-            #mapContainer {
+            #mapContainer{
                 display:inline-block;
                 position:absolute;
                 top:51px;
@@ -40,8 +49,8 @@
 
     <body>
       <div class="container">
-        <div class="jumbotron">
-          <h1>What are you looking for...</h1>
+        <class="jumbotron">
+          <h1>What are you looking for...</h>
           {% include "searchBar.html" %}
         </div>
       </div>
@@ -52,7 +61,7 @@
           {% if garbage %}
           {% for i in garbage %}
                 <div  class="col-sm-5" style="border-radius: 25px; background-color: #F7F2E8; margin-bottom:30px; margin-right:15px;margin-left:15px;">
-                    <p style="color:red; text-align:center; font-size:20px; margin-top:2px"><a href='/ItemDetails?garbage={{i.id}}'>{{i.title}}</a></p>
+                    <p style="color:red; text-align:center; font-size:20px; margin-top:15px"><a href='/ItemDetails?garbage={{i.id}}'>{{i.title}}</a></p>
                   <div class="thumbnail" style="padding:10px;">
                     <img src="{{i.photos.url}}">
                   </div>
@@ -66,9 +75,9 @@
         </div>
         </div>
 
-        <div class="container" style="float:right; width: 50%; display:inline-block;>
-          {% include "mapSingle.html" %}
-        </div>
+        <div class="container" style="float:right; width: 50%; display:inline-block">
+           <div id="map"></div>
+          </div>
       </div>
 
 
@@ -85,4 +94,114 @@
         {% include "footer.html" %}
       </nav> -->
     </body>
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map;
+      var markers = [];
+      function initMap() {
+        var SanDiego = {lat: 32.715736, lng: -117.161087}
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12
+        });
+        var infoWindow = new google.maps.InfoWindow;
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var garbages = {{json_garbage|safe }};
+            var i, marker;
+            var markers = []
+            
+            
+            for (i = 0; i < garbages.length; i++) {
+                //console.log(garbages[i].location.longitude);
+                //console.log(pos.lat+0.05*i)
+                marker = createMarker(garbages[i],map,markers,pos,i)
+                //markers.push(marker)
+                }
+            for(i=0;i < markers.length;i++){
+                console.log(markers[i])
+            }
+        
+            for (var i = 0; i < markers.length; i++) {
+              markers[i].setMap(map);
+
+            }
+            //console.log(markers);
+            map.setCenter(pos);
+            map.setZoom(14);
+              
+          },
+          function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        }
+
+        else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+      /*
+      function setMapOnAll(map,markers) { 
+        console.log('jahah')
+          for (var i = 0; i < markers.length; i++) {
+              markers[i].setMap(map);
+            }
+      }*/
+
+      function createMarker(garbage,map,pos,i) {
+            console.log(pos.lat)
+            var infowindow = new google.maps.InfoWindow();
+            var position = new google.maps.LatLng(garbage.location.latitude, garbage.location.longitude);
+            var marker = new google.maps.Marker({
+                position: position,
+                map: map
+                });
+            
+            google.maps.event.addListener(marker, 'click',
+                (function(marker) {
+                return function() {
+                infowindow.setContent(
+                  //not responsive
+                    '<div id="popContainer" style="width:200px; min-height:200px;">'+
+                    '<img src="'+garbage.photos +'" height="50%" width="50%">'+
+                    '<h4>' + garbage.title+'</h4>'+
+                    '<p><b>Cost:</b></p>'+
+                    '<p>$' + garbage.cost+'</p>'+
+                    '<p><b>Description:</b></p>'+
+                    '<p>' + garbage.description+'</p>'+
+                    "<form method='get'  onsubmit='' action='../ItemDetails/' enctype='multipart/form-data'>"+
+                    "<div style='float:right'>"+
+                    "<button name='garbage' type='submit' class='editButton' value=\'" + garbage.id + "\'>View Details</button>" +
+                    "</div>{% csrf_token %}</form>"
+                    );
+                    infowindow.open(map, marker);
+                    }
+                    })(marker));
+            
+            markers.push(marker);
+            }
+      
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+      
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB84VyA47vdb2vQTyKI3jmBgKMhEf72BTc&callback=initMap">
+    </script>
+       
 </html>

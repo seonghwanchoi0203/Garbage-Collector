@@ -17,6 +17,9 @@ class ExtendedUser(models.Model):
 
     # birth_date = models.DateField(null=True, blank=True)
 
+    def getUsername(self):
+        return self.user.username
+
     def __str__(self):
         return self.user.username
 
@@ -33,6 +36,8 @@ class AdminUser(models.Model):
     def get_allauth_user(self):
         return self.extended_user.user
 
+    def getAdminuUserName(self):
+        return self.extended_user.getUsername()
 
 
 

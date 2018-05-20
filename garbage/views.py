@@ -11,13 +11,15 @@ from django.shortcuts import render
 from garbage.models import Garbage, Watch
 from userprof.views import profile,sell
 from garbage.form import GarbageAdd, GarbageEdit,ImageUploadForm
+from datetime import date, datetime
+from django.contrib.gis.geos import Point
 # from django.contrib.gis.measure import D #
 # from django.contrib.gis.geos import Point
 # from django.contrib.gis.geoip import GeoIP
 
 from django.forms.models import model_to_dict
 
-# from geopy.geocoders import GoogleV3
+from geopy.geocoders import GoogleV3
 # from message.models import Message, ResMessage
 from django.contrib.auth.models import User
 
@@ -27,13 +29,49 @@ import json
 from django.contrib.auth.decorators import login_required
 # from django.utils.six.moves.urllib.parse import urlparse
 
+import json
+from uuid import UUID
+
+
+class UUIDEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, UUID):
+            # if the obj is uuid, we simply return the value of uuid
+            return obj.hex
+        if isinstance(obj, (datetime, date)):
+            return obj.isoformat()
+        return json.JSONEncoder.default(self, obj)
+
 
 # Create your views here.
 def home(request):
+    garbages= []
     garbages = Garbage.objects.all()
-    context = {
-        'garbage' : garbages
-    }
+    print(type(garbages))
+    ret_list = []
+    for index, x in enumerate(garbages):
+        # some fields with object points need manual translation for json
+        # also some additional fields are necessary.
+        # moved to a method of the model?
+        #temp_dict = model_to_dict(x)
+        temp_dict={}
+        temp_dict['title'] = x.title
+        temp_dict['seller'] = x.owner.getAdminuUserName()
+        temp_dict['id'] = x.id.hex
+        temp_dict['description'] = x.description
+        temp_dict['zipcode'] = x.zipcode
+        temp_dict['condition'] = x.condition
+        temp_dict['cost'] = x.cost
+        temp_dict['location'] = {'latitude': x.location.coords[0], 'longitude': x.location.coords[1]}
+        temp_dict['photos'] = x.photos.url
+        ret_list.append(temp_dict)
+    json_garbage = json.dumps(ret_list,cls=UUIDEncoder)
+
+    #print(json_garbage)
+    context = {'garbage': garbages,
+               'json_garbage':json_garbage,
+              }
+
     return render(request, 'index.html', context)
 
 
@@ -119,16 +157,14 @@ def edit_item(request):
         return redirect('/home')
     if request.method == 'POST':
         pid = request.POST['send']
-        print(pid)
         instance = get_object_or_404(Garbage, id=pid)
         form = GarbageEdit(request.POST, request.FILES, instance = instance)
-        print(form)
         if form.is_valid():
-            instance.cost = int(form.cleaned_data['cost'])
+            instance.cost = form.cleaned_data['cost']
             instance.title = form.cleaned_data['title']
-            instance.condition = int(form.cleaned_data['condition'])
+            instance.condition = form.cleaned_data['condition']
             instance.description = form.cleaned_data['description']
-            instance.zipcode = int(form.cleaned_data['zipcode'])
+            instance.zipcode = form.cleaned_data['zipcode']
             print(form.cleaned_data['photos'])
             instance.photos = form.cleaned_data['photos']
             instance.save(force_update=True)
@@ -142,7 +178,6 @@ def edit_item(request):
 
 
 def new_item(request):
-    print(request.method)
     if not request.user.is_authenticated:
         return redirect('/accounts/login')
     current_user = request.user
@@ -158,15 +193,17 @@ def new_item(request):
         form = GarbageAdd(request.POST, request.FILES, instance=instance)
         #form = GarbageAdd(request.POST)
         #imageForm = ImageUploadForm(request.POST, request.FILES)
-        print(form)
+        #print(form)
         if form.is_valid():
-            instance.cost = int(form.cleaned_data['cost'])
+            print("lalal")
+            instance.cost = form.cleaned_data['cost']
             instance.title = form.cleaned_data['title']
-            instance.condition = int(form.cleaned_data['condition'])
+            instance.condition = form.cleaned_data['condition']
             instance.description = form.cleaned_data['description']
-            instance.zipcode =int(form.cleaned_data['zipcode'])
-            print(form.cleaned_data['photos'])
+            instance.zipcode =form.cleaned_data['zipcode']
             instance.photos = form.cleaned_data['photos']
+            print(form.cleaned_data['Latitude'])
+            instance.location = Point(form.cleaned_data['Latitude'], form.cleaned_data['Longitude'])
             instance.save()
             message_type = True
             message = "Item created successfully."

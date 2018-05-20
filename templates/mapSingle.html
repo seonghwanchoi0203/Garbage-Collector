@@ -36,21 +36,18 @@
         });
         infoWindow = new google.maps.InfoWindow;
 
-        // Try HTML5 geolocation.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
-            //pos_num = 3
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-            //var randomPos1 = {lat: 32.715736, lng: -117.161087}
-            //var randomPos2 = {lat: 32.815736, lng: -117.261087}
+
             var marker = new google.maps.Marker({
                 position: pos,
                 map:map,
             })
-
+            /*
             google.maps.event.addListener(marker, 'click', (function(marker) {
                 return function() {
                   infoWindow.setPosition(pos);
@@ -64,6 +61,7 @@
                   infoWindow.open(map);
                 }
               })(marker));
+              */
               map.setCenter(pos);
               map.setZoom(14);
 

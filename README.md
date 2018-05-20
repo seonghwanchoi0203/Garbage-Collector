@@ -41,6 +41,7 @@ Links to the above packages and dependencies can be found here:
 brew install postgis
 ```
 
+
 **Database**
 ```sh
 postgres=# CREATE DATABASE test;
@@ -52,6 +53,12 @@ test=# CREATE EXTENSION postgis_topology;
 test=#\q
 ```
 
+**After Backend Extend Database**
+Do test and create new database again
+```sh
+$ dropdb test
+```
+
 **Enter the developer python environment**
 
 Make sure your python3.6 is named as python3
@@ -59,6 +66,22 @@ Make sure your python3.6 is named as python3
 ```sh
 $ cd Garbage-Collector && source develop.sh
 ```
+
+**Create SuperUser**
+
+```sh
+$ python3 manage.py createsuperuser
+```
+
+
+**Migrate before runserer**
+
+```sh
+$ python3 manage.py makemigrations
+$ python3 manage.py migrate
+$ python3 manage.py migrate --run-syncdb
+```
+
 
 **Usage**
 ```sh
