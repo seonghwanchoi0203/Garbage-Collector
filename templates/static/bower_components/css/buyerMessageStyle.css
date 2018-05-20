@@ -1,0 +1,80 @@
+body {
+	background: #1ddced;
+}
+
+.chatbox {
+	width: 500px;
+	min-width: 390px;
+	height: 600px;
+	background: #fff;
+	padding: 25px;
+	margin: 20px auto;
+	box-shadow: 0 3px #ccc;
+}
+
+.chatlogs {
+	padding: 10px;
+	width: 100%;
+	height: 450px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+
+}
+
+.chat {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: flex-start;
+	margin-bottom: 10px;
+}
+
+.chat .user-photo {
+	width: 60px;
+	height: 60px;
+	background: #ccc;
+	border-radius: 50%;
+}
+
+.chat .chat-message {
+	width: 70%;
+	padding: 15px;
+	margin: 5px 10px 0;
+	border-radius: 10px;
+	color: #fff;
+	font-size: 18px;
+}
+
+.partner .chat-message {
+	background: #1adda4;
+
+}
+
+.self .chat-message {
+	background: #1ddced;
+	order: -1;
+}
+
+.chat-form {
+	margin-top: 20px;
+}
+
+
+.chat-form textarea {
+	background: #fbfbfb;
+	width: 75%;
+	height: 50px;
+	border: 2px solid #eee;
+
+}
+
+.chat-form button {
+	background: #1ddced;
+	padding: 5px 15px;
+	font-size: 30px;
+	color: #fff;
+	border: none;
+
+	border-radius: 3px;
+	box-shadow: 0 3px 0 #0eb2c1;
+	cursor: pointer;
+}

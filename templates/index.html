@@ -12,7 +12,7 @@
     </head>
 
     <body>
-      <!--{% include "header.html" %}-->
+      {% include "header.html" %}
       <div class="container">
         <div class="jumbotron">
           <h1>Welcome!</h1>
@@ -26,19 +26,17 @@
           {% for i in garbage %}
                 <div style="border-radius: 25px; border: 2px solid white; margin:29px" class="col-sm-5">
                     <p style="color:red; text-align:center; font-size:20px"><a href='/ItemDetails?garbage={{i.id}}'>Title: {{i.title}}</a></p>
-                    <p>{{i.id}}</p>us: 25px; border: 2px solid white; margin:29px" class="col-sm-5">
+                    <p>{{i.id}}</p><!--us: 25px; border: 2px solid white; margin:29px" class="col-sm-5">-->
                   <div class="thumbnail" style="padding:0px;">
-                    <img src="{% static "media/{{i.photos.url}}" %}">
+                    <img src="{% static "{{i.photos.url}}" %}">
                   </div>
                   <p style="color:red;">
                     <span style="float:left;">Price: ${{i.cost}}</span>
                     <span style="float:right;">Seller: {{i.owner}}</span>
                   </p>
                 </div>
-                <!-- <p>{{i.title}}</p>
-                <p>{{i.cost}}</p>
-                <p>{{i.owner}}</p> -->
-          {% endfor %}ils?garbage={
+                <!-- <p>{{i.title}}</p><p>{{i.cost}}</p><p>{{i.owner}}</p> -->
+          {% endfor %}
           {% endif %}
           {% if user.is_authenticated %}
           {% else %}

@@ -41,6 +41,19 @@ def about(request):
     return render(request, 'about.html')
 
 
+def orderComplete(request):
+    return render(request, 'orderComplete.html')
+
+
+def about(request):
+    return render(request, 'about.html')
+
+def buyerMessage(request):
+    return render(request, 'buyerMessage.html')
+
+def inAppTransaction(request):
+    return render(request, 'inAppTransaction.html')
+
 @login_required
 def watch(request):
     if not request.user.is_authenticated:

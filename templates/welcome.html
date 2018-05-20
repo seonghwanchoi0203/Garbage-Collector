@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load account socialaccount %}
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+    <style type="text/css">
+        .back_image {
+            background-image: url(static/media/homeBackground1.jpg);
+            /*background-size: cover;*/
+        }
+        .head_title {
+            text-align: center;
+            color: white;
+            margin-top: 15%;
+        }
+        .button_set {
+            margin-top: 25%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="back_image">
+    <h1 class="head_title">Hello, welcome to our Garbage-Collector!</h1>
+    <div>
+        <button type="button" class="btn btn-default" style="margin-top: 25%" onclick="{location.href='home/'}">home page</button>
+    </div>
+
+
+</body>
+</html>

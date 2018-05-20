@@ -150,24 +150,18 @@
                     </div>
 
                     <hr>
-
-                    <div class="fieldContainers">
-                        <label  class="editLabels"
-                                for="title">Title: </label>
-                        <input  id="title"
-                                type="text"
-                                name="title"
-                                value="{{form.title.value}}">
-                    </div>
-
-                    <div class="fieldContainers">
-                        <label  class="editLabels"
-                                for="zipcode">Zipcode: </label>
-                        <input  id="zipcode"
-                                type="text"
-                                name="zipcode"
-                                value="{{form.zipcode.value}}">
-                    </div>
+            <!--
+            <div class="form-group">
+              <label for="description">Description: </label>
+              <textarea id="description" class="form-control" name="description" rows="8" cols="80"></textarea>
+              <input id="description" class="form-control" type="text" name="description" value="{{form.description.value}}">
+            </div> -->
+            <!--
+            <div style="text-align:right" id="buttondiv">
+              <button class="btn btn-primary" type="send" name="send" id="updateButton" value="{{pid}}">Sell</button>
+              <button class="btn btn-default" type="button" name="cancel" id="cancelButton" onClick="history.go(-1);">Cancel</button>
+            </div>
+            -->
 
                     <div class="fieldContainers">
                         <label  class="editLabels"
@@ -194,7 +188,6 @@
                                  type="text"
                                  name="description"
                                  value = "{{form.description.value}}">
-
                     </div>
 
                     <button name="cancel"

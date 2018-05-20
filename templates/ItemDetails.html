@@ -1,15 +1,16 @@
+<!DOCTYPE html>
 {% load i18n %}
 {% load account socialaccount %}
 {% load staticfiles %}
 <html lang="en">
-    <link   rel="stylesheet"
+    <head>
+        {% include "header.html" %}
+        <link   rel="stylesheet"
                 href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+        <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
         <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
         <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
-        <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello world</title>
+        <meta charset="UTF-8"/>
     <style>
         .gradient1{
             background-image: -webkit-gradient(linear,
@@ -64,35 +65,36 @@
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
       }
 
-      /* Modal Content */
-      .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-      }
+        /* Modal Content */
+        .modal-content {
+          background-color: #fefefe;
+           margin: auto;
+           padding: 20px;
+          border: 1px solid #888;
+          width: 80%;
+         }
 
-      /* The Close Button */
-      .close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-      }
+         /* The Close Button */
+        .close {
+           color: #aaaaaa;
+           float: right;
+           font-size: 28px;
+           font-weight: bold;
+        }
 
-      .close:hover,
-      .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-      }
-        .like { font-size:66px;  color:#ccc; cursor:pointer;}
-        .cs{color:#f00;}
+         .close:hover,
+         .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+          }
+           .like { font-size:66px;  color:#ccc; cursor:pointer;}
+           .cs{color:#f00;}
     </style>
-</head>
+    </head>
+
+
 <body>
-    {% include "header.html" %}
       <div class="container">
         <div class="jumbotron">
           <h1>Welcome!</h1>
@@ -164,10 +166,8 @@
                         </div>
 
                     </div>
-
                 </div>
               </div>
-
           </div>
         </div>
     </div>

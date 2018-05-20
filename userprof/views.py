@@ -29,6 +29,7 @@ def rate(request):
             seller = garbage.owner
             seller.rate = (seller.rate * seller.numberOfRate + rate_gave)*1.0/(seller.numberOfRate +1)
             seller.numberOfRate = seller.numberOfRate + 1
+            print("kakaka")
             seller.save()
             return render(request, "userprof.html")
 
@@ -159,3 +160,6 @@ def sell(request):
         # "history": history
     }
     return render(request, "sell.html", context)
+
+def setting(request):
+    return render(request, 'setting.html')

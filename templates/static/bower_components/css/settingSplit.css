@@ -1,0 +1,38 @@
+body {
+    font-family: Arial;
+    color: gray;
+}
+.split {
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    z-index: 1;
+    top: 52;
+    overflow-x: auto;
+    padding-top: 20px;
+}
+
+
+.right {
+    right: 0;
+    background-color: skyblue;
+}
+
+.left {
+    left: 160;
+    background-color: black;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    right: 40%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.centered img {
+    width: 150px;
+    border-radius: 90%;
+}
