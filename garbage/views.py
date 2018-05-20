@@ -11,7 +11,7 @@ from django.shortcuts import render
 from garbage.models import Garbage, Watch
 from userprof.views import profile,sell
 from garbage.form import GarbageAdd, GarbageEdit,ImageUploadForm
-from datetime import date, datetime
+from datetime import date
 from django.contrib.gis.geos import Point
 # from django.contrib.gis.measure import D #
 # from django.contrib.gis.geos import Point
@@ -38,7 +38,7 @@ class UUIDEncoder(json.JSONEncoder):
         if isinstance(obj, UUID):
             # if the obj is uuid, we simply return the value of uuid
             return obj.hex
-        if isinstance(obj, (datetime, date)):
+        if isinstance(obj, (datetime,date)):
             return obj.isoformat()
         return json.JSONEncoder.default(self, obj)
 
@@ -95,14 +95,19 @@ def inAppTransaction(request):
 @login_required
 def watch(request):
     if not request.user.is_authenticated:
+        print("no is_authenticated")
         return redirect("/accounts/login")
     current_user = request.user
+    e_user = get_object_or_404(ExtendedUser, user=current_user)
+    pid = request.POST['edit']
+    print(pid)
+    instance = get_object_or_404(Garbage, id=pid)
+    print(instance)
+    w = Watch(user=e_user, garbage=instance, date_watch=date.today())
+    print(w)
+    w.save()
     try:
-        e_user = get_object_or_404(ExtendedUser,user=current_user)
-        pid = request.POST['edit']
-        instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
-        w = Watch(user=e_user, garbage=instance, date_watch=datetime.date.today())
-        w.save()
+
         if request.method == 'POST':
             context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
                        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
@@ -110,6 +115,7 @@ def watch(request):
                        'watched': True, 'id': instance.id}
             return render(request, 'ItemDetails.html', context)
     except:
+        print("no exteneduser or garbage")
         redirect("/accounts/login")
 
     return redirect("/accounts/login")
