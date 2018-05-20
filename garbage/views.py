@@ -205,7 +205,7 @@ def sendEmail(request):
 
 def ItemDetails(request):
     pid = request.GET.get('garbage')
-    instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+    instance = get_object_or_404(Garbage, id=pid)
     current_user = request.user
     try:
         e_user = get_object_or_404(ExtendedUser,user=current_user)
