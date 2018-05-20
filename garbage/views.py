@@ -174,7 +174,8 @@ def edit_item(request):
         instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
         #print(instance)
         form = GarbageEdit(instance=instance)
-    return render(request, "new_item.html", {'form': form, 'instance':instance,'pid': pid})
+        sendfrom = "edit"
+    return render(request, "new_item.html", {'form': form, 'instance':instance,'pid': pid, 'sendfrom':sendfrom})
 
 
 def new_item(request):
@@ -212,7 +213,8 @@ def new_item(request):
             return redirect(sell)
     elif request.method == 'GET':
         form = GarbageAdd()
-    return render(request, "new_item.html", {'form': form})
+        sendfrom ="new"
+    return render(request, "new_item.html", {'form': form,'sendfrom':sendfrom})
 
 
 def contact(request):
