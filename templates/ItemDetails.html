@@ -54,6 +54,9 @@
             height: 80px;
             width: 120px;
         }
+
+        body {font-family: Arial, Helvetica, sans-serif;}
+
         .modal {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
@@ -70,19 +73,32 @@
 
         /* Modal Content */
         .modal-content {
-          background-color: #fefefe;
-           margin: auto;
-           padding: 20px;
+          background-color: white;
+          margin: auto;
+          padding: 20px;
           border: 1px solid #888;
-          width: 80%;
+          width: 75%;
+          height: 73%;
          }
+
+         /* Modal Header */
+          .modal-header {
+            background-color: #fafafa;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            -webkit-border-top-left-radius: 4px;
+            -webkit-border-top-right-radius: 4px;
+            -moz-border-radius-topleft: 4px;
+            -moz-border-radius-topright: 4px;
+          }
+
 
          /* The Close Button */
         .close {
-           color: #aaaaaa;
-           float: right;
-           font-size: 28px;
-           font-weight: bold;
+          color: #A9A9A9;
+         float: right; top;
+         font-size: 40px;
+         font-weight: bold;
         }
 
          .close:hover,
@@ -191,20 +207,85 @@
                     {% endif %}
 
                     <div style="width: 50%; float: right; position: relative">
-                        <button type="button"
+                      <button id="myBtn"
+                                type="button"
                                 class="btn btn-default button ele"
                                 style="margin-top: 25%">Inquiry</button>
-                        <div id = "popmodal" class = "modal">
-                          <div class = "modal-content">
-                            <form>
-                                Item title:<input type="text" name="title" value="desk">
-                                <br>
-                                Item price:<input type="text" name="price" value="$50">
-                                <br><br>
-                                <button id = "submit" >Submit</button>
-                                <button id = "cancel" style="float: right;">Cancel</button>
-                            </form>
-                          </div>
+
+
+                        <div id = "myModal" class = "modal">
+
+                            <div class = "modal-content">
+                              <div class="modal-header">
+                                <h2 class="modal-title" id="inquiryModalTitle">Inquiry Details
+                                  <span class="close">&times;</span>
+                                </h2>
+                              </div>
+
+
+                              <div class="modal-body">
+                                <div class="container-fluid">
+                                  <div class="row">
+                                    <div class="itemContain">
+
+                                          <div class="col-xs-3">
+                                              <img src="{{photos.url}}" style="width: 100%; height: 100%; float:right">
+                                          </div>
+
+                                      <div class="col-xs-9">
+                                            <ul style="list-style-type:none">
+                                                <h2 class="usualLi" style="text-align: center; font-size: 250%; height:20%">{{title}}</h2>
+                                                <li class="usualLi" style="font-size: 140%; height:28px"><span>Price: </span><span><b>&#36; </b><em style="color: red;font-size: 110%">{{cost}}</em></span></li>
+                                                <li class="usualLi" style="font-size: 140%; height:28px"><span>Post date: {{postdate}}</span></li>
+                                                <li class="usualLi" style="font-size: 140%; height:28px"><span>Condition: {{condition}}</span></li>
+                                                <li class="usualLi" style="font-size: 140%; height:5px"><span><b>Description:  </b></span>{{description}}</li>
+                                            </ul>
+                                            <!-- <h3 class="text-center">This is Item choosen for your Inquiry.</h3>
+                                            <h4 class="text-center">Please make sure your making an inquiry about a proper item.</h4> -->
+
+                                      </div>
+
+                                      <!-- <div class="col-xs-3">
+                                        <div class="row">
+                                          <div>
+                                            <hr>
+                                            <h2 class="text-center">Item Details</h2>
+                                          </div>
+                                          <hr>
+                                        </div>
+                                        <div class="row">
+                                          <form action="Inquiry" method="POST" enctype="multipart/form-data">
+                                              Item title:&nbsp&nbsp&nbsp<input type="text" name="title" value="desk" style="width: 250px">
+                                              <br>
+                                              Item price:&nbsp<input type="text" name="price" value="$50" style="width: 250px">
+                                              <br><br>
+                                              <button id = "submit" style="width: 250px; height: 50px; position:relative; top:50%; left:15%">Submit The Price</button>
+                                              <button id = "cancel" style="float: right;">Cancel</button>
+                                          </form>
+                                        </div>
+                                      </div> -->
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="modal-footer">
+                                <div class="row">
+                                  <p style="text-align: left;">&nbsp&nbsp&nbspInquiry will be sent to: {{owner}}</p>
+                                </div>
+                                <div class="row">
+                                  <div class="input-group">
+                                    <input id="btn-input" type="text" class="form-control input-lg" placeholder="Type your message here..."/ style="height:60%">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-warning btn-lg" id="btn-chat" style="height:60%">
+                                            Send</button>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
                         </div>
 
                     </div>
@@ -232,7 +313,7 @@
 
         $(function maximize() {
             $('.result_pics').on('click', 'img.zoom', function() {
-              var $dialog = $('#dialog_pic'); 
+              var $dialog = $('#dialog_pic');
               $dialog.show();
 
               var marginTop = ($dialog.outerHeight() - $('.dialog-body', $dialog).outerHeight()) / 2;
@@ -246,8 +327,11 @@
             });
           });
 
-                // Get the modal
-        var modal = document.getElementById('popmodal');
+        // Get the modal
+        var modal = document.getElementById('myModal');
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        // var modal = document.getElementById('popmodal');
 
         // Get the button that opens the modal
         var btnInq = document.getElementById("inquiry");
@@ -258,6 +342,14 @@
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
         // When the user clicks the button, op en the modal
         btnInq.onclick = function() {
             modal.style.display = "block";
@@ -271,9 +363,9 @@
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+        // span.onclick = function() {
+        //     modal.style.display = "none";
+        // }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {

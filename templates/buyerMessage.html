@@ -1,20 +1,17 @@
 {% load staticfiles %}
-<html>
-         <link   rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
-        <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
-        <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
-        <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
+<html>
+  <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+  <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+  <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
 
     <head>
-      <!-- fixed side bar menu -->
-      <!-- if pushing animated side bar is wanted, use "bower_components/css/pushingSidebar_style.css"
-      <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/pushingSidebar_style.css" %}">
-      -->
+
       <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/fixedSidebar_style.css" %}">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/buyerMessageStyle.css"%}">
+      <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/buyerMessageStyle2.css"%}">
 
       <title>{{user.username}}'s Profile</title>
     </head>
@@ -22,37 +19,115 @@
     <body>
       {% include "header.html" %}
 
-      <!-- for fixed side bar menu -->
       <div class="sidenav">
         <a class="profPic" href="profile"><img src="{% static "media/default_profile_pic.png" %}" /></a>
         <a href="profile"><i class="glyphicon glyphicon-user"></i> Bio</a>
-        <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Buyer</a>
         <a href="/sell"><i class="glyphicon glyphicon-tag"></i> Seller</a>
-        <a href="#"><i class="glyphicon glyphicon-list"></i> History</a>
         <a href="home"><i class="glyphicon glyphicon-th"></i> Settings</a>
       </div>
-
-<!--
-      for pushing animated side bar menu
-      (if pushing side bar is wanted, comment out the above sidenav div, and uncomment this)
-
-      <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Bio</a>
-        <a href="#">Buyer</a>
-        <a href="#">Seller</a>
-        <a href="about">About</a>
-      </div>
-
-      <div id="main">
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; User Profile</span>
--->
-
 
 
       <div class="main"> <!-- For pushing animated side bar, comment out this line -->
 
-       
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-comment"></span> Chat
+                    <div class="btn-group pull-right">
+
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </button>
+                        <ul class="dropdown-menu slidedown">
+                            <li><a href=""><span class="glyphicon glyphicon-refresh">
+                            </span>Refresh</a></li>
+                            <li><a href=""><span class="glyphicon glyphicon-ok-sign">
+                            </span>Accept</a></li>
+                            <li><a href=""><span class="glyphicon glyphicon-remove">
+                            </span>Withdraw</a></li>
+                            <li><a href="/home"><span class="glyphicon glyphicon-time"></span>
+                                Home</a></li>
+                            <li class="divider"></li>
+                            <li><a href=""><span class="glyphicon glyphicon-off"></span>
+                                Close</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <ul class="chat">
+                        <li class="left clearfix"><span class="chat-img pull-left">
+                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Seller1</strong> <small class="pull-right text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                                </div>
+                                <p>
+                                    what is this?
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix"><span class="chat-img pull-right">
+                            <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+                                    <strong class="pull-right primary-font">buyer</strong>
+                                </div>
+                                <p>
+                                    how mush is this?
+                                </p>
+                            </div>
+                        </li>
+                        <li class="left clearfix"><span class="chat-img pull-left">
+                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Seller1</strong> <small class="pull-right text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                                </div>
+                                <p>
+                                    whafasfajlsnd.asnfasmd?
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix"><span class="chat-img pull-right">
+                            <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
+                                    <strong class="pull-right primary-font">buyer</strong>
+                                </div>
+                                <p>
+                                    salfjaslkdjq;kjr;ldsamd
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat">
+                                Send</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- original code
           <div class="chatbox">
             <div class="chatlogs">
 
@@ -94,14 +169,19 @@
               </div>
           <div class="chat-form">
             <textarea></textarea>
-              <button>Send</button>   
+              <button>Send</button>
          </div>
       </div>
+-->
 
 
-     
 
-   
+
+    </div>
+
+
+
+
 
 
 
