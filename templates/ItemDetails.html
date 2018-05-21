@@ -38,11 +38,12 @@
             transform: translateY(-50%);
         }
         .usualLi {
-            font-size: 22px;
-            line-height: 45px;
+            font-size: 20px;
+            line-height: 40px;
+
         }
         .button {
-            background-color: #4CAF50; /* Green */
+            background-color: #00bfff; /* Green */
             border: none;
             color: white;
             padding: 15px 32px;
@@ -50,74 +51,92 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
+            height: 80px;
+            width: 120px;
         }
-        
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
 
-        /*pop up*/
-        body {font-family: Arial, Helvetica, sans-serif;}
+        /* Modal Content */
+        .modal-content {
+          background-color: #fefefe;
+           margin: auto;
+           padding: 20px;
+          border: 1px solid #888;
+          width: 80%;
+         }
 
-          /* The Modal (background) */
-          .modal {
-              display: none; /* Hidden by default */
-              position: fixed; /* Stay in place */
-              z-index: 1; /* Sit on top */
-              padding-top: 100px; /* Location of the box */
-              left: 0;
-              top: 0;
-              width: 100%; /* Full width */
-              height: 100%; /* Full height */
-              overflow: auto; /* Enable scroll if needed */
-              background-color: rgb(0,0,0); /* Fallback color */
-              background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+         /* The Close Button */
+        .close {
+           color: #aaaaaa;
+           float: right;
+           font-size: 28px;
+           font-weight: bold;
+        }
+
+         .close:hover,
+         .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
           }
+           .like { font-size:66px;  color:#ccc; cursor:pointer;}
+           .cs{font-size:66px;color:#f00;cursor:pointer;}
 
-          /* Modal Content */
-          .modal-content {
-              background-color: #fefefe;
-              margin: auto;
-              padding: 20px;
-              border: 1px solid #888;
-              width: 80%;
+        #dialog_pic {
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: rgba(0,0,0,0.65);
+          z-index: 100;
+          display: none;
+          .dialog-body {
+            width: 100%;
+            max-width: 250px;
+            max-height: 300px;
+            margin: 0 auto;
+            padding: 10px;
+            border-radius: 5px;
+            background: white;
+            overflow: auto;
+            margin-top: 283px;
+            img {
+              width: 100%;
+            }
           }
-
-          /* The Close Button */
-          .close {
-              color: #aaaaaa;
-              float: right;
-              font-size: 28px;
-              font-weight: bold;
-          }
-
-          .close:hover,
-          .close:focus {
-              color: #000;
-              text-decoration: none;
-              cursor: pointer;
-          }
+        }
     </style>
     </head>
 
 
 <body>
-      <div class="container">
-        <div class="jumbotron">
-          <h1>{{watched}}</h1>
-        </div>
-      </div>
 
     <!--<p class="like" onclick="sa"> &#10084;</p>-->
     <div class=" container">
-    <div class="panel panel-default" style="margin-bottom: 40px;border: 1px solid black;">
-        <span style="margin-left: 60px;color:red; text-align:left; font-size:30px"><i class="glyphicon glyphicon-user"></i> {{owner}} </span>
+    <div class="panel panel-default" style="margin-bottom: 40px;border: 1px solid black;display: none">
+        <span style="margin-left: 5%;color:red; text-align:left; font-size:30px"><i class="glyphicon glyphicon-user"></i> {{owner}} </span>
     </div>
 
     <div id="container">
         <div class="jumbotron" style="padding:0px">
 
-          <div class="thumbnail result_pics" style="padding:0px; display:flex;display: -webkit-flex;">
-              <div class="panel panel-default" style="padding:0px;-webkit-flex: 1;flex: 1;margin-top:10px;">
+          <div class="thumbnail result_pics" style="padding:0px; display:flex;display: -webkit-flex;height: 600px">
+              <div class="panel panel-default" style="padding:0px;-webkit-flex: 1;flex: 1;margin-top:10px;margin-left:10px;">
                 <div class="gradient1" style="height: 60%; float: top;position: relative">
-                   <img src="{{photos.url}}" class="ele zoom" style="width:500px;height:400px;margin-top: 1%">
+                   <img src="{{photos.url}}" class="ele zoom" style="width:400px;height:300px;margin-top: 3%">
                 </div>
                 <div style="height: 40%; float: top">
                     {% include "mapSingle.html" %}
@@ -130,28 +149,30 @@
                     <img src="{{photos.url}}" style="width: 800px;height: 600px">
                 </div>
               </div>
-              <div style="-webkit-flex: 1;flex: 1; " >
+              <div style="-webkit-flex: 1;flex: 1; margin-right: 10px" >
                 <ul style="list-style-type:none">
-                    <h1 class="usualLi">{{title}}</h1>
-                    <li class="usualLi" style="font-size: 18px"><span>Price: </span><span><b>&#36; </b><em style="color: red;font-size: 26px">{{cost}}</em></span>
-                    <li class="usualLi"><span>Post date: {{postdate}}</span></li>
-                    <li class="usualLi"><span>Condition: {{condition}}</span></li>
+                    <h1 class="usualLi" style="margin-top: 10%">{{title}}</h1>
+                    <li class="usualLi" style="margin-top: 10%"><div style="float: left"><i class="glyphicon glyphicon-user"></i><b> {{owner}}</b></div><div style="float: left;margin-left: 20%"><b> Rating: 5</b></div></li>
+                    <li class="usualLi" style="clear: both"><span><b>Price:  </b></span><span><b>&#36; </b><em style="color: red;">{{cost}}</em></span>
+                    <li class="usualLi"><span><b>Post date:  </b>{{postdate}}</span></li>
+                    <li class="usualLi"><span><b>Condition:  </b>{{condition}}</span></li>
+                    <li class="usualLi" style="height: 100px"><span><b>Description:  </b></span>{{description}}</li>
                 </ul>
 
-                <div class="panel panel-default" style="height: 250px">
-                    <p >{{description}}</p>
-                </div>
+                <!--<div class="panel-default" style="height: 250px;vertical-align: top">-->
+                    <!--<p class="usualLi" style="margin-left: 8%"></p>-->
+                <!--</div>-->
 
-                <div class="panel-default" style="height: 250px">
+                <div class="panel-default" style="height: 50px">
                      {% if watched %}
-                    <p>lalalala</p>
+                    <!--<p>lalalala</p>-->
                       <form method="post"  action="./unwatch/" enctype="multipart/form-data">
                          <div style="width: 50%; float: left; position: relative">
                              <button name="unwatch"
                                      type="submit"
                                      class="btn btn-default ele button"
                                      style="margin-top: 25%"
-                                     value="{{id}}" onclick="sa"><p class="cs" onclick="sa">&#10084; </p> unWatch</button>
+                                     value="{{id}}" onclick="sa"><p class="cs" onclick="sa" style="font-size: xx-large">&#10084; </p></button>
 
                          </div>
                          {% csrf_token %}
@@ -162,33 +183,20 @@
                              <button name="edit"
                                      type="send"
                                      class="btn btn-default ele button"
-                                     style="margin-top: 25%"
-                                     value="{{id}}" onclick="sa"><p class="like" onclick="sa">&#10084; </p> Watch</button>
+                                     style="margin-top: 25%;"
+                                     value="{{id}}" onclick="sa"><p class="like" onclick="sa" style="font-size: xx-large">&#10084; </p> </button>
                          </div>
                          {% csrf_token %}
                      </form>
                     {% endif %}
 
                     <div style="width: 50%; float: right; position: relative">
-                        <button id="myBtn"
-                                type="button"
+                        <button type="button"
                                 class="btn btn-default button ele"
                                 style="margin-top: 25%">Inquiry</button>
-                        <div id = "myModal" class = "modal">
+                        <div id = "popmodal" class = "modal">
                           <div class = "modal-content">
-                            <span class="close">&times;</span>
-                            <div class="itemContain">
-                              <div class="col-sm-3">
-                                  <img src="{{photos.url}}" style="width: 150px;height: 150px">
-                              </div>
-                              <div class="col-sm-9">
-                                  <div>
-                                    <p>lalalall</p>
-                                  </div>
-                              </div>
-                            </div>
-
-                            <form action="Inquiry" method="POST" enctype="multipart/form-data">
+                            <form>
                                 Item title:<input type="text" name="title" value="desk">
                                 <br>
                                 Item price:<input type="text" name="price" value="$50">
@@ -226,6 +234,7 @@
             $('.result_pics').on('click', 'img.zoom', function() {
               var $dialog = $('#dialog_pic'); 
               $dialog.show();
+
               var marginTop = ($dialog.outerHeight() - $('.dialog-body', $dialog).outerHeight()) / 2;
               $('.dialog-body', $dialog).css({
                 marginTop: marginTop
@@ -237,20 +246,28 @@
             });
           });
 
-
-        //****** pop up /////
-       
-       var modal = document.getElementById('myModal');
+                // Get the modal
+        var modal = document.getElementById('popmodal');
 
         // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
+        var btnInq = document.getElementById("inquiry");
+
+        var btnSub = document.getElementById("submit");
+        var btnCan = document.getElementById("cancel");
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
+        // When the user clicks the button, op en the modal
+        btnInq.onclick = function() {
             modal.style.display = "block";
+        }
+
+        btnSub.onclick = function() {
+            modal.style.display = "none";
+        }
+        btnCan.onclick = function() {
+            modal.style.display = "none";
         }
 
         // When the user clicks on <span> (x), close the modal
