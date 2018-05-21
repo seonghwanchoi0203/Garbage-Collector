@@ -215,8 +215,10 @@ def new_item(request):
             instance.description = form.cleaned_data['description']
             instance.zipcode =form.cleaned_data['zipcode']
             instance.photos = form.cleaned_data['photos']
-            print(form.cleaned_data['Latitude'])
-            instance.location = Point(form.cleaned_data['Latitude'], form.cleaned_data['Longitude'])
+            if(form.cleaned_data['Latitude'] == None or form.cleaned_data['Longitude'] == None):
+                instance.location = Point(32.715736, -117.161087)
+            else:
+                instance.location = Point(form.cleaned_data['Latitude'], form.cleaned_data['Longitude'])
             instance.save()
             message_type = True
             message = "Item created successfully."
