@@ -42,8 +42,8 @@ urlpatterns = [
     url('orderComplete', garbage_views.orderComplete, name='orderComplete'),
     url('inAppTransaction', garbage_views.inAppTransaction, name='inAppTransaction'),
     url('setting', userprof_views.setting, name='setting'),
-    url('buyerMessage', garbage_views.buyerMessage, name='buyerMessage')
-
+    url('buyerMessage', garbage_views.buyerMessage, name='buyerMessage'),
+    url('userinfo',userprof_views.userinfo,name ='userinfo')
 ]
 
 if settings.DEBUG:

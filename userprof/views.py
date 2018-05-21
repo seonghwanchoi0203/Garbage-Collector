@@ -60,7 +60,8 @@ def profile(request):
     watch = Watch.objects.filter(user=m_user)
     print(watch)
     history = Inquiry.objects.filter(sender=m_user, accept=True)
-    print(history)
+    inquiry_out = list(Offer.objects.filter(receiver=m_user))
+    print(inquiry_out)
     context = {
         "garbage": garbage,
         # "message" : message,
@@ -68,7 +69,7 @@ def profile(request):
         # "incoming_requests" : incoming_requests,
         # "outgoing_requests" : outgoing_requests,
         "watch":watch,
-        #"admin_user": a_user,
+        "ongoing_message": inquiry_out,
         "extended_user": m_user,
         "history": history
     }
@@ -160,6 +161,10 @@ def sell(request):
         # "history": history
     }
     return render(request, "sell.html", context)
+
+
+def userinfo(request):
+    return render(request, 'userinfo.html')
 
 
 def setting(request):

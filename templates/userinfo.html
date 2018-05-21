@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
         <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
         <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
         <meta charset="UTF-8"/>
     <head>
       <!-- fixed side bar menu -->
@@ -15,9 +17,11 @@
       -->
       <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/fixedSidebar_style.css" %}">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      
+
       <title>Profile</title>
       <style>
+
+      
         /* Profile container */
         .profile {
           margin: 20px 0;
@@ -121,6 +125,11 @@
           background: #fff;
           min-height: 460px;
         }
+         /*star*/
+        .checked {
+        color: orange;
+        }
+
       </style>
 
     </head>
@@ -130,7 +139,7 @@
 
     <body>
 
-     <div class="container">
+    <div class="container">
     <div class="row profile">
     <div class="col-md-3">
       <div class="profile-sidebar">
@@ -145,7 +154,7 @@
             <h3 class="media-heading">Gary Gillespie</h3>
           </div>
           <div class="profile-usertitle-job">
-            <p>Buyer</p>
+           <p>Profile</p>
           </div>
         </div>
         <!-- END SIDEBAR USER TITLE -->
@@ -155,16 +164,15 @@
         <!-- SIDEBAR MENU -->
         <div class="profile-usermenu">
           <ul class="nav">
-            <li>
+            <li class="active">
               <a href="/userinfo/">
               <i class="glyphicon glyphicon-user"></i>
               Profile </a>
             </li>
-              <li class="active">
+            <li>
               <a href="/profile/">
               <i class="glyphicon glyphicon-shopping-cart"></i>
               I want to buy</a>
-              </li>
             </li>
             <li>
               <a href="/sell/" target="_blank">
@@ -182,57 +190,32 @@
       </div>
     </div>
     <div class="col-md-9 col-md-10">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-9">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">
-                        </span>On Going</a></li>
-                        <li><a href="#profile" data-toggle="tab"><span class="glyphicon glyphicon-tags"></span>
-                            Success</a></li>
-                        <li><a href="#messages" data-toggle="tab"><span class="glyphicon glyphicon-tags"></span>
-                            Declined</a></li>
-                        <li><a href="#settings" data-toggle="tab"><span class="glyphicon glyphicon-plus no-margin">
-                        </span></a></li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="home">
-                            <div class="list-group">
-                              <!--popup here-->
-                              {% if ongoing_message %}
-                              {% for o_m in ongoing_message %}
-                                <a href="#" class="list-group-item">
-                                    <span class="name" style="min-width: 120px;
-                                        display: inline-block;">{{o_m.sender.extendeduser.user.username}}</span> <span class="">{{o_m.title}}</span>
-                                    <span class="text-muted" style="font-size: 11px;">{{o_m.content}}</span> <span class="badge">{{o_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
-                                    </span></span></a>
-                              {% endfor%}
-                              {% else %}
-                                <div class="list-group-item">
-                                    <span class="text-center">This tab is empty.</span>
-                                </div>
-                              {% endif %}
-                            </div>
-                        </div>
-                        <div class="tab-pane fade in" id="profile">
-                            <div class="list-group">
-                                <div class="list-group-item">
-                                    <span class="text-center">This tab is empty.</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade in" id="messages">
-                            ...</div>
-                        <div class="tab-pane fade in" id="settings">
-                            This tab is empty.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <center>
+                    <div>
+                    <img src="{% static "media/Gary.jpg" %}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <h3 class="media-heading">Gary Gillespie <small>La Jolla</small></h3>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    </center>
+                    <hr>
+                    <center>
+
+                    <p class="text-left"><strong>Email: </strong><br>gillespie@ucsd.edu</p>
+                    <br>
+                    <p class="text-left"><strong>UserName: </strong><br>Gary_Gillespie</p>
+                    <br>
+                    <p class="text-left"><strong>ZipCode: </strong><br>92037</p>
+                    <br>
+                    <p class="text-left"><strong>Bio: </strong><br>Like Teaching Student</p>
+                    <br>
+                    </center>
+                  </div>
+                  
       </div>
-  </div>
+    </div>
 </div>
 
 
