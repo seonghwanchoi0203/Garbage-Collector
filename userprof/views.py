@@ -161,5 +161,6 @@ def sell(request):
     }
     return render(request, "sell.html", context)
 
+
 def setting(request):
     return render(request, 'setting.html')
