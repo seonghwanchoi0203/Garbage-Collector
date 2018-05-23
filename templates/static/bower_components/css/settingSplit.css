@@ -19,15 +19,15 @@ body {
 }
 
 .left {
-    left: 160;
+    left: 0;
     background-color: black;
 }
 
 .centered {
-    position: absolute;
+    position: relative;
     top: 50%;
-    left: 40%;
-    right: 40%;
+    left: 50%;
+    right: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
 }

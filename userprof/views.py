@@ -60,14 +60,15 @@ def profile(request):
     watch = Watch.objects.filter(user=m_user)
     print(watch)
     history = Inquiry.objects.filter(sender=m_user, accept=True)
-    inquiry_out = list(Offer.objects.filter(receiver=m_user))
+    decline_message = list(Offer.objects.filter(receiver=m_user, decline = True))
+    success_message = list(Offer.objects.filter(receiver=m_user))
+    inquiry_out = list(Offer.objects.filter(receiver=m_user,decline = False, continueMessage = True))
     print(inquiry_out)
     context = {
         "garbage": garbage,
         # "message" : message,
-        # "message_type" : message_type,
-        # "incoming_requests" : incoming_requests,
-        # "outgoing_requests" : outgoing_requests,
+        "decline_message" : decline_message,
+        "success_message" : success_message,
         "watch":watch,
         "ongoing_message": inquiry_out,
         "extended_user": m_user,
@@ -146,16 +147,18 @@ def sell(request):
     except:
         pass
     # messages = Message.objects.filter(receiver=current_user, is_reservation=False).order_by('-date')
-    # outgoing_requests = ResMessage.objects.filter(message__sender=current_user).order_by('res_date')
+    onGoing_message = Inquiry.objects.filter(receiver=a_user, accept=False,withdraw=False)
+    success_message = Inquiry.objects.filter(receiver=a_user,accept=True)
+    withdraw_message = Inquiry.objects.filter(receiver=a_user,withdraw=True)
     now = datetime.datetime.now()
     # history = ResMessage.objects.filter(message__sender=current_user, res_date__lte = now, is_approved=True).order_by('res_date')
     context = {
         "garbage": garbage,
         # "message" : message,
         # "message_type" : message_type,
-        # "incoming_requests" : incoming_requests,
-        # "outgoing_requests" : outgoing_requests,
-        # "messages"  : messages,
+        "withdraw_message" : withdraw_message,
+        "ongoing_message" : onGoing_message,
+        "success_message"  : success_message,
         "admin_user": a_user,
         "extended_user": m_user,
         # "history": history
