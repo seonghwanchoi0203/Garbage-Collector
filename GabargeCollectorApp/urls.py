@@ -19,6 +19,7 @@ from django.conf.urls import include, url
 from garbage import views as garbage_views
 from django.conf import settings
 from userprof import views as userprof_views
+from message import views as message_views
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -43,7 +44,8 @@ urlpatterns = [
     url('inAppTransaction', garbage_views.inAppTransaction, name='inAppTransaction'),
     url('setting', userprof_views.setting, name='setting'),
     url('buyerMessage', garbage_views.buyerMessage, name='buyerMessage'),
-    url('userinfo',userprof_views.userinfo,name ='userinfo')
+    url('userinfo',userprof_views.userinfo,name ='userinfo'),
+    url('inquiry',message_views.inquiry,name ='inquiry'),
 ]
 
 if settings.DEBUG:

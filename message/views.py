@@ -26,13 +26,13 @@ def inquiry(request):
         form = InquiryAdd(request.POST)
         if form.is_valid():
             inquiry_out = Inquiry(sender=e_user)
-            garbage = get_object_or_404(Garbage, id=int(form.cleaned_data['garbage_id']))
+            garbage = get_object_or_404(Garbage, id=form.cleaned_data['garbage_id'])
             inquiry_out.receiver = garbage.owner
             inquiry_out.title = form.cleaned_data['title']
             inquiry_out.content = form.cleaned_data['content']
             inquiry_out.garbage = garbage
             inquiry_out.date = datetime.date.today()
-            inquiry_out.negotiate_price = form.cleaned_data['neigotiate_price']
+            inquiry_out.negotiate_price = form.cleaned_data['negotiate_price']
             inquiry_out.accept = False
             inquiry_out.read = False
             inquiry_out.withdraw = False
