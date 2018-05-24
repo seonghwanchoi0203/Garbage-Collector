@@ -1,6 +1,87 @@
 {% load i18n %}
 {% load account socialaccount %}
 {% load staticfiles %}
+
+<html>
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+
+.bgimg {
+    background-image: url(static/media/homeBackground2.jpg);
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: white;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 25px;
+}
+
+
+.invisibleLink {
+    display: block;
+    position: absolute;
+    left: 0; top: 0; bottom: 0; right: 0;
+    height: 100%; width: 100%;
+}
+
+
+.topleft {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    height: 5%;
+    width: 5%;
+}
+
+.bottomleft {
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+}
+
+.middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+hr {
+    margin: auto;
+    width: 40%;
+}
+
+</style>
+<body>
+<div class="bgimg">
+  <a href="/home" class="invisibleLink"></a>
+  <!--
+  <div class="topleft">
+  </div>
+-->
+  <div class="middle">
+    <a href="/home" class="invisibleLink"></a>
+    <h1>WELCOME</h1>
+    <hr>
+    <p>Since 2018</p>
+  </div>
+  <div class="bottomleft">
+    <a href="/home" class="invisibleLink"></a>
+    <p>© Garbage-Collector | Privacy | Terms</p>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+<!--
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,3 +111,4 @@
 
 </body>
 </html>
+-->
