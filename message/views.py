@@ -51,8 +51,8 @@ def offer(request):
         form = OfferAdd(request.POST)
         if form.is_valid():
             instance = Offer(sender=a_user)
-            instance.receiver = get_object_or_404(ExtendedUser, id=int(form.cleaned_data['extended_user_id']))
-            inquiry_from_buyer = get_object_or_404(Inquiry, id=int(form.cleaned_data['inqury_id']))
+            instance.receiver = get_object_or_404(ExtendedUser, id= form.cleaned_data['extended_user_id'])
+            inquiry_from_buyer = get_object_or_404(Inquiry, id= form.cleaned_data['inqury_id'])
             instance.inquiry = inquiry_from_buyer
             instance.title = form.cleaned_data['title']
             instance.content = form.cleaned_data['content']

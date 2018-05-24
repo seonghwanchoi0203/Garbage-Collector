@@ -46,6 +46,7 @@ urlpatterns = [
     url('buyerMessage', garbage_views.buyerMessage, name='buyerMessage'),
     url('userinfo',userprof_views.userinfo,name ='userinfo'),
     url('inquiry',message_views.inquiry,name ='inquiry'),
+    url('offer', message_views.offer, name='offer'),
 ]
 
 if settings.DEBUG:
