@@ -171,6 +171,55 @@
           }
            .like { font-size:66px;  color:#ccc; cursor:pointer;}
            .cs{font-size:66px;color:#f00;cursor:pointer;}
+
+           //horizontal display:
+           ::-webkit-scrollbar {
+              width: 1px;
+              height: 1px;
+            }
+
+            ::-webkit-scrollbar-button {
+              width: 1px;
+              height: 1px;
+            }
+
+
+            div {
+              box-sizing: border-box;
+            }
+
+            .horizontal-scroll-wrapper {
+              position: absolute;
+              display: block;
+              width: calc(250px + 1px);
+              max-height: 750px;
+              margin: 0;
+              padding-top: 1px;
+              overflow-y: auto;
+              overflow-x: hidden;
+              -webkit-transform: rotate(-90deg) translateY(-250px);
+                      transform: rotate(-90deg) translateY(-250px);
+              -webkit-transform-origin: right top;
+                      transform-origin: right top;
+            }
+            .horizontal-scroll-wrapper > div {
+              display: block;
+              padding: 5px;
+              -webkit-transform: rotate(90deg);
+                      transform: rotate(90deg);
+              -webkit-transform-origin: right top;
+                      transform-origin: right top;
+            }
+
+            .squares {
+              padding: 250px 0 0 0;
+            }
+            .squares > div {
+              width: 250px;
+              height: 250px;
+              margin: 10px 0;
+            }
+
       </style>
 
     </head>
@@ -379,8 +428,16 @@
                            style="float:right"
                            onClick="form.submit()"><i class="glyphicon glyphicon-plus"></i> Add</button>
           </form>
-
        </div>
+         <div class="horizontal-scroll-wrapper squares">
+            {%if garbage%}
+            {%for i in garbage%}
+                <div class="thumbnail">
+                    <img src="{{i.photos.url}}">
+                </div>
+            {%endfor%}
+            {%endif%}
+        </div>
       </div>
   </div>
 </div>

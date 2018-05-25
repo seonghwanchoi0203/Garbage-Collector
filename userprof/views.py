@@ -150,6 +150,7 @@ def sell(request):
     onGoing_message = Inquiry.objects.filter(receiver=a_user, accept=False,withdraw=False)
     success_message = Inquiry.objects.filter(receiver=a_user,accept=True)
     withdraw_message = Inquiry.objects.filter(receiver=a_user,withdraw=True)
+    garbage = Garbage.objects.all()
     now = datetime.datetime.now()
     # history = ResMessage.objects.filter(message__sender=current_user, res_date__lte = now, is_approved=True).order_by('res_date')
     context = {
