@@ -123,7 +123,7 @@
         display: none; /* Hidden by default */
         position: auto; /* Stay in place */
         z-index: 1; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
+        padding-top: 5%; /* Location of the box */
         left: 0;
         top: 0;
         width: 100%; /* Full width */
@@ -135,12 +135,14 @@
 
         /* Modal Content */
         .modal-content {
+          border: '0';
+          bottom: auto;
           background-color: white;
           margin: auto;
           padding: 20px;
           border: 1px solid #888;
-          width: 75%;
-          height: 77%;
+          width: 1400px;
+          height: 633px;
          }
 
          /* Modal Header */
@@ -154,6 +156,22 @@
             -moz-border-radius-topright: 4px;
           }
 
+          /* Modal Body */
+          .modal-body {
+            height: 50%;
+            overflow-y: auto;
+          }
+
+          /* Modal Footer */
+          .modal-footer {
+            background-color: #fafafa;
+            /* -webkit-border-bottom-left-radius: 4px;
+            -webkit-border-bottom-right-radius: 4px;
+            -moz-border-radius-bottomleft: 4px;
+            -moz-border-radius-bottomright: 4px; */
+            height: 155px;
+            /* max-height: auto; */
+          }
 
          /* The Close Button */
         .close {
@@ -328,10 +346,10 @@
 
                                                     <div class="col-xs-9">
                                                           <ul style="list-style-type:none">
-                                                              <h2 class="usualLi" style="text-align: center; font-size: 250%; height:20%">Desk</h2>
-                                                              <li class="usualLi" style="font-size: 140%; height:28px"><span>Price: </span><span><b>&#36; </b><em style="color: red;font-size: 110%"> {{o_m.negotiate_price}}</em></span></li>
-                                                              <li class="usualLi" style="font-size: 140%; height:28px"><span>Post date: </span>{{o_m.garbage.postdate}}</li>
-                                                              <li class="usualLi" style="font-size: 140%; height:28px"><span>Condition: </span>{{o_m.garbage.condition}}</li>
+                                                              <h2 class="usualLi" style="text-align: center; font-size: 250%; height:20%">{{o_m.garbage.title}}</h2>
+                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Price: </span><span><b>&#36; </b><em style="color: red;font-size: 110%"> {{o_m.negotiate_price}}</em></span></li>
+                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Post date: </span>{{o_m.garbage.postdate}}</li>
+                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Condition: </span>{{o_m.garbage.condition}}</li>
                                                               <li class="usualLi" style="font-size: 140%; height:5px"><span><b>Description: </b></span>{{o_m.garbage.description}}</li>
                                                           </ul>
                                                     </div>
@@ -342,17 +360,19 @@
 
                                             <div class="modal-footer">
                                               <div class="row">
-                                                  <p style="text-align: left;">&nbsp&nbsp&nbsp<strong>Last mesasage received: </strong>{{o_m.content}}</p>
-
+                                                <h4 style="text-align: left;">&nbsp&nbsp&nbsp<strong>Last mesasage received :</strong></h4>
                                               </div>
                                               <div class="row">
-
-                                                  <p style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.user.username}}&nbsp&nbsp
+                                                <h4 style="text-align: left;">&nbsp&nbsp{{o_m.content}}</h4>
+                                              </div>
+                                              <div class="row">
+                                                  <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.user.username}}&nbsp&nbsp
                                                   <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
                                                       Decline</button>
                                                   <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
-                                                      Change Price</button>
-                                                  </p>
+                                                      Change Price</button>&nbsp&nbsp&nbsp
+                                                  </h4>
+                                                  <hr>
                                               </div>
                                               <div class="row">
                                                 <div class="input-group">
@@ -474,6 +494,13 @@
 
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks outside of modal, close it
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
 
             // When the user clicks the button, open the modal
             btn.onclick = function() {
