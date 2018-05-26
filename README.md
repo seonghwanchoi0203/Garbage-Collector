@@ -40,18 +40,18 @@ Links to the above packages and dependencies can be found here:
 ```sh
 brew install postgis
 ```
-(*Ubuntu: If an error about python@2 comes up, ignore the error*)
+(*Ubuntu: If an error about python@2 comes up, ignore the error step ahead*)
 
 
 Ubuntu:
 ```sh
 sudo -u postgres psql
 ```
-
 Mac:
 ```sh
 psql postgres
 ```
+
 
 **Database**
 ```sh
