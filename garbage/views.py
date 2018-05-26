@@ -207,6 +207,7 @@ def new_item(request):
         #form = GarbageAdd(request.POST)
         #imageForm = ImageUploadForm(request.POST, request.FILES)
         #print(form)
+        sendfrom = "edit"
         if form.is_valid():
             print("lalal")
             instance.cost = form.cleaned_data['cost']
