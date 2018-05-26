@@ -322,72 +322,83 @@
                                     <span class="name" style="min-width: 120px; display: inline-block;">{{o_m.sender.user.username}}</span> <span class="">{{o_m.title}}</span>
                                     <span class="text-muted" style="font-size: 11px;">{{o_m.content}}</span> <span class="badge">{{o_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
                                     </span></span>
-                                </a>
+                                    <!-- this part is pop up of inquiry -->
+                                    <div id = "myModal" class = "modal">
 
-                                <!-- this part is pop up of inquiry -->
-                                <div id = "myModal" class = "modal">
+                                              <div class = "modal-content">
+                                                <div class="modal-header">
+                                                  <h2 class="modal-title" id="inquiryModalTitle">Message Details
+                                                    <span class="close">&times;</span>
+                                                  </h2>
+                                                </div>
 
-                                          <div class = "modal-content">
-                                            <div class="modal-header">
-                                              <h2 class="modal-title" id="inquiryModalTitle">Message Details
-                                                <span class="close">&times;</span>
-                                              </h2>
-                                            </div>
+                                                <div class="modal-body">
+                                                  <div class="container-fluid">
+                                                    <div class="row">
+                                                      <div class="itemContain">
 
+                                                            <div class="col-xs-3">
+                                                                <img src="{{o_m.garbage.photos.url}}" style="width: 100%; height: 100%; float:right">
+                                                            </div>
 
-                                            <div class="modal-body">
-                                              <div class="container-fluid">
-                                                <div class="row">
-                                                  <div class="itemContain">
-
-                                                        <div class="col-xs-3">
-                                                            <img src="{{o_m.garbage.photos.url}}" style="width: 100%; height: 100%; float:right">
+                                                        <div class="col-xs-9">
+                                                              <ul style="list-style-type:none">
+                                                                  <h2 class="usualLi" style="text-align: center; font-size: 250%; height:20%">{{o_m.garbage.title}}</h2>
+                                                                  <li class="usualLi" style="font-size: 140%; height:10%"><span>Price: </span><span><b>&#36; </b><em style="color: red;font-size: 110%"> {{o_m.negotiate_price}}</em></span></li>
+                                                                  <li class="usualLi" style="font-size: 140%; height:10%"><span>Post date: </span>{{o_m.garbage.postdate}}</li>
+                                                                  <li class="usualLi" style="font-size: 140%; height:10%"><span>Condition: </span>{{o_m.garbage.condition}}</li>
+                                                                  <li class="usualLi" style="font-size: 140%; height:5px"><span><b>Description: </b></span>{{o_m.garbage.description}}</li>
+                                                              </ul>
                                                         </div>
-
-                                                    <div class="col-xs-9">
-                                                          <ul style="list-style-type:none">
-                                                              <h2 class="usualLi" style="text-align: center; font-size: 250%; height:20%">{{o_m.garbage.title}}</h2>
-                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Price: </span><span><b>&#36; </b><em style="color: red;font-size: 110%"> {{o_m.negotiate_price}}</em></span></li>
-                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Post date: </span>{{o_m.garbage.postdate}}</li>
-                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Condition: </span>{{o_m.garbage.condition}}</li>
-                                                              <li class="usualLi" style="font-size: 140%; height:5px"><span><b>Description: </b></span>{{o_m.garbage.description}}</li>
-                                                          </ul>
+                                                      </div>
                                                     </div>
                                                   </div>
                                                 </div>
-                                              </div>
-                                            </div>
 
-                                            <div class="modal-footer">
-                                              <div class="row">
-                                                <h4 style="text-align: left;">&nbsp&nbsp&nbsp<strong>Last mesasage received :</strong></h4>
-                                              </div>
-                                              <div class="row">
-                                                <h4 style="text-align: left;">&nbsp&nbsp{{o_m.content}}</h4>
-                                              </div>
-                                              <div class="row">
-                                                  <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.user.username}}&nbsp&nbsp
-                                                  <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
-                                                      Decline</button>
-                                                  <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
-                                                      Change Price</button>&nbsp&nbsp&nbsp
-                                                  </h4>
-                                                  <hr>
-                                              </div>
-                                              <div class="row">
-                                                <div class="input-group">
-                                                  <input id="btn-input" type="text" class="form-control input-lg" placeholder="Type your message here..."/ style="height:60%">
-                                                  <span class="input-group-btn">
-                                                      <button class="btn btn-warning btn-lg" id="btn-chat" style="height:60%">
+                                                <div class="modal-footer">
+                                                  <div class="row">
+                                                    <h4 style="text-align: left;">&nbsp&nbsp&nbsp<strong>Mesasage received :</strong></h4>
+                                                  </div>
+                                                  <div class="row">
+                                                    <h4 style="text-align: left;">&nbsp&nbsp{{o_m.content}}</h4>
+                                                  </div>
+                                                  <div class="row">
+                                                      <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.user.username}}&nbsp&nbsp
+                                                      <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
+                                                          Decline</button>
+                                                      <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
+                                                          Change Price</button>&nbsp&nbsp&nbsp
+                                                      </h4>
+                                                      <hr>
+                                                  </div>
+                                                  <div class="row">
+
+                                                    <div class="input-group">
+
+                                                      <form action="offer" method="POST" enctype="multipart/form-data" style="width:1358px;">
+                                                        <input type="text" id="content" name="content" value="" class="form-control input-lg" placeholder="Type your message here..."/ style="height:60%; width:90%">
+                                                        <button class="btn btn-warning btn-lg" id="btn-chat" style="height:60%; width:10%; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">
                                                           Send</button>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </div>
+                                                        <div id="divSample" class="invisible">
+                                                          <input type="text" id="garbage_id" name="garbage_id" value="{{o_m.garbage.id}}" >
+                                                          <input type="text" id="title" name="title" value="Inquiry about {{o_m.garbage.title}}">
+                                                          <input type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.garbage.cost}}" >
+                                                          <input type="text" id="transaction_id" name="transaction_id" value="{{0}}" >
+                                                          {% csrf_token %}
+                                                        </div>
+                                                      </form>
 
+                                                    </div>
+
+                                                  </div>
+                                                </div>
+
+                                              </div>
                                           </div>
-                                      </div>
-                                      <!-- end of pop up of inquiry part -->
+                                          <!-- end of pop up of inquiry part -->
+
+                                </a>
+
 
 
                               {% endfor%}
