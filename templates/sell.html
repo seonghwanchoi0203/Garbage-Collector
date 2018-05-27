@@ -375,31 +375,26 @@
 
                                                     <div class="input-group">
 
-                                                      <form action="offer" method="POST" enctype="multipart/form-data" style="width:1358px;">
+                                                      <form action="../offer/" method="POST" enctype="multipart/form-data" style="width:1358px;">
                                                         <input type="text" id="content" name="content" value="" class="form-control input-lg" placeholder="Type your message here..."/ style="height:60%; width:90%">
                                                         <button class="btn btn-warning btn-lg" id="btn-chat" style="height:60%; width:10%; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">
                                                           Send</button>
                                                         <div id="divSample" class="invisible">
-                                                          <input type="text" id="garbage_id" name="garbage_id" value="{{o_m.garbage.id}}" >
-                                                          <input type="text" id="title" name="title" value="Inquiry about {{o_m.garbage.title}}">
-                                                          <input type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.garbage.cost}}" >
-                                                          <input type="text" id="transaction_id" name="transaction_id" value="{{0}}" >
+                                                          <input type="text" id="inquiry_id" name="inquiry_id" value="{{o_m.id}}" >
+                                                          <input type="text" id="title" name="title" value="Inquiry about {{o_m.title}}">
+                                                          <input type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}" >
+                                                          <input type="text" id="extended_user_id" name="extended_user_id" value="{{o_m.sender.id}}" >
                                                           {% csrf_token %}
                                                         </div>
                                                       </form>
-
                                                     </div>
-
                                                   </div>
                                                 </div>
-
                                               </div>
                                           </div>
                                           <!-- end of pop up of inquiry part -->
 
                                 </a>
-
-
 
                               {% endfor%}
 
@@ -433,7 +428,7 @@
                               {% if withdraw_message %}
                               {% for o_w in withdraw_message %}
                                 <a href="#" class="list-group-item">
-                                    <span class="name" style="min-width: 120px;display: inline-block;">{{o_w.sender.user.username}}</span> <span class="">{{o_w.title}}</span>
+                                    <span class="name" style="min-width:120px;display:inline-block;">{{o_w.sender.user.username}}</span> <span class="">{{o_w.title}}</span>
                                     <span class="text-muted" style="font-size: 11px;">{{o_w.content}}</span> <span class="badge">{{o_w.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
                                     </span></span></a>
                               {% endfor%}
