@@ -15,7 +15,7 @@
       -->
       <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/fixedSidebar_style.css" %}">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      
+
       <title>Profile</title>
       <style>
         /* Profile container */
@@ -75,7 +75,7 @@
         .profile-userbuttons .btn:last-child {
           margin-right: 0px;
         }
-            
+
         .profile-usermenu {
           margin-top: 30px;
         }
@@ -150,7 +150,7 @@
         </div>
         <!-- END SIDEBAR USER TITLE -->
         <!-- SIDEBAR BUTTONS -->
-        
+
         <!-- END SIDEBAR BUTTONS -->
         <!-- SIDEBAR MENU -->
         <div class="profile-usermenu">
@@ -204,8 +204,7 @@
                               {% if ongoing_message %}
                               {% for o_m in ongoing_message %}
                                 <a href="#" class="list-group-item">
-                                    <span class="name" style="min-width: 120px;
-                                        display: inline-block;">{{o_m.extendeduser.sender.user.username}}</span> <span class="">{{o_m.title}}</span>
+                                    <span class="name" style="min-width: 120px; display: inline-block;">{{o_m.extendeduser.sender.user.username}}</span> <span class="">{{o_m.title}}</span>
                                     <span class="text-muted" style="font-size: 11px;">{{o_m.content}}</span> <span class="badge">{{o_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
                                     </span></span></a>
                               {% endfor%}
@@ -222,8 +221,7 @@
                               {% if success_message %}
                               {% for o_s in success_message %}
                                 <a href="#" class="list-group-item">
-                                    <span class="name" style="min-width: 120px;
-                                        display: inline-block;">{{o_s.sender.extendeduser.user.username}}</span> <span class="">{{o_s.title}}</span>
+                                    <span class="name" style="min-width: 120px; display: inline-block;">{{o_s.sender.extendeduser.user.username}}</span> <span class="">{{o_s.title}}</span>
                                     <span class="text-muted" style="font-size: 11px;">{{o_s.content}}</span> <span class="badge">{{o_s.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
                                     </span></span></a>
                               {% endfor%}
@@ -240,8 +238,7 @@
                               {% if decline_message %}
                               {% for d_m in decline_message %}
                                 <a href="#" class="list-group-item">
-                                    <span class="name" style="min-width: 120px;
-                                        display: inline-block;">{{d_m.sender.extendeduser.user.username}}</span> <span class="">{{d_m.title}}</span>
+                                    <span class="name" style="min-width: 120px; display: inline-block;">{{d_m.sender.extendeduser.user.username}}</span> <span class="">{{d_m.title}}</span>
                                     <span class="text-muted" style="font-size: 11px;">{{d_m.content}}</span> <span class="badge">{{d_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
                                     </span></span></a>
                               {% endfor%}
@@ -263,7 +260,7 @@
 
 
 
-    
+
 
 
       <script>
