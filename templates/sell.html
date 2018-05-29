@@ -142,7 +142,8 @@
           padding: 20px;
           border: 1px solid #888;
           width: 78%;
-          height: 633px;
+          /* height: 740px; */
+          height: 635px;
          }
 
          /* Modal Header */
@@ -158,7 +159,7 @@
 
           /* Modal Body */
           .modal-body {
-            height: 50%;
+            height: 300px;
             overflow-y: auto;
           }
 
@@ -172,6 +173,32 @@
             height: 155px;
             /* max-height: auto; */
           }
+
+          .priceModal {
+          display: none; /* Hidden by default */
+          position: auto; /* Stay in place */
+          z-index: 2; /* Sit on top */
+          padding-top: 10%; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 50%; /* Full width */
+          height: 50%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+          /* Modal Content */
+          .pirceModal-content {
+            border: '0';
+            bottom: auto;
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 20%;
+            height: 200px;
+           }
 
          /* The Close Button */
         .close {
@@ -326,7 +353,7 @@
                                 <!-- this part is pop up of inquiry -->
                                 <div id="myModal" class="modal">
 
-                                          <div class = "modal-content">
+                                          <div class = "modal-content" id="modalcontent">
                                             <div class="modal-header">
                                               <h2 class="modal-title" id="inquiryModalTitle">Message Details
                                                 <span class="close">&times;</span>
@@ -367,10 +394,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.user.username}}&nbsp&nbsp
-                                                    <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
+                                                    <button class="btn btn-warning btn-sm" id="declineBtn" style="height:30px; text-align: right;">
                                                         Decline</button>
-                                                    <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
-                                                        Change Price</button>&nbsp&nbsp&nbsp
+                                                    <button class="btn btn-warning btn-sm" id="edit_priceBtn" style="height:30px; text-align: right;">
+                                                        Edit Price</button>&nbsp&nbsp&nbsp
                                                     </h4>
                                                     <hr>
                                                 </div>
@@ -379,14 +406,23 @@
                                                   <div class="input-group" style="margin: auto; float: left; width:70%">
 
                                                     <form action="../offer/" method="POST" enctype="multipart/form-data" style="width:143%;">
-                                                      <input type="text" id="content" name="content" value="" class="form-control input-lg" placeholder="Type your message here..."/ style="height:60%; width:90%">
-                                                      <button class="btn btn-warning btn-lg" id="btn-chat" type="submit" style="float: right; height:60%; width:10%; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">
+                                                      <!-- <div id="secondModal" class="priceModal">
+                                                        <div class="priceModal-content">
+                                                        </div>
+                                                      </div> -->
+                                                      <div class="row" style="width:100%; text-align:right">
+                                                        <p id="priceEditText" style="display:none;">&#8251; Once you change the price, send it with your message. Then, changed price will be sent. Valid format: $XX.XX &nbsp&nbsp&nbsp&nbsp&nbsp
+                                                          <strong style="text-align:right">Edit Price: $</strong></p>
+                                                        <input type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}" / style="display:none; height:35px; width:80px">
+                                                      </div>
+                                                      <br id="priceEditBr" style="display:none">
+                                                      <input type="text" id="content" name="content" value="" class="form-control input-lg" placeholder="Type your message here..."/ style="height:60%; width:90%; border-top-left-radius: 4px; border-bottom-left-radius: 4px;">
+                                                      <button class="btn btn-warning btn-lg" id="btn-chat" type="submit" style="float: right; height:60%; width:10%; border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
                                                         Send</button>
-                                                      <div id="divSample" class="invisible">
-                                                        <input type="text" id="inquiry_id" name="inquiry_id" value="{{o_m.id}}" >
-                                                        <input type="text" id="title" name="title" value="Inquiry about {{o_m.title}}">
-                                                        <input type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}" >
-                                                        <input type="text" id="extended_user_id" name="extended_user_id" value="{{o_m.sender.id}}" >
+                                                      <div id="divSample">
+                                                        <input class="invisible" type="text" id="inquiry_id" name="inquiry_id" value="{{o_m.id}}" >
+                                                        <input class="invisible" type="text" id="title" name="title" value="Inquiry about {{o_m.title}}">
+                                                        <input class="invisible" type="text" id="extended_user_id" name="extended_user_id" value="{{o_m.sender.id}}" >
                                                         {% csrf_token %}
                                                       </div>
                                                     </form>
@@ -493,6 +529,7 @@
 
             // Get the modal
             var modal = document.getElementById('myModal');
+            var modal_content = document.getElementById("modalcontent");
             // Get the button that opens the modal
             var btn = document.getElementById("myBtn");
             // var modal = document.getElementById('popmodal');
@@ -504,13 +541,51 @@
             var btnCan = document.getElementById("cancel");
 
             // Get the <span> element that closes the modal
-            var closeMark = document.getElementsByClassName("close")[1];
+            var closeMark = document.getElementsByClassName("close")[0];
+
+            // Get negotiate_price element
+            var nego_price = document.getElementById("negotiate_price");
+
+            // Get edit price element
+            var editPrice = document.getElementById("edit_priceBtn");
+
+            var pirceEditBox = document.getElementById("priceEditText");
+
+            var priceEditbr = document.getElementById("priceEditBr");
+
+            // editprice butten flag
+            // 0; currently invisible
+            // 1; currently visible
+            var editPriceBtnFlag = 0;
+
+            var secondModal = document.getElementById("secondModal");
+
+
+            editPrice.onclick = function() {
+              if(editPriceBtnFlag){ // currently visible
+                editPriceBtnFlag = 0;
+                nego_price.style.display = "none";
+                pirceEditBox.style.display = "none";
+                priceEditbr.style.display = "none";
+                modal_content.style.height = "635px";
+              }
+              else{ // currently invisible
+                editPriceBtnFlag = 1;
+                nego_price.style.display = "inline-block";
+                pirceEditBox.style.display = "inline";
+                priceEditbr.style.display = "inline";
+                modal_content.style.height = "690px";
+              }
+              // secondModal.style.display = "block";
+            }
 
 
             // When 'esc' key pressed, also close modal
             document.addEventListener('keyup', function(e) {
               if (e.keyCode == 27){
                 modal.style.display = "none";
+                nego_price.style.display = "none";
+                editPriceBtnFlag = 0;
               }
             });
 
@@ -518,6 +593,8 @@
             window.onclick = function(event) {
               if (event.target == modal) {
                 modal.style.display = "none";
+                nego_price.style.display = "none";
+                editPriceBtnFlag = 0;
               }
             }
 
@@ -528,6 +605,8 @@
             // When the user clicks on <span> (x), close the modal
             closeMark.onclick = function() {
                 modal.style.display = "none";
+                nego_price.style.display = "none";
+                editPriceBtnFlag = 0;
             }
             // When the user clicks the button, op en the modal
             btnInq.onclick = function() {

@@ -13,8 +13,8 @@
       <!-- if pushing animated side bar is wanted, use "bower_components/css/pushingSidebar_style.css"
       <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/pushingSidebar_style.css" %}">
       -->
-      <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/fixedSidebar_style.css" %}">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- <link rel="stylesheet" type="text/css" href="{% static "bower_components/css/fixedSidebar_style.css" %}">
+      <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
       <title>Profile</title>
       <style>
@@ -121,6 +121,80 @@
           background: #fff;
           min-height: 460px;
         }
+
+        body {font-family: Arial, Helvetica, sans-serif;}
+
+        .modal {
+        display: none; /* Hidden by default */
+        position: auto; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 5%; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+
+        /* Modal Content */
+        .modal-content {
+          border: '0';
+          bottom: auto;
+          background-color: white;
+          margin: auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 78%;
+          height: 633px;
+         }
+
+         /* Modal Header */
+          .modal-header {
+            background-color: #fafafa;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            -webkit-border-top-left-radius: 4px;
+            -webkit-border-top-right-radius: 4px;
+            -moz-border-radius-topleft: 4px;
+            -moz-border-radius-topright: 4px;
+          }
+
+          /* Modal Body */
+          .modal-body {
+            height: 50%;
+            overflow-y: auto;
+          }
+
+          /* Modal Footer */
+          .modal-footer {
+            background-color: #fafafa;
+            /* -webkit-border-bottom-left-radius: 4px;
+            -webkit-border-bottom-right-radius: 4px;
+            -moz-border-radius-bottomleft: 4px;
+            -moz-border-radius-bottomright: 4px; */
+            height: 155px;
+            /* max-height: auto; */
+          }
+
+         /* The Close Button */
+        .close {
+          color: #A9A9A9;
+         float: right; top;
+         font-size: 40px;
+         font-weight: bold;
+        }
+
+         .close:hover,
+         .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+          }
+           .like { font-size:66px;  color:#ccc; cursor:pointer;}
+           .cs{font-size:66px;color:#f00;cursor:pointer;}
+
       </style>
 
     </head>
@@ -203,10 +277,88 @@
                               <!--popup here-->
                               {% if ongoing_message %}
                               {% for o_m in ongoing_message %}
-                                <a href="#" class="list-group-item">
+                                <a href="#" class="list-group-item" id="myBtn">
                                     <span class="name" style="min-width: 120px; display: inline-block;">{{o_m.extendeduser.sender.user.username}}</span> <span class="">{{o_m.title}}</span>
-                                    <span class="text-muted" style="font-size: 11px;">{{o_m.content}}</span> <span class="badge">{{o_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
-                                    </span></span></a>
+                                    <span class="text-muted" style="font-size: 11px;">{{o_m.content}}</span> <span class="badge">{{o_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
+                                    </span></span>
+                                </a>
+
+                                <!-- this part is pop up of inquiry -->
+                                <div id="myModal" class="modal">
+
+                                          <div class = "modal-content">
+                                            <div class="modal-header">
+                                              <h2 class="modal-title" id="inquiryModalTitle">Message Details
+                                                <span class="close">&times;</span>
+                                              </h2>
+                                            </div>
+
+                                            <div class="modal-body">
+                                              <div class="container-fluid">
+                                                <div class="row">
+                                                  <div class="itemContain">
+
+                                                        <div class="col-xs-3">
+                                                            <img src="{{o_m.garbage.photos.url}}" style="width: 100%; height: 100%; float:right">
+                                                        </div>
+
+                                                    <div class="col-xs-9">
+                                                          <ul style="list-style-type:none">
+                                                              <h2 class="usualLi" style="text-align: center; font-size: 250%; height:20%">{{o_m.garbage.title}}</h2>
+                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Offered Price: </span><span><b>&#36; </b><em style="color: red;font-size: 110%"> {{o_m.negotiate_price}}</em></span></li>
+                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Post date: </span>{{o_m.garbage.postdate}}</li>
+                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Condition: </span>{{o_m.garbage.condition}}</li>
+                                                              <li class="usualLi" style="font-size: 140%; height:5px"><span><b>Description: </b></span>{{o_m.garbage.description}}</li>
+                                                          </ul>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="modal-footer" >
+                                              <!-- <div class="container-fluid"> -->
+
+                                                <div class="row">
+                                                  <h4 style="text-align: left;">&nbsp&nbsp&nbsp<strong>Mesasage received :</strong></h4>
+                                                </div>
+                                                <div class="row">
+                                                  <h4 style="text-align: left;">&nbsp&nbsp{{o_m.content}}</h4>
+                                                </div>
+                                                <div class="row">
+                                                    <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.extendeduser.sender.user.username}}&nbsp&nbsp
+                                                    <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
+                                                        Accept</button>
+                                                    <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
+                                                        Withdraw</button>&nbsp&nbsp&nbsp
+                                                    </h4>
+                                                    <hr>
+                                                </div>
+                                                <div class="row">
+
+                                                  <div class="input-group" style="margin: auto; float: left; width:70%">
+
+                                                    <form action="../offer/" method="POST" enctype="multipart/form-data" style="width:143%;">
+                                                      <input type="text" id="content" name="content" value="" class="form-control input-lg" placeholder="Type your message here..."/ style="height:60%; width:90%">
+                                                      <button class="btn btn-warning btn-lg" id="btn-chat" type="submit" style="float: right; height:60%; width:10%; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">
+                                                        Send</button>
+                                                      <div id="divSample" class="invisible">
+                                                        <input type="text" id="inquiry_id" name="inquiry_id" value="{{o_m.id}}" >
+                                                        <input type="text" id="title" name="title" value="Inquiry about {{o_m.title}}">
+                                                        <input type="text" id="extended_user_id" name="extended_user_id" value="{{o_m.sender.id}}" >
+                                                        <input type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}" >
+                                                        {% csrf_token %}
+                                                      </div>
+                                                    </form>
+                                                  </div>
+                                                </div>
+
+                                              <!-- </div> -->
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <!-- end of pop up of inquiry part -->
+
                               {% endfor%}
                               {% else %}
                                 <div class="list-group-item">
@@ -275,8 +427,70 @@
               document.getElementById("mySidenav").style.width = "0";
               document.getElementById("main").style.marginLeft = "0";
             }
+
+            // Get the modal
+            var modal = document.getElementById('myModal');
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+            // var modal = document.getElementById('popmodal');
+
+            // Get the button that opens the modal
+            var btnInq = document.getElementById("inquiry");
+
+            var btnSub = document.getElementById("submit");
+            var btnCan = document.getElementById("cancel");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When 'esc' key pressed, also close modal
+            document.addEventListener('keyup', function(e) {
+              if (e.keyCode == 27){
+                modal.style.display = "none";
+              }
+            });
+
+            // When the user clicks outside of modal, close it
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+
+            // When the user clicks the button, open the modal
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            // When the user clicks the button, op en the modal
+            btnInq.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            btnSub.onclick = function() {
+                modal.style.display = "none";
+            }
+            btnCan.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            // span.onclick = function() {
+            //     modal.style.display = "none";
+            // }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
       </script>
-      <!--
+<!--
         <p>UserProf</p>
          <div>
                  <div>
@@ -296,6 +510,12 @@
 
 
         <script>
+
+
+
+
+
+
             //Function To Display Popup
             function pop(div) {
                 document.getElementById(div).style.display = 'block';
