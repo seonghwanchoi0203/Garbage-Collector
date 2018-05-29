@@ -14,6 +14,7 @@ from garbage.form import GarbageAdd, GarbageEdit,ImageUploadForm
 from datetime import date
 from django.contrib.gis.geos import Point
 from django.urls import reverse
+from datetime import date
 
 
 # from django.contrib.gis.measure import D #
@@ -24,7 +25,6 @@ from django.forms.models import model_to_dict
 
 # from message.models import Message, ResMessage
 from django.contrib.auth.models import User
-
 import os
 import json
 
@@ -56,6 +56,7 @@ def home(request):
         # also some additional fields are necessary.
         # moved to a method of the model?
         #temp_dict = model_to_dict(x)
+        tmp = x.postdate.isocalendar()
         temp_dict={}
         temp_dict['title'] = x.title
         temp_dict['seller'] = x.owner.getAdminuUserName()
@@ -66,6 +67,7 @@ def home(request):
         temp_dict['cost'] = x.cost
         temp_dict['location'] = {'latitude': x.location.coords[0], 'longitude': x.location.coords[1]}
         temp_dict['photos'] = x.photos.url
+        temp_dict['postdate'] = tmp
         ret_list.append(temp_dict)
     json_garbage = json.dumps(ret_list,cls=UUIDEncoder)
 
