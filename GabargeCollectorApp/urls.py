@@ -47,6 +47,8 @@ urlpatterns = [
     url('userinfo',userprof_views.userinfo,name ='userinfo'),
     url('inquiry',message_views.inquiry,name ='inquiry'),
     url('offer', message_views.offer, name='offer'),
+    url('decline', message_views.decline, name='decline'),
+    url('withdraw', message_views.withdraw, name='withdraw'),
 ]
 
 if settings.DEBUG:
