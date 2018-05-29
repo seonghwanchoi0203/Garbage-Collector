@@ -218,10 +218,12 @@
         var content = "";
         for (i = 0; i < curr_list.length; i++) {
           var tmp = curr_list[i];
-          uid = tmp.id.innerHTML;
+          uid = tmp.id.toString();
+          // console.log('try if works');
+          // console.log(uid);
           content += "<div class='col-sm-5'>";
           content += "<p style='color:red; text-align:center; font-size:20px; margin-top:15px'>";
-          content += "<a href='/ItemDetails?garbage=\'" +tmp.id + "\''>"+ tmp.title + "</a></p>";
+          content += "<a href='/ItemDetails?garbage="+uid+"''>"+ tmp.title + "</a></p>";
           content += "<div class='thumbnail'> ";
           content += "<img src='"+tmp.photos +"'></div>";
           content += "<p style='color:black'>";
