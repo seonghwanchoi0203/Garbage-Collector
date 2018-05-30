@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.contrib.auth.models import User
+from django.contrib.postgres.search import SearchVector
 
 import datetime
 from django.shortcuts import render, redirect
@@ -78,6 +79,38 @@ def home(request):
 
     return render(request, 'index.html', context)
 
+def search(request):
+	garbages = []
+	search_query = request.POST['searchBar']
+	garbages = Garbage.objects.annotate(
+					search=SearchVector('title', 'description'),
+			   ).filter(search = str(search_query))
+	print ('this is '+ str(search_query))
+	ret_list = []
+
+	for index, x in enumerate(garbages):
+        	# some fields with object points need manual translation for json
+       		# also some additional fields are necessary.
+        	# moved to a method of the model?
+        	#temp_dict = model_to_dict(x)
+		tmp = x.postdate.isocalendar()
+		temp_dict={}
+		temp_dict['title'] = x.title
+		temp_dict['seller'] = x.owner.getAdminuUserName()
+		temp_dict['id'] = x.id.hex
+		temp_dict['description'] = x.description
+		temp_dict['zipcode'] = x.zipcode
+		temp_dict['condition'] = x.condition
+		temp_dict['cost'] = x.cost
+		temp_dict['location'] = {'latitude': x.location.coords[0], 'longitude': x.location.coords[1]}
+		temp_dict['photos'] = x.photos.url
+		temp_dict['postdate'] = tmp
+		ret_list.append(temp_dict)
+	json_garbage = json.dumps(ret_list,cls=UUIDEncoder)
+	search_res = {'garbage': garbages ,
+			'json_garbage': json_garbage,
+			} 
+	return render(request, 'index.html', search_res)
 
 def about(request):
     return render(request, 'about.html')
