@@ -231,7 +231,7 @@ def new_item(request):
     elif request.method == 'GET':
         form = GarbageAdd()
         sendfrom ="new"
-    return render(request, "new_item.html", {'form': form,'sendfrom':sendfrom})
+    return render(request, "new_item.html", {'sendfrom':sendfrom})
 
 
 def contact(request):
