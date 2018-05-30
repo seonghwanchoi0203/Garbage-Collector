@@ -108,9 +108,12 @@ def editBio(request):
         form = BioForm(request.POST)
         if form.is_valid():
             e_user.bio = form.cleaned_data['bio']
+            e_user.first = True
+            e_user.zipcode = form.cleaned_data['zipcode']
+            e_user.photos = form.cleaned_data['photos']
             e_user.save()
             message_type = True
-            message = "Item created successfully."
+            message = "User update successfully."
             request.session['message'] = message
             request.session['message_type'] = message_type
             return redirect('/profile')

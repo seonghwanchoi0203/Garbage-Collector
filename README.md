@@ -66,10 +66,16 @@ test=#\q
 
 **After Backend Extend Database**
 
-Do test and create new database again
+Drop test and create new database again
 ```sh
 $ dropdb test
 ```
+If not success, go to psql then
+
+```sh
+postgres=# DROP DATABASE test;
+```
+
 
 **Enter the developer python environment**
 
