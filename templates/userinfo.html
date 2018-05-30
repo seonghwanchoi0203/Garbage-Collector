@@ -143,13 +143,13 @@
       <div class="profile-sidebar">
         <!-- SIDEBAR USERPIC -->
         <div class="profile-userpic">
-          <img src="{% static "media/Gary.jpg" %}" class="img-responsive" alt="">
+          <img src="{{extended_user.photos.url}}" class="img-responsive" alt="">
         </div>
         <!-- END SIDEBAR USERPIC -->
         <!-- SIDEBAR USER TITLE -->
         <div class="profile-usertitle">
           <div class="profile-usertitle-name">
-            <h3 class="media-heading">Gary Gillespie</h3>
+            <h3 class="media-heading">{{extended_user.user.username}}</h3>
           </div>
           <div class="profile-usertitle-job">
            <p>Profile</p>
@@ -191,13 +191,21 @@
         {%if extended_user.first%}
         <div class="">
             <center>
-                    <img src="{% static "media/Gary.jpg" %}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <img src="{{extended_user.photos.url}}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                     <h3 class="media-heading">{{extended_user.user.username}} <small>La Jolla</small></h3>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
+                    <form method="get"  onsubmit="" action='../editBio/' enctype="multipart/form-data">
+                 <div style="float:right;">
+                     <button name="edit"
+                             type="submit"
+                             style="width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Edit</button>
+                 </div>
+                 {% csrf_token %}
+             </form>
             </center>
             <hr>
             <center>
