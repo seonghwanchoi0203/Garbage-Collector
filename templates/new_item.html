@@ -67,7 +67,7 @@
             #state,
             #zipcode,
             #default_num_spots,
-            #cost {
+            /*#cost {
                 background-color:white;
                 display:inline-block;
                 width:200px;
@@ -79,12 +79,16 @@
                 border-radius:3px;
                 margin-top: 20px;
 
+            }*/
+
+            #cost{
+                margin-top:20px;
+                width:200px;
             }
 
             #title {
               margin-top: 20px;
               width:200px;
-
             }
 
 
@@ -192,38 +196,53 @@
 
                     <div class="fieldContainers">
                         <label  class="editLabels"
-                                for="title">Title <span style="color: red">*</span>: </label>
+                                for="title">Title <span style="color: red">*</span>: </label>
                         <input  id="title"
                                 type="text"
                                 name="title"
-                                value="{{form.title.value}}">
+                                placeholder="None"
+                                required>   
+                                <!--value="{{form.title.value}}"-->
                     </div>
 
                     <div class="fieldContainers">
                         <label  class="editLabels"
-                                for="cost">Cost <span style="color: red">*</span>: </label>
+                                for="cost">Cost <span style="color: red">*</span>: </label>
                         <input  id="cost"
-                                type="text"
+                                type="number"
                                 name="cost"
-                                value="{{form.cost.value}}">
+                                placeholder="0"
+                                min="0"
+                                max="1000"
+                                step="0.01"
+                                required>
+                                <!--value="{{form.cost.value}}"-->
                     </div>
 
                     <div class="fieldContainers">
                         <label  class="editLabels"
-                                for="condition">Condition <span style="color: red">*</span>: </label>
+                                for="condition">Condition <span style="color: red">*</span>: </label>
                         <input  id="condition"
-                                type="text"
+                                type="number"
                                 name="condition"
-                                value="{{form.condition.value}}">
+                                placeholder="0"
+                                min="0"
+                                max="5"
+                                required>
+                                <!--value="{{form.condition.value}}"-->
                     </div>
 
                     <div id="descriptionFieldContainers" class="fieldContainers">
                         <label  class="editLabels"
-                                for="description">Description <span style="color: red">*</span>: </label>
-                        <input   id="description"
-                                 type="text"
-                                 name="description"
-                                value = "{{form.description.value}}">
+                                for="description"
+                                style="margin-top:60px">Description <span style="color: red">*</span>: </label>
+                        <textarea   id="description"
+                                    type="text"
+                                    name="description"
+                                    placeholder="None"
+                                    style="resize:none"
+                                    required></textarea>
+                                <!--value = "{{form.description.value}}"-->
                     </div>
 
                     <hr>
@@ -236,7 +255,9 @@
                         <input  type="file"
                                 id="photoButton"
                                 accept="image/*"
-                                name="photos">
+                                name="photos"
+                                onchange="readURL(this)"
+                                required/>
                     </div>
 
                     <div id="divSample" class="hideClass">Latitude:
@@ -285,6 +306,21 @@
 
         function onGeoError(event) {
             alert("Error code " + event.code + ". " + event.message);
+        }
+        
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#thumbnail')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
         }
     </script>
 
