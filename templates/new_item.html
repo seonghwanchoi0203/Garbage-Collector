@@ -15,6 +15,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
         <meta charset=utf-8 />
         <style>
@@ -113,6 +114,14 @@
                 border-radius:3px;
                 margin-top: 20px;
             }
+            /*#costRestritions{
+                font-size: 12px;
+                display:none;
+            }*/
+
+            #costRestritions{
+                color:#A9A9A9;
+            }
 
             #updateButton {
                 background-color:#4da5ff;
@@ -166,6 +175,31 @@
             }
             .hideClass
             {display:none;}
+
+            #costLimit{
+               color:#A9A9A9;
+            }
+            #costLimit:before {
+                content: "";
+            }
+
+            #cost:focus + #costLimit:before{
+                content: "Enter number from 0.00 to 1000";
+                margin-left: 5px;
+            }
+            
+            #conditionLimit{
+                color:#A9A9A9;
+            }
+            #conditionLimit:before {
+                content: "";
+            }
+
+            #condition:focus + #conditionLimit:before{
+                content: "Enter integer from 0 to 5, i.e 5 means very good condition ";
+                margin-left: 5px;
+            }
+
         </style>
 
 
@@ -201,8 +235,9 @@
                                 type="text"
                                 name="title"
                                 placeholder="None"
+                                value="{{form.title.value}}"
                                 required>   
-                                <!--value="{{form.title.value}}"-->
+                                <!---->
                     </div>
 
                     <div class="fieldContainers">
@@ -215,8 +250,9 @@
                                 min="0"
                                 max="1000"
                                 step="0.01"
-                                required>
-                                <!--value="{{form.cost.value}}"-->
+                                value="{{form.cost.value}}"
+                                required><span id="costLimit"></span>
+                                <!---->
                     </div>
 
                     <div class="fieldContainers">
@@ -228,8 +264,9 @@
                                 placeholder="0"
                                 min="0"
                                 max="5"
-                                required>
-                                <!--value="{{form.condition.value}}"-->
+                                value="{{form.condition.value}}"
+                                required><span id="conditionLimit"></span>
+                                <!---->
                     </div>
 
                     <div id="descriptionFieldContainers" class="fieldContainers">
@@ -241,8 +278,9 @@
                                     name="description"
                                     placeholder="None"
                                     style="resize:none"
+                                    value = "{{form.description.value}}"
                                     required></textarea>
-                                <!--value = "{{form.description.value}}"-->
+                                <!--"-->
                     </div>
 
                     <hr>
@@ -274,7 +312,11 @@
                             id="cancelButton"
                             onClick="history.go(-1)">Cancel</button>
 
-                    <input type="button" id="getLocationButton" value="Get Location" onclick="getLocationConstant()" />
+                    {% if sendfrom == "new" %}
+                        <input type="button" id="getLocationButton" value="Get Location" onclick="getLocationConstant()" />
+                    {% elif sendfrom == "edit" %}
+                        <input type="button" id="delete" value="delete" onclick="" />
+                    {% endif %}
 
                     <button name="send"
                             type="submit"
@@ -322,6 +364,7 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
     </script>
 
 </html>
