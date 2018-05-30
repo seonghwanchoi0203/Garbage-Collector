@@ -4,7 +4,7 @@
     <head>
         {% include "header.html" %}
 
-        <title>Item_Manageer</title>
+        <title>New Item</title>
 
         <link   rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
 
@@ -22,10 +22,6 @@
                 width:100%;
                 height:100%;
                 margin:0;
-            }
-
-            body {
-                padding-top:50px;
             }
 
             #editItemContainer {
@@ -52,7 +48,7 @@
             #imageContainer {
                 display:inline-block;
                 width:100%;
-                margin-top:20px;
+                margin-bottom:40px;
             }
 
             #descriptionFieldContainers textarea {
@@ -60,9 +56,10 @@
             }
 
             .editLabels {
+                text-align: right;
                 display:inline-block;
                 width:125px;
-                margin-right:100px;
+                margin-right:10px;
             }
 
             #street_address,
@@ -80,6 +77,20 @@
                 border-width:1px;
                 border-color:#4da5ff;
                 border-radius:3px;
+                margin-top: 20px;
+
+            }
+
+            #title {
+              margin-top: 20px;
+              width:200px;
+
+            }
+
+
+            #condition {
+              margin-top: 20px;
+              width:200px;
             }
 
             #state {
@@ -96,6 +107,7 @@
                 border-width:1px;
                 border-color:#4da5ff;
                 border-radius:3px;
+                margin-top: 20px;
             }
 
             #updateButton {
@@ -120,6 +132,18 @@
                 border-radius:5px;
             }
 
+            #getLocationButton {
+                background-color:#4da5ff;
+                color:white;
+                width:120px;
+                height:40px;
+                margin-left:8px;
+                border-style:solid;
+                border-width:1px;
+                border-color:#4da5ff;
+                border-radius:5px;
+            }
+
             tr.alt{
                 line-height:20px;
             }
@@ -130,6 +154,12 @@
                 margin-bottom:20px;
             }
 
+
+
+            #buttons{
+              margin-bottom: 20px;
+
+            }
             .hideClass
             {display:none;}
         </style>
@@ -139,20 +169,13 @@
 
     <body>
         <div id="editItemContainer" class="panel panel-default">
-            <div id="editHeading" class="panel-heading" align='center'>Items</div>
+            <div id="editHeading" class="panel-heading" align='center'>New Item</div>
 
             <div id="infoContainer">
                 <form id="editItemForm" action="." method="POST" enctype="multipart/form-data">
-                    <div id="imageContainer">
-                        <img src="{{instance.photos.url}}" alt="Item" id="itemThumbnail">
 
-                        <input  type="file"
-                                id="photoButton"
-                                accept="image/*"
-                                name="photos">
-                    </div>
 
-                    <hr>
+
             <!--
             <div class="form-group">
               <label for="description">Description: </label>
@@ -166,40 +189,59 @@
             </div>
             -->
 
+
                     <div class="fieldContainers">
                         <label  class="editLabels"
-                                for="title">title: </label>
+                                for="title">Title <span style="color: red">*</span>: </label>
                         <input  id="title"
                                 type="text"
-                                name="title"
-                                value="{{form.title.value}}">
+                                name="title">
+
+    <!--                            value="{{form.title.value}}"> -->
                     </div>
 
                     <div class="fieldContainers">
                         <label  class="editLabels"
-                                for="cost">Cost: </label>
+                                for="cost">Cost <span style="color: red">*</span>: </label>
                         <input  id="cost"
                                 type="text"
-                                name="cost"
-                                value="{{form.cost.value}}">
+                                name="cost">
+
+
+    <!--                            value="{{form.cost.value}}"> -->
                     </div>
 
                     <div class="fieldContainers">
                         <label  class="editLabels"
-                                for="condition">Condition: </label>
+                                for="condition">Condition <span style="color: red">*</span>: </label>
                         <input  id="condition"
                                 type="text"
-                                name="condition"
-                                value="{{form.condition.value}}">
+                                name="condition">
+    <!--                            value="{{form.condition.value}}"> -->
                     </div>
 
                     <div id="descriptionFieldContainers" class="fieldContainers">
                         <label  class="editLabels"
-                                for="description">Description: </label>
+                                for="description">Description <span style="color: red">*</span>: </label>
                         <input   id="description"
                                  type="text"
-                                 name="description"
-                                 value = "{{form.description.value}}">
+                                 name="description">
+
+
+    <!--                             value = "{{form.description.value}}"> -->
+                    </div>
+
+                    <hr>
+                    <div id="imageContainer">
+                      <label class="editLabels" for="photoButton">
+                      <i class="glyphicon glyphicon-camera"></i> Image<span style="color: red">*</span>: </label>
+
+    <!--          <img src="{{instance.photos.url}}" alt="Image" id="itemThumbnail">-->
+
+                        <input  type="file"
+                                id="photoButton"
+                                accept="image/*"
+                                name="photos">
                     </div>
 
                     <div id="divSample" class="hideClass">Latitude:
@@ -210,18 +252,20 @@
                          <br>
                     </div>
 
+                    <div id="buttons">
                     <button name="cancel"
                             type="button"
                             id="cancelButton"
                             onClick="history.go(-1)">Cancel</button>
 
-                    <input type="button" value="Get Location" onclick="getLocationConstant()" />
+                    <input type="button" id="getLocationButton" value="Get Location" onclick="getLocationConstant()" />
 
                     <button name="send"
                             type="submit"
                             id="updateButton"
                             formaction = "."
                             value="{{pid}}">Confirm</button>
+                    </div>
                     {% csrf_token %}
                 </form>
             </div>
