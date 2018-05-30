@@ -103,19 +103,12 @@ def editBio(request):
         return redirect('/home')
     if a_user.registered is not True:
         return redirect('/home')
-
     if request.method == 'POST':
         e_user = ExtendedUser.objects.get(user=current_user)
-        instance = User.objects.get(email=request.user.email)
         form = BioForm(request.POST)
-        print('form : ', form.as_p())
-        print("Posted")
-
         if form.is_valid():
             e_user.bio = form.cleaned_data['bio']
             e_user.save()
-            print("form is valid!!!")
-            #form.save()
             message_type = True
             message = "Item created successfully."
             request.session['message'] = message
@@ -168,7 +161,11 @@ def sell(request):
 
 
 def userinfo(request):
-    return render(request, 'userinfo.html')
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login')
+    current_user = request.user
+    e_user = ExtendedUser.objects.get(user=current_user)
+    return render(request, 'userinfo.html',{'extended_user': e_user})
 
 
 def setting(request):

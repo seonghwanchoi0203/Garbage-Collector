@@ -4,17 +4,22 @@ from django.db import models
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
 from django.contrib.auth.models import User
+from django.conf import settings
 import uuid
 # from django.contrib.postgres.fields import ArrayField
 # from localflavor.us.forms import USPhoneNumberField
+
+
+def get_image_path(instance, filename):
+    return os.path.join('photos', str(instance.id), filename)
 
 class ExtendedUser(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=500, blank=True, null=True)
-    #location = models.CharField(max_length=30, blank=True, null=True)
-    #photos = models.ImageField(default='%s/default.png' % settings.MEDIA_URL, upload_to=get_image_path)
-
+    photos = models.ImageField(default='%s/default.png' % settings.MEDIA_URL, upload_to=get_image_path)
+    zipcode = models.IntegerField(blank=True, null=True)
+    first = models.BooleanField(blank=True, default=False)
     # birth_date = models.DateField(null=True, blank=True)
 
     def getUsername(self):

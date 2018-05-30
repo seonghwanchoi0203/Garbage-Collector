@@ -135,8 +135,6 @@
     </head>
 
 
-
-
     <body>
 
     <div class="container">
@@ -190,33 +188,29 @@
       </div>
     </div>
     <div class="col-md-9 col-md-10">
-                    <center>
-                    <div>
+        <div>
+            <center>
                     <img src="{% static "media/Gary.jpg" %}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
-                    <h3 class="media-heading">Gary Gillespie <small>La Jolla</small></h3>
+                    <h3 class="media-heading">{{extended_user.user.username}} <small>La Jolla</small></h3>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
-                    </center>
-                    <hr>
-                    <center>
-
-                    <p class="text-left"><strong>Email: </strong><br>gillespie@ucsd.edu</p>
+            </center>
+            <hr>
+            <center>
+                    <p class="text-left"><strong>Email: </strong><br>{{extended_user.user.email}}</p>
                     <br>
-                    <p class="text-left"><strong>UserName: </strong><br>Gary_Gillespie</p>
+                    <p class="text-left"><strong>ZipCode: </strong><br>{{extended_user.zipcode}}</p>
                     <br>
-                    <p class="text-left"><strong>ZipCode: </strong><br>92037</p>
+                    <p class="text-left"><strong>Bio: </strong><br>{{extended_user.bio}}</p>
                     <br>
-                    <p class="text-left"><strong>Bio: </strong><br>Like Teaching Student</p>
-                    <br>
-                    </center>
-                  </div>
-                  
-      </div>
+            </center>
+        </div>
     </div>
-</div>
+    </div>
+
 
 
 
