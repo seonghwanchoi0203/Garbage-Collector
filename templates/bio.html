@@ -1,43 +1,176 @@
+<!DOCTYPE html>
 {% load staticfiles %}
-<html>
-    .editLabels {
-        display:inline-block;
-        width:125px;
-        margin-right:100px;
-    }
-  {% if user.extendeduser.adminuser.registered %}
-    <div class="container">
-    <form action="/editBio" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      Introduce Yourself :<br>
-        <div id="imageContainer">
-                        <img src="{{instance.photos.url}}" alt="Item" id="itemThumbnail">
+<html lang = "en">
+    <head>
+        <title>Bio Edit</title>
 
-                        <input  type="file"
-                                id="photoButton"
-                                accept="image/*"
-                                name="photos">
-                    </div>
-        <div class="fieldContainers">
-            <label  class="editLabels"
-                    for="bio">bio: </label>
-            <input  id="bio"
-                    type="text"
-                    name="bio"
-                    value="{{ form.user.extendeduser.bio.value}}">
+        <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+        <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+        <meta charset=utf-8 />
+        <style>
+            html, body {
+                width:100%;
+                height:100%;
+                margin:0;
+            }
+            #editItemContainer {
+                margin-top:20px;
+                margin-left:15%;
+                margin-right:15%;
+            }
+
+            #editHeading {
+                background-color:#4da5ff;
+                color:white;
+                font-size:20px;
+            }
+
+            #infoContainer {
+                margin-left:5%;
+                margin-right:5%;
+            }
+
+            #editSpotForm {
+                margin-bottom:20px;
+            }
+
+            #imageContainer {
+                display:inline-block;
+                width:100%;
+                margin-bottom:40px;
+            }
+
+            #descriptionFieldContainers textarea {
+                vertical-align:top;
+            }
+
+            .editLabels {
+                text-align: right;
+                display:inline-block;
+                width:125px;
+                margin-right:100px;
+                }
+
+            #zipcode {
+              margin-top: 20px;
+              width:200px;
+            }
+
+            #bio {
+                width:400px;
+                height:100px;
+                padding-left:10px;
+                padding-right:10px;
+                padding-top:5px;
+                border-style:solid;
+                border-width:1px;
+                border-color:#4da5ff;
+                border-radius:3px;
+                margin-top: 20px;
+            }
+
+            #updateButton {
+                background-color:#4da5ff;
+                color:white;
+                width:120px;
+                height:40px;
+                margin-left:8px;
+                border-style:solid;
+                border-width:1px;
+                border-color:#4da5ff;
+                border-radius:5px;
+            }
+
+            #cancelButton {
+                width:120px;
+                height:40px;
+                margin-right:8px;
+                border-style:solid;
+                border-width:1px;
+                border-color:lightgrey;
+                border-radius:5px;
+            }
+            #buttons{
+              margin-bottom: 20px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+       <div id="editItemContainer" class="panel panel-default">
+          <div id="editHeading" class="panel-heading" align='center'>Bio Edit</div>
+
+              {% if user.extendeduser.adminuser.registered %}
+              <div class="infoContainer">
+                  <form id="editItemForm" action="/editBio" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        Introduce Yourself :<br>
+
+
+                          <div class="fieldContainers">
+                              <label  class="editLabels"
+                                      for="zipcode">zipcode: </label>
+                              <input  id="zipcode"
+                                      type="text"
+                                      name="zipcode"
+                                      value="{{ form.user.extendeduser.zipcode.value}}">
+                          </div>
+                          <div class="fieldContainers">
+                              <label  class="editLabels"
+                                      for="bio">bio: </label>
+                              <input  id="bio"
+                                      type="text"
+                                      name="bio"
+                                      value="{{ form.user.extendeduser.bio.value}}">
+                          </div>
+
+                          <hr>
+                          <div id="imageContainer">
+                              <label class="editLabels" for="photoButton">
+                              <i class="glyphicon glyphicon-camera"></i> Image<span style="color: red">*</span>: </label>
+                              <img src="{{instance.photos.url}}" alt="Image" id="itemThumbnail" width="100px" height="auto">
+                              <hr>
+                              <input  type="file"
+                                      id="photoButton"
+                                      accept="image/*"
+                                      name="photos">
+                          </div>
+
+                          <div id="buttons">
+                              <button name="cancel"
+                                      type="button"
+                                      id="cancelButton"
+                                      onClick="history.go(-1)">Cancel</button>
+
+                              <input type="submit"
+                                     id = "updateButton"
+                                     value="Submit">
+                              <!--<button name="send"
+                                      type="submit"
+                                      id="updateButton"
+                                      formaction = "."
+                                      value="Submit">submit</button>-->
+                          </div>
+                    </form>
+              </div>
+            {% endif %}
         </div>
-        <div class="fieldContainers">
-            <label  class="editLabels"
-                    for="zipcode">zipcode: </label>
-            <input  id="zipcode"
-                    type="text"
-                    name="zipcode"
-                    value="{{ form.user.extendeduser.zipcode.value}}">
-        </div>
-      <input type="submit" value="Submit">
-    </form>
-    </div>
-  {% endif %}
+    </body>
+
+    <script>
+
+    </script>
+
+
 </html>
 
 <!--
