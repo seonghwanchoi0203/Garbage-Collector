@@ -156,6 +156,18 @@
                 border-color:#4da5ff;
                 border-radius:5px;
             }
+            
+            #deleteItem {
+                background-color:#4da5ff;
+                color:white;
+                width:120px;
+                height:40px;
+                margin-left:8px;
+                border-style:solid;
+                border-width:1px;
+                border-color:#4da5ff;
+                border-radius:5px;
+            }
 
             tr.alt{
                 line-height:20px;
@@ -207,7 +219,14 @@
 
     <body>
         <div id="editItemContainer" class="panel panel-default">
-            <div id="editHeading" class="panel-heading" align='center'>New Item</div>
+            <div id="editHeading" class="panel-heading" align='center'>
+                {% if sendfrom == "new" %}   
+                    New Item
+                {% elif sendfrom == "edit" %}
+                    Edit Item
+                {% endif %}
+                            
+            </div>
 
             <div id="infoContainer">
                 <form id="editItemForm" action="." method="POST" enctype="multipart/form-data">
@@ -273,14 +292,22 @@
                         <label  class="editLabels"
                                 for="description"
                                 style="margin-top:60px">Description <span style="color: red">*</span>: </label>
-                        <textarea   id="description"
-                                    type="text"
-                                    name="description"
-                                    placeholder="None"
-                                    style="resize:none"
-                                    value = "{{form.description.value}}"
-                                    required></textarea>
-                                <!--"-->
+                        {% if form.description.value %}
+                            <textarea   id="description"
+                                        type="text"
+                                        name="description"
+                                        style="resize:none"
+                                        value = "{{form.description.value}}"
+                                        required>{{form.description.value}}</textarea>
+                        {% else %}
+                            <textarea   id="description"
+                                        type="text"
+                                        name="description"
+                                        placeholder="None"
+                                        style="resize:none"
+                                        value = "{{form.description.value}}"
+                                        required></textarea>
+                        {% endif %}
                     </div>
 
                     <hr>
@@ -290,12 +317,23 @@
 
                      <img src="{{instance.photos.url}}" alt="Image" id="thumbnail" width="100px" height="auto">
                      <hr>
+                        {% if form.photos.value %}
                         <input  type="file"
                                 id="photoButton"
                                 accept="image/*"
                                 name="photos"
                                 onchange="readURL(this)"
-                                required/>
+                                />
+                        
+                        {% else %} 
+                        <input  type="file"
+                            id="photoButton"
+                            accept="image/*"
+                            name="photos"
+                            onchange="readURL(this)"
+                            required
+                            />
+                        {% endif %}
                     </div>
 
                     <div id="divSample" class="hideClass">Latitude:
@@ -315,7 +353,7 @@
                     {% if sendfrom == "new" %}
                         <input type="button" id="getLocationButton" value="Get Location" onclick="getLocationConstant()" />
                     {% elif sendfrom == "edit" %}
-                        <input type="button" id="delete" value="delete" onclick="" />
+                        <input type="button" id="deleteItem" value="delete" onclick="" />
                     {% endif %}
 
                     <button name="send"
