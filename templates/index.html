@@ -67,6 +67,8 @@
                   Sort newest by date created </button>
               <button id="sort_condition" type="button" class="btn btn-default button ele">
                   Sort condition by high to low</button>
+              <button id="sort_distance" type="button" class="btn btn-default button ele">
+                  Sort distance by nearest</button>
 <!--                 </ul>
               </div> -->
         
@@ -190,6 +192,7 @@
       }
 
 
+      
       //sort the condition from high to low
       document.getElementById("sort_condition").onclick = function() {
         var garbages = {{json_garbage|safe }};
@@ -206,6 +209,37 @@
         sortGarbage = garbages.sort(compare('condition'));
         console.log('rununtill here1');
         updateList(sortGarbage);
+      }
+
+
+
+      //Sort distance by nearest
+      document.getElementById("sort_distance").onclick = function() {
+        var garbages = {{json_garbage|safe }};
+        var sdLat = 32.715736;
+        var sdLng = 117.161087;
+
+        function compare(distance){
+          return function(obj1,obj2) {
+            var lat_1 = obj1.location[0];
+            var lng_1 = obj1.location[1];
+            var lat_2 = obj2.condition[0];
+            var lng_2 = obj2.condition[1];
+            if (navigator.geolocation) {
+              var dis1 = ((lat_1 - lati) * (lat_1 - lati)) - ((lng_1 - long) * (lng_1 - long));
+              var dis2 = ((lat_2 - lati) * (lat_2 - lati)) - ((lng_2 - long) * (lng_2 - long));
+            } else {
+              var dis1 = ((lat_1 - sdLat) * (lat_1 - sdLat)) - ((lng_1 - sdLng) * (lng_1 - sdLng));
+              var dis2 = ((lat_2 - sdLat) * (lat_2 - sdLat)) - ((lng_2 - sdLng) * (lng_2 - sdLng));
+            }
+            return dis1 - dis2
+          }
+        }
+
+        sortGarbage = garbages.sort(compare('location'));
+        console.log('rununtill hhhhhhere');
+        updateList(sortGarbage);
+
       }
 
 
@@ -247,6 +281,10 @@
       // locate you.
       var map;
       var markers = [];
+      var position_points;
+      var lati;
+      var long; 
+
       function initMap() {
         var SanDiego = {lat: 32.715736, lng: -117.161087}
         map = new google.maps.Map(document.getElementById('map'), {
@@ -260,6 +298,10 @@
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
+
+            lati = position.coords.latitude;
+            long = position.coords.longitude;
+            position_points = pos;
             var garbages = {{json_garbage|safe }};
             var i, marker;
             var markers = []
