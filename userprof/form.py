@@ -8,7 +8,7 @@ class BioForm(forms.ModelForm):
     class Meta:
         model = ExtendedUser
         #fields = ['bio']
-        exclude = ['user','first']
+        exclude = ['user','first','city','state']
 
         '''
             # the new bit we're adding

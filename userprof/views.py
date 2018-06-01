@@ -7,6 +7,7 @@ from userprof.form import BioForm, ScoreAdd
 from message.models import Inquiry, Offer
 from django.shortcuts import get_object_or_404
 import datetime
+from uszipcode import ZipcodeSearchEngine
 # import stripe
 
 
@@ -38,7 +39,6 @@ def profile(request):
     # message_type = request.session.pop('message_type', None)
     if not request.user.is_authenticated:
         return redirect('/home')
-
     current_user = request.user
     garbage = []
     # incoming_requests = []
@@ -108,7 +108,13 @@ def editBio(request):
         if form.is_valid():
             e_user.bio = form.cleaned_data['bio']
             e_user.first = True
-            e_user.zipcode = form.cleaned_data['zipcode']
+            zipcode_in = form.cleaned_data['zipcode']
+            e_user.zipcode = zipcode_in
+            search = ZipcodeSearchEngine()
+            zipcode = search.by_zipcode(str(zipcode_in))
+            print(zipcode)
+            e_user.city = zipcode['City']
+            e_user.state = zipcode['State']
             e_user.photos = form.cleaned_data['photos']
             e_user.save()
             message_type = True

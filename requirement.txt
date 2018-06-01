@@ -4,4 +4,5 @@ django-allauth==0.32.0
 pillow==5.1.0
 psycopg2==2.7.4
 jsonfield==2.0.2
-gropy==1.14.0
+geopy==1.14.0
+uszipcode==0.1.3
