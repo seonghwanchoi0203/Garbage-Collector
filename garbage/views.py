@@ -366,6 +366,6 @@ def ItemDetails(request):
         'postdate': instance.postdate,
         'watched': watched,
         'id': instance.id,
-        'photos':instance.photos,
+        'photos':e_user.photos,
     }
     return render(request, 'ItemDetails.html', context)

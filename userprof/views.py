@@ -111,8 +111,10 @@ def editBio(request):
             zipcode_in = form.cleaned_data['zipcode']
             e_user.zipcode = zipcode_in
             search = ZipcodeSearchEngine()
-            zipcode = search.by_zipcode(str(zipcode_in))
+            zipcode = search.by_zipcode(str(zipcode_in))  # type: object
             print(zipcode)
+            if(zipcode == None):
+                render(request, "bio.html", {'form': form, 'instance': e_user, 'error': 'invalidzipcode'})
             e_user.city = zipcode['City']
             e_user.state = zipcode['State']
             e_user.photos = form.cleaned_data['photos']
