@@ -347,8 +347,8 @@
                               {% if ongoing_message %}
                               {% for o_m in ongoing_message %}
                                 <a href="#" class="list-group-item" id="myBtn">
-                                    <span class="name" style="min-width: 120px; display: inline-block;">{{o_m.extendeduser.sender.user.username}}</span> <span class="">{{o_m.title}}</span>
-                                    <span class="text-muted" style="font-size: 11px;">{{o_m.content}}</span> <span class="badge">{{o_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
+                                    <span class="name" style="min-width: 120px; display: inline-block;">{{o_m.sender.extended_user.user.username}}</span> <span class="">{{o_m.title}}</span>
+                                    <span class="text-muted" style="font-size: 11px;">{{o_m.content}}</span> <span class="badge">{{o_m.res_date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
                                     </span></span>
                                 </a>
 
@@ -395,7 +395,7 @@
                                                   <h4 style="text-align: left;">&nbsp&nbsp{{o_m.content}}</h4>
                                                 </div>
                                                 <div class="row">
-                                                    <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.extendeduser.sender.user.username}}&nbsp&nbsp
+                                                    <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.extended_user.user.username}}&nbsp&nbsp
                                                     <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
                                                         Accept</button>
                                                     <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
@@ -442,8 +442,8 @@
                               {% if success_message %}
                               {% for o_s in success_message %}
                                 <a href="#" class="list-group-item">
-                                    <span class="name" style="min-width: 120px; display: inline-block;">{{o_s.sender.extendeduser.user.username}}</span> <span class="">{{o_s.title}}</span>
-                                    <span class="text-muted" style="font-size: 11px;">{{o_s.content}}</span> <span class="badge">{{o_s.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
+                                    <span class="name" style="min-width: 120px; display: inline-block;">{{o_s.sender.extended_user.user.username}}</span> <span class="">{{o_s.title}}</span>
+                                    <span class="text-muted" style="font-size: 11px;">{{o_s.content}}</span> <span class="badge">{{o_s.res_date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
                                     </span></span></a>
                               {% endfor%}
                               {% else %}
@@ -459,7 +459,7 @@
                               {% if decline_message %}
                               {% for d_m in decline_message %}
                                 <a href="#" class="list-group-item">
-                                    <span class="name" style="min-width: 120px; display: inline-block;">{{d_m.sender.extendeduser.user.username}}</span> <span class="">{{d_m.title}}</span>
+                                    <span class="name" style="min-width: 120px; display: inline-block;">{{d_m.sender.extended_user.user.username}}</span> <span class="">{{d_m.title}}</span>
                                     <span class="text-muted" style="font-size: 11px;">{{d_m.content}}</span> <span class="badge">{{d_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
                                     </span></span></a>
                               {% endfor%}
@@ -501,7 +501,6 @@
         <div class="horizontal-scroll-wrapper1 squares1">
             {%if garbage%}
             {%for i in garbage%}
-
             <div  class="col-sm-5" style="border-radius: 25px; background-color: #F7F2E8; margin-right:15px;margin-left:15px;">
                     <p style=" background-color: #F7F2E8; text-align:center; font-size:20px; margin-top:15px"><a href='/ItemDetails?garbage={{i.id}}'>{{i.title}}</a></p>
                   <div class="thumbnail" style="padding:7px; height: auto; width: auto">
