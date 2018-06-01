@@ -28,7 +28,7 @@ from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 import os
 import json
-
+from uszipcode import ZipcodeSearchEngine
 from django.contrib.auth.decorators import login_required
 # from django.utils.six.moves.urllib.parse import urlparse
 
@@ -252,7 +252,9 @@ def new_item(request):
             instance.zipcode =form.cleaned_data['zipcode']
             instance.photos = form.cleaned_data['photos']
             if(form.cleaned_data['Latitude'] == None or form.cleaned_data['Longitude'] == None):
-                instance.location = Point(32.715736, -117.161087)
+                search = ZipcodeSearchEngine()
+                res = search.by_city_and_state(e_user.city, e_user.state)
+                instance.location = Point(res[0]["Latitude"],res[0]["Longitude"])
             else:
                 instance.location = Point(form.cleaned_data['Latitude'], form.cleaned_data['Longitude'])
             instance.save()
