@@ -113,8 +113,6 @@
               <div class="infoContainer">
                   <form id="editItemForm" action="/editBio" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        Introduce Yourself :<br>
-
 
                           <div class="fieldContainers">
                               <label  class="editLabels"
@@ -122,7 +120,7 @@
                               <input  id="zipcode"
                                       type="text"
                                       name="zipcode"
-                                      value="{{ form.user.extendeduser.zipcode.value}}">
+                                      value="{{ form.zipcode.value}}">
                           </div>
                           <div class="fieldContainers">
                               <label  class="editLabels"
@@ -130,20 +128,31 @@
                               <input  id="bio"
                                       type="text"
                                       name="bio"
-                                      value="{{ form.user.extendeduser.bio.value}}">
+                                      value="{{form.bio.value}}">
                           </div>
-
-                          <hr>
                           <div id="imageContainer">
                               <label class="editLabels" for="photoButton">
                               <i class="glyphicon glyphicon-camera"></i> Image<span style="color: red">*</span>: </label>
-                              <img src="{{instance.photos.url}}" alt="Image" id="itemThumbnail" width="100px" height="auto">
-                              <hr>
-                              <input  type="file"
-                                      id="photoButton"
-                                      accept="image/*"
-                                      name="photos">
-                          </div>
+                            <hr>
+                             <img src="{{instance.photos.url}}" alt="Image" id="thumbnail" width="auto" height="100px">
+                                {% if form.photos.value %}
+                                <input  type="file"
+                                        id="photoButton1"
+                                        accept="image/*"
+                                        name="photos"
+                                        onchange="readURL(this)"
+                                        />
+
+                                {% else %}
+                                <input  type="file"
+                                    id="photoButton"
+                                    accept="image/*"
+                                    name="photos"
+                                    onchange="readURL(this)"
+                                    required
+                                    />
+                                {% endif %}
+                        </div>
 
                           <div id="buttons">
                               <button name="cancel"

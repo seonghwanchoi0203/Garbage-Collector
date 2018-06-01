@@ -1,5 +1,5 @@
 from django.db import models
-
+import os
 # Create your models here.
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up

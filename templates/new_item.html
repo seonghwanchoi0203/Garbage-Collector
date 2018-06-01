@@ -254,8 +254,7 @@
                                 type="text"
                                 name="title"
                                 value="{{form.title.value}}"
-                                required>   
-                                <!---->
+                                required>
                     </div>
 
                     <div class="fieldContainers">
@@ -311,7 +310,7 @@
                       <label class="editLabels" for="photoButton">
                       <i class="glyphicon glyphicon-camera"></i> Image<span style="color: red">*</span>: </label>
 
-                     <img src="{{instance.photos.url}}" alt="Image" id="thumbnail" width="100px" height="auto">
+                     <img src="{{instance.photos.url}}" alt="Image" id="thumbnail" width="auto" height="100px">
                      <hr>
                         {% if form.photos.value %}
                         <input  type="file"

@@ -29,7 +29,6 @@ def rate(request):
             seller = garbage.owner
             seller.rate = (seller.rate * seller.numberOfRate + rate_gave)*1.0/(seller.numberOfRate +1)
             seller.numberOfRate = seller.numberOfRate + 1
-            print("kakaka")
             seller.save()
             return render(request, "userprof.html")
 
@@ -105,7 +104,7 @@ def editBio(request):
         return redirect('/home')
     if request.method == 'POST':
         e_user = ExtendedUser.objects.get(user=current_user)
-        form = BioForm(request.POST)
+        form = BioForm(request.POST, request.FILES)
         if form.is_valid():
             e_user.bio = form.cleaned_data['bio']
             e_user.first = True
@@ -116,11 +115,10 @@ def editBio(request):
             message = "User update successfully."
             request.session['message'] = message
             request.session['message_type'] = message_type
-            return redirect('/profile')
+            return redirect('/userinfo')
     elif request.method == 'GET':
-        form = BioForm()
-
-    return render(request, "bio.html", {'form': form})
+        form = BioForm(instance=e_user)
+    return render(request, "bio.html", {'form': form,'instance':e_user})
 
 
 
