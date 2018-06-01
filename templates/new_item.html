@@ -332,35 +332,39 @@
                         {% endif %}
                     </div>
 
-                    <div id="divSample" class="hideClass">Latitude:
-                         <input type="text" id="Latitude" name="Latitude" value="">
-                         <br>
-                         <br>Longitude:
-                         <input type="text" id="Longitude" name="Longitude" value="">
-                         <br>
-                    </div>
-
-                    <div id="buttons">
-                    <button name="cancel"
-                            type="button"
-                            id="cancelButton"
-                            onClick="history.go(-1)">Cancel</button>
-
-                    {% if sendfrom == "new" %}
-                        <input type="button" id="getLocationButton" value="Get Location" onclick="getLocationConstant()" />
-                    {% elif sendfrom == "edit" %}
-                        <input type="button" id="deleteItem" value="delete" onclick="" />
-                    {% endif %}
-
                     <button name="send"
                             type="submit"
                             id="updateButton"
                             formaction = "."
                             value="{{pid}}">Confirm</button>
-                    </div>
                     {% csrf_token %}
                 </form>
-            </div>
+                <div id="divSample" class="hideClass">Latitude:
+                         <input type="text" id="Latitude" name="Latitude" value="">
+                         <br>
+                         <br>Longitude:
+                         <input type="text" id="Longitude" name="Longitude" value="">
+                         <br>
+                </div>
+                <div id="buttons">
+                    <button name="cancel"
+                            type="button"
+                            id="cancelButton"
+                            onClick="history.go(-1)">Cancel</button>
+                </div>
+                {% if sendfrom == "new" %}
+                    <input type="button" id="getLocationButton" value="Get Location" onclick="getLocationConstant()" />
+                {% elif sendfrom == "edit" %}
+                    <form action="../delete/" method="POST">
+                         <button name="delete"
+                                 class="btn btn-danger"
+                                 type="submit"
+                                 id="delete"
+                                value="{{pid}}">Delete</button>
+                            {% csrf_token %}
+                    </form>
+                {% endif %}
+                </div>
         </div>
     </body>
 

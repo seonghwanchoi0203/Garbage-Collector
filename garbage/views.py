@@ -271,7 +271,10 @@ def contact(request):
     return render(request, 'contact.html')
 
 def delete(request):
-
+    if request.method == "POST":
+        pid = request.POST['delete']
+        instance = get_object_or_404(Garbage, id=pid)
+        instance.delete()
     return redirect(sell)
 
 def sendEmail(request):
@@ -279,11 +282,9 @@ def sendEmail(request):
         name = request.POST.get("name")
         email = request.POST.get("email")
         message = request.POST.get("message")
-
         subject = "Garbage Collector Questions"
         from_email = email
         to_email = [settings.DEFAULT_FROM_EMAIL]
-
         context = {
         'user': name,
         'email': email,
