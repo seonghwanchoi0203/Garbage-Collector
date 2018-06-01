@@ -2,6 +2,7 @@
 {% load staticfiles %}
 <html lang = "en">
     <head>
+        {% include "header.html" %}
         <title>Bio Edit</title>
 
         <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
@@ -102,6 +103,32 @@
               margin-bottom: 20px;
             }
 
+            #zipcodeLimit{
+               color:#A9A9A9;
+            }
+
+            #zipcodeLimit:before {
+                content: "";
+            }
+
+            #zipcode:focus + #zipcodeLimit:before{
+                content: "Example zip-Code: 92037 or 92037-1234";
+                margin-left: 5px;
+            }
+
+            #zipcodeLimit1{
+               color:#A9A9A9;
+            }
+            
+            #zipcodeLimit1:before {
+                content: "";
+            }
+
+            #zipcode:invalid + #zipcodeLimit1:before{
+                content: "Invild zip-Code. Example zip-Code: 92037 or 92037-1234";
+                margin-left: 5px;
+                color:red;
+            }
         </style>
     </head>
 
@@ -113,34 +140,78 @@
               <div class="infoContainer">
                   <form id="editItemForm" action="/editBio" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-
-                          <div class="fieldContainers">
+                        {% if not error %}
+                            {% if form.zipcode.value %}
+                                <div class="fieldContainers">
+                                    <label  class="editLabels"
+                                            for="zipcode">zipcode: </label>
+                                    <input  id="zipcode"
+                                            type="text"
+                                            name="zipcode"
+                                            value="{{form.zipcode.value}}"
+                                            pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$"
+                                            required
+                                            ><span id="zipcodeLimit"></span>
+                                </div>
+                            {% else %}
+                                <div class="fieldContainers">
+                                    <label  class="editLabels"
+                                            for="zipcode">zipcode: </label>
+                                    <input  id="zipcode"
+                                            type="text"
+                                            name="zipcode"
+                                            value="{{form.zipcode.value}}"
+                                            pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$"
+                                            required
+                                            ><span id="zipcodeLimit"></span>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <div class="fieldContainers">
+                                <label  class="editLabels"
+                                        for="zipcode">zipcode: </label>
+                                <input  id="zipcode"
+                                        type="text"
+                                        name="zipcode"
+                                        pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$"
+                                        required
+                                        ><span id="zipcodeLimit1"></span>
+                             </div>
+                        {% endif %}
+                          <div id="descriptionFieldContainers" class="fieldContainers">
                               <label  class="editLabels"
-                                      for="zipcode">zipcode: </label>
-                              <input  id="zipcode"
-                                      type="text"
-                                      name="zipcode"
-                                      value="{{ form.zipcode.value}}">
-                          </div>
-                          <div class="fieldContainers">
-                              <label  class="editLabels"
-                                      for="bio">bio: </label>
-                              <input  id="bio"
+                                      for="bio"
+                                      style="margin-top:60px">bio: </label>
+                            {% if form.bio.value %}
+                                      <textarea  id="bio"
                                       type="text"
                                       name="bio"
-                                      value="{{form.bio.value}}">
+                                      value="{{form.bio.value}}"
+                                      style="resize:none"
+                                      required>{{form.bio.value}}</textarea>
+                            {% else %}
+                                <textarea  id="bio"
+                                           type="text"
+                                           name="bio"
+                                           style="resize:none"
+                                           required></textarea>
+                            {% endif %}
                           </div>
+                          <hr>
+                          
                           <div id="imageContainer">
                               <label class="editLabels" for="photoButton">
-                              <i class="glyphicon glyphicon-camera"></i> Image<span style="color: red">*</span>: </label>
-                            <hr>
+                              <i class="glyphicon glyphicon-camera" style="margin-top: 20px"></i> Image<span style="color: red">*</span>: </label>
+                           
                              <img src="{{instance.photos.url}}" alt="Image" id="thumbnail" width="auto" height="100px">
-                                {% if form.photos.value %}
+                             <hr>
+                             {% if form.photos.value %}
                                 <input  type="file"
-                                        id="photoButton1"
+                                        id="photoButton"
                                         accept="image/*"
                                         name="photos"
                                         onchange="readURL(this)"
+                                        style="margin-left:4.5%"
                                         />
 
                                 {% else %}
@@ -149,16 +220,18 @@
                                     accept="image/*"
                                     name="photos"
                                     onchange="readURL(this)"
+                                    style="margin-left:4.5%"
                                     required
                                     />
-                                {% endif %}
+                            {% endif %}
+                        
                         </div>
-
                           <div id="buttons">
                               <button name="cancel"
                                       type="button"
                                       id="cancelButton"
-                                      onClick="history.go(-1)">Cancel</button>
+                                      onClick="history.go(-1)"
+                                      style="margin-left:4.5%">Cancel</button>
 
                               <input type="submit"
                                      id = "updateButton"
@@ -176,7 +249,20 @@
     </body>
 
     <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function (e) {
+                    $('#thumbnail')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 
 
