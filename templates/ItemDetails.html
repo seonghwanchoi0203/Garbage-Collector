@@ -155,6 +155,15 @@
         /*hidden class*/
         .hideClass
             {display:none;}
+
+        /*TEXT*/
+            .text {
+
+               width: 500px;
+               overflow: hidden;
+               white-space: nowrap;
+               text-overflow: ellipsis;
+            }
     </style>
     </head>
 
@@ -166,7 +175,7 @@
     <div class="panel panel-default" style="margin-bottom: 40px;border: 1px solid black;display: none">
         <span style="margin-left: 5%;color:red; text-align:left; font-size:30px"><i class="glyphicon glyphicon-user"></i> {{owner}} </span>
     </div>
-</span></li>
+
     <div id="container">
         <div class="jumbotron" style="padding:0px">
           <div class="thumbnail result_pics" style="padding:0px; display:flex;display: -webkit-flex;height: 600px">
@@ -187,7 +196,7 @@
               </div>
               <div style="-webkit-flex: 1;flex: 1; margin-right: 10px" >
                 <ul style="list-style-type:none">
-                    <h1 class="usualLi" style="margin-top: 10%">{{title}}</h1>
+                    <h1 class="usualLi text" style="margin-top: 10%;line-height: 45px">{{title}}</h1>
                     <li class="usualLi" style="margin-top: 10%"><div style="float: left"><i class="glyphicon glyphicon-user"></i><b> {{owner}}</b></div><div style="float: left;margin-left: 20%"><b> Rating: 5</b></div></li>
                     <li class="usualLi" style="clear: both"><span><b>Price:  </b></span><span><b>&#36; </b><em style="color: red;">{{cost}}</em></span>
                     <li class="usualLi"><span><b>Post date:  </b>{{postdate}}</span></li>
@@ -208,7 +217,7 @@
                              <button name="unwatch"
                                      type="submit"
                                      class="btn btn-default ele button"
-                                     style="margin-top: 15%"
+                                     style="margin-top: 13%"
                                      value="{{id}}" onclick="sa"><p class="cs" onclick="sa" style="font-size: xx-large">&#10084; </p></button>
 
                          </div>
@@ -220,7 +229,7 @@
                              <button name="edit"
                                      type="send"
                                      class="btn btn-default ele button"
-                                     style="margin-top: 15%;"
+                                     style="margin-top: 13%;"
                                      value="{{id}}" onclick="sa"><p class="like" onclick="sa" style="font-size: xx-large">&#10084; </p> </button>
                          </div>
                          {% csrf_token %}
@@ -231,7 +240,7 @@
                       <button id="myBtn"
                                 type="button"
                                 class="btn btn-default button ele"
-                                style="margin-top: 15%">Inquiry</button>
+                                style="margin-top: 13%">Inquiry</button>
 
 
                         <div id = "myModal" class = "modal">
