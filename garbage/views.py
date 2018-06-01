@@ -31,9 +31,7 @@ import json
 
 import nltk
 from nltk.corpus import wordnet
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('wordnet')
+
 
 from uszipcode import ZipcodeSearchEngine
 from django.contrib.auth.decorators import login_required
@@ -55,7 +53,20 @@ class UUIDEncoder(json.JSONEncoder):
 
 # Create your views here.
 def home(request):
-    garbages= []
+    import ssl
+
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+    print('???')
+
+    nltk.download('punkt')
+    nltk.download('averaged_perceptron_tagger')
+    nltk.download('wordnet')
+
     garbages = Garbage.objects.all()
     print(type(garbages))
     ret_list = []
@@ -82,61 +93,61 @@ def home(request):
     #print(json_garbage)
     context = {'garbage': garbages,
                'json_garbage':json_garbage,
-              }
+               }
 
     return render(request, 'index.html', context)
 
 def search(request):
-	garbages = Garbage.objects.none()
-	search_query = request.POST['searchBar']
-	sentences = nltk.sent_tokenize(str(search_query)) #tokenize sentences
-	nouns = [] #empty to array to hold all nouns
-	for sentence in sentences:
-		for word,pos in nltk.pos_tag(nltk.word_tokenize(str(sentence))):
-			if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS'):
-				nouns.append(word)
-				print(word)
-	#garbages = Garbage.objects.annotate(
-	#				search=SearchVector('title', 'description'),
-	#		   ).filter(search = search_query)
-	if not nouns: #if no nouns are detected, use the exact same text to search
-		nouns = search_query.split()
-	query = []
-	for n in nouns: #expend nouns to query by adding synonyms
-		query.append(n)
-		if wordnet.synsets(str(n)):
-			for syn in wordnet.synsets(str(n)): #str(n)+".n.01"
-				for l in syn.lemmas():
-					query.append(l.name())
-	for q in query:
-		res_q = Garbage.objects.annotate(
-					search=SearchVector('title', 'description'),
-			   ).filter(search = str(q))
-		garbages |= res_q
-	ret_list = []
-	for index, x in enumerate(garbages):
-        	# some fields with object points need manual translation for json
-       		# also some additional fields are necessary.
-        	# moved to a method of the model?
-        	#temp_dict = model_to_dict(x)
-		tmp = x.postdate.isocalendar()
-		temp_dict={}
-		temp_dict['title'] = x.title
-		temp_dict['seller'] = x.owner.getAdminuUserName()
-		temp_dict['id'] = x.id.hex
-		temp_dict['description'] = x.description
-		temp_dict['zipcode'] = x.zipcode
-		temp_dict['condition'] = x.condition
-		temp_dict['cost'] = x.cost
-		temp_dict['location'] = {'latitude': x.location.coords[0], 'longitude': x.location.coords[1]}
-		temp_dict['photos'] = x.photos.url
-		temp_dict['postdate'] = tmp
-		ret_list.append(temp_dict)
-	json_garbage = json.dumps(ret_list,cls=UUIDEncoder)
-	search_res = {'garbage': garbages ,
-			'json_garbage': json_garbage,
-			} 
-	return render(request, 'index.html', search_res)
+    garbages = Garbage.objects.none()
+    search_query = request.POST['searchBar']
+    sentences = nltk.sent_tokenize(str(search_query)) #tokenize sentences
+    nouns = [] #empty to array to hold all nouns
+    for sentence in sentences:
+        for word,pos in nltk.pos_tag(nltk.word_tokenize(str(sentence))):
+            if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS'):
+                nouns.append(word)
+                print(word)
+    #garbages = Garbage.objects.annotate(
+    #				search=SearchVector('title', 'description'),
+    #		   ).filter(search = search_query)
+    if not nouns: #if no nouns are detected, use the exact same text to search
+        nouns = search_query.split()
+    query = []
+    for n in nouns: #expend nouns to query by adding synonyms
+        query.append(n)
+        if wordnet.synsets(str(n)):
+            for syn in wordnet.synsets(str(n)): #str(n)+".n.01"
+                for l in syn.lemmas():
+                    query.append(l.name())
+    for q in query:
+        res_q = Garbage.objects.annotate(
+            search=SearchVector('title', 'description'),
+        ).filter(search = str(q))
+        garbages |= res_q
+    ret_list = []
+    for index, x in enumerate(garbages):
+        # some fields with object points need manual translation for json
+        # also some additional fields are necessary.
+        # moved to a method of the model?
+        #temp_dict = model_to_dict(x)
+        tmp = x.postdate.isocalendar()
+        temp_dict={}
+        temp_dict['title'] = x.title
+        temp_dict['seller'] = x.owner.getAdminuUserName()
+        temp_dict['id'] = x.id.hex
+        temp_dict['description'] = x.description
+        temp_dict['zipcode'] = x.zipcode
+        temp_dict['condition'] = x.condition
+        temp_dict['cost'] = x.cost
+        temp_dict['location'] = {'latitude': x.location.coords[0], 'longitude': x.location.coords[1]}
+        temp_dict['photos'] = x.photos.url
+        temp_dict['postdate'] = tmp
+        ret_list.append(temp_dict)
+    json_garbage = json.dumps(ret_list,cls=UUIDEncoder)
+    search_res = {'garbage': garbages ,
+                  'json_garbage': json_garbage,
+                  }
+    return render(request, 'index.html', search_res)
 
 def about(request):
     return render(request, 'about.html')
@@ -314,9 +325,9 @@ def sendEmail(request):
         from_email = email
         to_email = [settings.DEFAULT_FROM_EMAIL]
         context = {
-        'user': name,
-        'email': email,
-        'message':message
+            'user': name,
+            'email': email,
+            'message':message
         }
 
         send_mail(subject, message, from_email, to_email,fail_silently = True)
@@ -332,11 +343,11 @@ def ItemDetails(request):
         e_user = get_object_or_404(ExtendedUser,user=current_user)
     except:
         context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
-            'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
-            'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate, 'watched': False,
-            'id': instance.id,
+                   'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
+                   'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate, 'watched': False,
+                   'id': instance.id,
 
-        }
+                   }
         return render(request, 'ItemDetails.html', context)
 
     watch_list = list(Watch.objects.filter(user=e_user,garbage=instance))
