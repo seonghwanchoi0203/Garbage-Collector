@@ -337,6 +337,14 @@
                         {% endif %}
                     </div>
 
+                     <div id="divSample" class="hideClass">Latitude:
+                         <input type="text" id="Latitude" name="Latitude" value="">
+                         <br>
+                         <br>Longitude:
+                         <input type="text" id="Longitude" name="Longitude" value="">
+                         <br>
+                    </div>
+
                     <button name="send"
                             type="submit"
                             id="updateButton"
@@ -344,13 +352,7 @@
                             value="{{pid}}">Confirm</button>
                     {% csrf_token %}
                 </form>
-                <div id="divSample" class="hideClass">Latitude:
-                         <input type="text" id="Latitude" name="Latitude" value="">
-                         <br>
-                         <br>Longitude:
-                         <input type="text" id="Longitude" name="Longitude" value="">
-                         <br>
-                </div>
+
                 <div id="buttons" style="display:inline">
                     <button name="cancel"
                             type="button"
@@ -386,7 +388,8 @@
         function onGeoSuccess(event) {
             document.getElementById("Latitude").value = event.coords.latitude;
             document.getElementById("Longitude").value = event.coords.longitude;
-
+            console.log(event.coords.latitude);
+            console.log(event.coords.longitude);
         }
 
         function onGeoError(event) {
