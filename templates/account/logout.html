@@ -11,14 +11,6 @@
         <link rel="stylesheet" href="{% static "bower_components/css/style2.css" %}">
 </head>
 
-<script type="text/javascript">
-function signoutWarnging(){
-  var answer = confirm("You sure want to logout?");
-  if(!answer){
-    return false;
-  }
-}
-</script>
 <body>
   {% include "header.html" %}
   <div class="alert alert-warning" role="alert">...</div>
@@ -32,7 +24,7 @@ function signoutWarnging(){
       {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
       {% endif %}
-      <button type="submit" onclick="return signoutWarnging()">{% trans 'Sign Out' %}</button>
+      <button type="submit" onclick="../home">{% trans 'Sign Out' %}</button>
       <a href="/home"><button type="button">No</button> </a>
     </form>
   </div>
