@@ -1,15 +1,14 @@
 
-
-<!doctype html>
+<!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
  
 
   <script>
@@ -50,7 +49,36 @@
     });
   } );
   </script>
+    <style>
+        #searchForm{
+          text-align: center;
+        }
+
+        #searchBar{
+          text-align: center;
+          width:400px;
+          border-radius: 25px;
+          border: 2px solid black;
+          height:40px;
+        }
+
+        #searchBar:focus{
+          width:50%;
+        }
+
+        #searchBarButton{
+          outline:none;
+          border:none;
+          background-color: inherit;
+          font-size: 20px;
+        }
+
+        #searchBarButton:hover{
+          color: blue;
+        }
+    </style>
 </head>
+
 <body>
 <form id="searchForm" method="POST" action = '../search' >
  {% csrf_token %}
