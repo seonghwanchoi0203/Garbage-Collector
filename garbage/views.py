@@ -337,6 +337,9 @@ def sendEmail(request):
 def ItemDetails(request):
     pid = request.GET.get('garbage')
     instance = get_object_or_404(Garbage, id=pid)
+    seller = instance.owner
+    extend_seller = seller.extended_user
+
     current_user = request.user
     try:
         e_user = get_object_or_404(ExtendedUser,user=current_user)
@@ -344,7 +347,7 @@ def ItemDetails(request):
         context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
                    'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
                    'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate, 'watched': False,
-                   'id': instance.id,
+                   'id': instance.id, 'photo':extend_seller.photos, 'rating':seller.rate*12,
 
                    }
         return render(request, 'ItemDetails.html', context)
@@ -366,6 +369,7 @@ def ItemDetails(request):
         'postdate': instance.postdate,
         'watched': watched,
         'id': instance.id,
-        'photos':e_user.photos,
+        'photo':extend_seller.photos, 'rating': seller.rate * 12,
     }
+    print(context)
     return render(request, 'ItemDetails.html', context)
