@@ -28,6 +28,13 @@ from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 import os
 import json
+
+import nltk
+from nltk.corpus import wordnet
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+
 from uszipcode import ZipcodeSearchEngine
 from django.contrib.auth.decorators import login_required
 # from django.utils.six.moves.urllib.parse import urlparse
@@ -80,14 +87,33 @@ def home(request):
     return render(request, 'index.html', context)
 
 def search(request):
-	garbages = []
+	garbages = Garbage.objects.none()
 	search_query = request.POST['searchBar']
-	garbages = Garbage.objects.annotate(
+	sentences = nltk.sent_tokenize(str(search_query)) #tokenize sentences
+	nouns = [] #empty to array to hold all nouns
+	for sentence in sentences:
+		for word,pos in nltk.pos_tag(nltk.word_tokenize(str(sentence))):
+			if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS'):
+				nouns.append(word)
+				print(word)
+	#garbages = Garbage.objects.annotate(
+	#				search=SearchVector('title', 'description'),
+	#		   ).filter(search = search_query)
+	if not nouns: #if no nouns are detected, use the exact same text to search
+		nouns = search_query.split()
+	query = []
+	for n in nouns: #expend nouns to query by adding synonyms
+		query.append(n)
+		if wordnet.synsets(str(n)):
+			for syn in wordnet.synsets(str(n)): #str(n)+".n.01"
+				for l in syn.lemmas():
+					query.append(l.name())
+	for q in query:
+		res_q = Garbage.objects.annotate(
 					search=SearchVector('title', 'description'),
-			   ).filter(search = str(search_query))
-	print ('this is '+ str(search_query))
+			   ).filter(search = str(q))
+		garbages |= res_q
 	ret_list = []
-
 	for index, x in enumerate(garbages):
         	# some fields with object points need manual translation for json
        		# also some additional fields are necessary.
