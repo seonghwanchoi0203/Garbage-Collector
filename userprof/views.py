@@ -60,7 +60,7 @@ def profile(request):
     print(watch)
     history = Inquiry.objects.filter(sender=m_user, accept=True)
     decline_message = list(Offer.objects.filter(receiver=m_user, decline = True))
-    success_message = list(Offer.objects.filter(receiver=m_user))
+    success_message = list(Inquiry.objects.filter(sender=m_user))
     inquiry_out = list(Offer.objects.filter(receiver=m_user,decline = False, continueMessage = True))
     print(inquiry_out)
     context = {
@@ -147,8 +147,8 @@ def sell(request):
     except:
         pass
     # messages = Message.objects.filter(receiver=current_user, is_reservation=False).order_by('-date')
-    onGoing_message = Inquiry.objects.filter(receiver=a_user, accept=False,withdraw=False)
-    success_message = Inquiry.objects.filter(receiver=a_user,accept=True)
+    inquiry_received = Inquiry.objects.filter(receiver=a_user, accept=False,withdraw=False)
+    send_offer = Offer.objects.filter(sender=a_user)
     withdraw_message = Inquiry.objects.filter(receiver=a_user,withdraw=True)
     garbage = Garbage.objects.filter(owner=a_user)
     now = datetime.datetime.now()
@@ -158,8 +158,8 @@ def sell(request):
         # "message" : message,
         # "message_type" : message_type,
         "withdraw_message" : withdraw_message,
-        "ongoing_message" : onGoing_message,
-        "success_message"  : success_message,
+        "ongoing_message" : inquiry_received,
+        "send_offer"  : send_offer,
         "admin_user": a_user,
         "extended_user": m_user,
         # "history": history

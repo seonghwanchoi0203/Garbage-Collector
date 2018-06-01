@@ -54,14 +54,12 @@ class UUIDEncoder(json.JSONEncoder):
 # Create your views here.
 def home(request):
     import ssl
-
     try:
         _create_unverified_https_context = ssl._create_unverified_context
     except AttributeError:
         pass
     else:
         ssl._create_default_https_context = _create_unverified_https_context
-    print('???')
 
     nltk.download('punkt')
     nltk.download('averaged_perceptron_tagger')
@@ -279,9 +277,10 @@ def new_item(request):
         #form = GarbageAdd(request.POST)
         #imageForm = ImageUploadForm(request.POST, request.FILES)
         #print(form)
-        sendfrom = "edit"
+        sendfrom = "new"
         if form.is_valid():
             print("lalal")
+            sendfrom = "new"
             instance.cost = form.cleaned_data['cost']
             instance.title = form.cleaned_data['title']
             instance.condition = form.cleaned_data['condition']
