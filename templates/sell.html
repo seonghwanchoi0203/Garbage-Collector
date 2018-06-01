@@ -157,8 +157,8 @@
           margin: auto;
           padding: 20px;
           border: 1px solid #888;
-          width: 70%;
-          height: auto;
+          width: 80%;
+          height: 642px;
          }
 
          /* Modal Header */
@@ -292,14 +292,6 @@
 
             }
 
-            /*TEXT*/
-            .text {
-
-               width: auto;
-               overflow: hidden;
-               white-space: nowrap;
-               text-overflow: ellipsis;
-            }
 
 
 
@@ -383,90 +375,89 @@
                               <!--popup here-->
                               {% if ongoing_message %}
                               {% for o_m in ongoing_message %}
-                                <a href="#" class="list-group-item" id="myBtn">
+                                <a href="#" class="list-group-item" onclick="modalPopup('{{o_m.id}}')">
                                     <span class="name" style="min-width: 120px; display: inline-block;">{{o_m.sender.user.username}}</span> <span class="">{{o_m.title}}</span>
                                     <span class="text-muted" style="font-size: 11px;">{{o_m.content}}</span> <span class="badge">{{o_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
                                     </span></span>
-                                </a>
+                                    <!-- this part is pop up of inquiry -->
+                                    <div id={{o_m.id}} class="modal">
 
-                                <!-- this part is pop up of inquiry -->
-                                <div id = "myModal" class = "modal">
-
-                                          <div class = "modal-content" id="modalcontent">
-                                            <div class="modal-header">
-                                              <h2 class="modal-title" id="inquiryModalTitle">Message Details
-                                                <span class="close">&times;</span>
-                                              </h2>
-                                            </div>
+                                              <div class = "modal-content" id="modalcontent{{o_m.id}}">
+                                                <div class="modal-header">
+                                                  <h2 class="modal-title" id="inquiryModalTitle" style="text-align: center"><strong>Message Details</strong>
+                                                    </h2>
+                                                </div>
 
 
-                                            <div class="modal-body">
-                                              <div class="container-fluid">
-                                                <div class="row">
-                                                  <div class="itemContain">
+                                                <div class="modal-body">
+                                                  <div class="container-fluid">
+                                                    <div class="row">
+                                                      <div class="itemContain">
 
-                                                        <div class="col-xs-3">
-                                                            <img src="{{o_m.garbage.photos.url}}" style="width: 100%; height: 100%; float:right">
+                                                            <div class="col-xs-3">
+                                                                <img src="{{o_m.garbage.photos.url}}" style="width: 100%; height: 100%; float:right">
+                                                            </div>
+
+                                                        <div class="col-xs-9">
+                                                              <ul style="list-style-type:none">
+                                                                  <h2 class="usualLi" style="text-align: center; font-size: 250%; height:20%">{{o_m.garbage.title}}</h2>
+                                                                  <li class="usualLi" style="font-size: 140%; height:10%"><span>Price: </span><span><b>&#36; </b><em style="color: red;font-size: 110%"> {{o_m.negotiate_price}}</em></span></li>
+                                                                  <li class="usualLi" style="font-size: 140%; height:10%"><span>Post date: </span>{{o_m.garbage.postdate}}</li>
+                                                                  <li class="usualLi" style="font-size: 140%; height:10%"><span>Condition: </span>{{o_m.garbage.condition}}</li>
+                                                                  <li class="usualLi" style="font-size: 140%; height:5px"><span><b>Description: </b></span>{{o_m.garbage.description}}</li>
+                                                              </ul>
                                                         </div>
-
-                                                    <div class="col-xs-9">
-                                                          <ul style="list-style-type:none">
-                                                              <h2 class="usualLi" style="text-align: center; font-size: 250%; height:20%">{{o_m.garbage.title}}</h2>
-                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Price: </span><span><b>&#36; </b><em style="color: red;font-size: 110%"> {{o_m.negotiate_price}}</em></span></li>
-                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Post date: </span>{{o_m.garbage.postdate}}</li>
-                                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Condition: </span>{{o_m.garbage.condition}}</li>
-                                                              <li class="usualLi" style="font-size: 140%; height:5px"><span><b>Description: </b></span>{{o_m.garbage.description}}</li>
-                                                          </ul>
+                                                      </div>
                                                     </div>
                                                   </div>
                                                 </div>
+
+                                                <div class="modal-footer">
+                                                  <div class="row">
+                                                      <h4 style="text-align: left;">&nbsp&nbsp&nbsp<strong>Mesasage received :</strong></h4>
+                                                    </div>
+                                                    <div class="row">
+                                                      <h4 style="text-align: left;">&nbsp&nbsp{{o_m.content}}</h4>
+                                                    </div>
+                                                    <div class="row">
+                                                        <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.user.username}}&nbsp&nbsp
+                                                        <button class="btn btn btn-sm" id="declineBtn" style="height:30px; text-align: right;">
+                                                            Decline</button>
+                                                        <button class="btn btn-warning btn-sm" id="{{o_m.id}}" style="height:30px; text-align: right;" onclick="editpricePopup('{{o_m.id}}')">
+                                                            Edit Price</button>&nbsp&nbsp&nbsp
+                                                        </h4>
+                                                        <hr>
+                                                    </div>
+                                                    <div class="row">
+
+                                                      <div class="input-group" style="margin: auto; float: left; width:70%">
+
+                                                        <form action="../offer/" method="POST" enctype="multipart/form-data" style="width:143%;">
+                                                          <div class="row" style="width:100%; text-align:right">
+                                                            <p id="priceEditInst{{o_m.id}}" style="display:none;">&#8251; Once you change the price, send it with your message. Then, changed price will be sent. &nbsp&nbsp&nbsp&nbsp&nbsp
+                                                              <strong style="text-align:right">Edit Price: $</strong></p>
+                                                            <input type="text" id="negotiate_price{{o_m.id}}" name="negotiate_price" value="{{o_m.negotiate_price}}" style="display:none; height:35px; width:80px" >
+                                                          </div>
+                                                          <br id="priceEditBr{{o_m.id}}" style="display:none">
+                                                          <input type="text" id="content" name="content" value="" class="form-control input-lg" placeholder="Type your message here..." style="height:46.2px; width:90%; border-top-left-radius: 4px; border-bottom-left-radius: 4px;">
+                                                          <button class="btn btn-success btn-lg" id="btn-chat" type="submit" style="float: right; height:46.2px; width:10%; border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
+                                                            Send</button>
+                                                          <div id="divSample">
+                                                            <input class="invisible" type="text" id="inquiry_id" name="inquiry_id" value="{{o_m.id}}" >
+                                                            <input class="invisible" type="text" id="title" name="title" value="Inquiry about {{o_m.title}}">
+                                                            <input class="invisible" type="text" id="extended_user_id" name="extended_user_id" value="{{o_m.sender.id}}" >
+                                                            {% csrf_token %}
+                                                          </div>
+                                                        </form>
+                                                      </div>
+                                                    </div>
+                                                </div>
+
                                               </div>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                              <div class="row">
-                                                  <h4 style="text-align: left;">&nbsp&nbsp&nbsp<strong>Mesasage received :</strong></h4>
-                                                </div>
-                                                <div class="row">
-                                                  <h4 style="text-align: left;">&nbsp&nbsp{{o_m.content}}</h4>
-                                                </div>
-                                                <div class="row">
-                                                    <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.user.username}}&nbsp&nbsp
-                                                    <button class="btn btn-warning btn-sm" id="declineBtn" style="height:30px; text-align: right;">
-                                                        Decline</button>
-                                                    <button class="btn btn-warning btn-sm" id="edit_priceBtn" style="height:30px; text-align: right;">
-                                                        Edit Price</button>&nbsp&nbsp&nbsp
-                                                    </h4>
-                                                    <hr>
-                                                </div>
-                                                <div class="row">
-
-                                                  <div class="input-group" style="margin: auto; float: left; width:70%">
-
-                                                    <form action="../offer/" method="POST" enctype="multipart/form-data" style="width:143%;">
-                                                      <div class="row" style="width:100%; text-align:right">
-                                                        <p id="priceEditText" style="display:none">&#8251; Once you change the price, send it with your message. Then, changed price will be sent. Valid format: $XX.XX &nbsp&nbsp&nbsp&nbsp&nbsp
-                                                          <strong style="text-align:right">Edit Price: $</strong></p>
-                                                        <input type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}" style="display:none; height:35px; width:80px">
-                                                      </div>
-                                                      <br id="priceEditBr" style="display:none">
-                                                      <input type="text" id="content" name="content" value="" class="form-control input-lg" placeholder="Type your message here..." style="height:60%; width:90%; border-top-left-radius: 4px; border-bottom-left-radius: 4px;">
-                                                      <button class="btn btn-warning btn-lg" id="btn-chat" type="submit" style="float: right; height:60%; width:10%; border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
-                                                        Send</button>
-                                                      <div id="divSample">
-                                                        <input class="invisible" type="text" id="inquiry_id" name="inquiry_id" value="{{o_m.id}}" >
-                                                        <input class="invisible" type="text" id="title" name="title" value="Inquiry about {{o_m.title}}">
-                                                        <input class="invisible" type="text" id="extended_user_id" name="extended_user_id" value="{{o_m.sender.id}}" >
-                                                        {% csrf_token %}
-                                                      </div>
-                                                    </form>
-                                                  </div>
-                                                </div>
-                                            </div>
-
                                           </div>
-                                      </div>
-                                      <!-- end of pop up of inquiry part -->
+                                          <!-- end of pop up of inquiry part -->
+                                </a>
+
                               {% endfor%}
 
                               {% else %}
@@ -532,7 +523,7 @@
             {%if garbage%}
             {%for i in garbage%}
                 <div class="col-sm-5" style="border-radius: 25px; background-color: #F7F2E8; margin-right:15px;margin-left:15px;">
-                    <p class="text" style=" background-color: #F7F2E8; text-align:center; font-size:20px; margin-top:15px"><a href='/ItemDetails?garbage={{i.id}}'>{{i.title}}</a></p>
+                    <p style=" background-color: #F7F2E8; text-align:center; font-size:20px; margin-top:15px"><a href='/ItemDetails?garbage={{i.id}}'>{{i.title}}</a></p>
                   <div class="thumbnail" style="padding:5px; height: auto; width: auto">
                     <img src="{{i.photos.url}}" style="width: auto;height: 115px">
                   </div>
@@ -563,8 +554,8 @@
             {%if garbage%}
             {%for i in garbage%}
                 <div  class="col-sm-5" style="border-radius: 25px; background-color: #F7F2E8; margin-right:15px;margin-left:15px;">
-                    <p class="text" style=" background-color: #F7F2E8; text-align:center; font-size:20px; margin-top:15px"><a href='/ItemDetails?garbage={{i.id}}'>{{i.title}}</a></p>
-                  <div class="thumbnail" style="padding:5px; height: auto; width: auto">
+                    <p style=" background-color: #F7F2E8; text-align:center; font-size:20px; margin-top:15px"><a href='/ItemDetails?garbage={{i.id}}'>{{i.title}}</a></p>
+                  <div class="thumbnail" style="padding:10px; height: 115; width: auto">
                     <img src="{{i.photos.url}}" style="width: auto;height: 115px">
                   </div>
                   <p style="color:black; background-color: #F7F2E8; ">
@@ -596,9 +587,12 @@
               document.getElementById("main").style.marginLeft = "0";
             }
 
+
             // Get the modal
-            var modal = document.getElementById('myModal');
-            var modal_content = document.getElementById("modalcontent");
+            var modals = document.getElementsByClassName("modal");
+
+            var modal;// = modals[1];// = document.getElementById('myModal');
+            var modal_content;// = document.getElementById("modalcontent");
             // Get the button that opens the modal
             var btn = document.getElementById("myBtn");
             // var modal = document.getElementById('popmodal');
@@ -611,40 +605,96 @@
 
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
+            var closing = document.getElementById("closeModal");
 
             // Get negotiate_price element
-            var nego_price = document.getElementById("negotiate_price");
+            var nego_price;// = document.getElementsByName("negotiate_price");
+            var pirceEditBox;// = document.getElementById("priceEditText");
+            var priceEditbr;// = document.getElementById("priceEditBr");
 
             // Get edit price element
-            var editPrice = document.getElementById("edit_priceBtn");
-
-            var pirceEditBox = document.getElementById("priceEditText");
-
-            var priceEditbr = document.getElementById("priceEditBr");
+            var editPriceBtns = document.getElementsByClassName("btn btn-warning btn-sm");
+            var editPriceBtn;
 
             // editprice butten flag
             // 0; currently invisible
             // 1; currently visible
             var editPriceBtnFlag = 0;
 
+            // set all modals unique id
+            var totalModals = modals.length;
+            for(var j = 0; j < totalModals; j++){
+              modal = modals[j];
+              curId = modal.id;
+              newId = curId.toString();
+              modal.id = ("modal" + newId);
+            }
 
-            editPrice.onclick = function() {
+            // set all editprice buttons unique id
+            var totalEPBtns = editPriceBtns.length;
+            for(var b = 0; b < totalEPBtns; b++){
+              editPriceBtn = editPriceBtns[b];
+              currId = editPriceBtn.id;
+              newId_epBtn = currId.toString();
+              editPriceBtn.id = ("edit_priceBtn" + newId_epBtn);
+            }
+
+
+            function modalPopup(id){
+              // console.log(id);
+              rawId = id.toString();
+              stringID = "modal"+ rawId;
+              modal = document.getElementById(stringID);
+              modal.style.display = "block";
+            }
+
+
+            function editpricePopup(id){
+              rawId_epbtn = id.toString();
+              newbtnID = "edit_priceBtn"+rawId_epbtn;
+              newnego_priceID = "negotiate_price"+rawId_epbtn;
+              newpeInstID = "priceEditInst"+rawId_epbtn;
+              newpebrID = "priceEditBr"+rawId_epbtn;
+              newmodalcontentID = "modalcontent"+rawId_epbtn;
+              editPriceBtn = document.getElementById(newbtnID);
+              nego_price = document.getElementById(newnego_priceID);
+              pirceEditBox = document.getElementById(newpeInstID);
+              priceEditbr = document.getElementById(newpebrID);
+              modal_content = document.getElementById(newmodalcontentID);
               if(editPriceBtnFlag){ // currently visible
                 editPriceBtnFlag = 0;
                 nego_price.style.display = "none";
                 pirceEditBox.style.display = "none";
                 priceEditbr.style.display = "none";
-                modal_content.style.height = "645px";
+                modal_content.style.height = "642px";
               }
               else{ // currently invisible
                 editPriceBtnFlag = 1;
                 nego_price.style.display = "inline-block";
                 pirceEditBox.style.display = "inline";
                 priceEditbr.style.display = "inline";
-                modal_content.style.height = "700px";
+                modal_content.style.height = "697px";
               }
-              // secondModal.style.display = "block";
             }
+
+
+            // editPrice.onclick = function() {
+            //   if(editPriceBtnFlag){ // currently visible
+            //     editPriceBtnFlag = 0;
+            //     nego_price.style.display = "none";
+            //     pirceEditBox.style.display = "none";
+            //     priceEditbr.style.display = "none";
+            //     modal_content.style.height = "645px";
+            //   }
+            //   else{ // currently invisible
+            //     editPriceBtnFlag = 1;
+            //     nego_price.style.display = "inline-block";
+            //     pirceEditBox.style.display = "inline";
+            //     priceEditbr.style.display = "inline";
+            //     modal_content.style.height = "700px";
+            //   }
+            //   // secondModal.style.display = "block";
+            // }
 
             // When 'esc' key pressed, also close modal
             document.addEventListener('keyup', function(e) {
@@ -653,7 +703,7 @@
                 nego_price.style.display = "none";
                 pirceEditBox.style.display = "none";
                 priceEditbr.style.display = "none";
-                modal_content.style.height = "645px";
+                modal_content.style.height = "642px";
                 editPriceBtnFlag = 0;
               }
             });
@@ -665,35 +715,35 @@
                 nego_price.style.display = "none";
                 pirceEditBox.style.display = "none";
                 priceEditbr.style.display = "none";
-                modal_content.style.height = "645px";
+                modal_content.style.height = "642px";
                 editPriceBtnFlag = 0;
               }
             }
 
-            // When the user clicks the button, open the modal
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
+            // // When the user clicks the button, open the modal
+            // btn.onclick = function() {
+            //     modal.style.display = "block";
+            // }
             // When the user clicks on <span> (x), close the modal
             span.onclick = function() {
                 modal.style.display = "none";
                 nego_price.style.display = "none";
                 pirceEditBox.style.display = "none";
                 priceEditbr.style.display = "none";
-                modal_content.style.height = "645px";
+                modal_content.style.height = "642px";
                 editPriceBtnFlag = 0;
             }
             // When the user clicks the button, op en the modal
-            btnInq.onclick = function() {
-                modal.style.display = "block";
-            }
+            // btnInq.onclick = function() {
+            //     modal.style.display = "block";
+            // }
 
-            btnSub.onclick = function() {
-                modal.style.display = "none";
-            }
-            btnCan.onclick = function() {
-                modal.style.display = "none";
-            }
+            // btnSub.onclick = function() {
+            //     modal.style.display = "none";
+            // }
+            // btnCan.onclick = function() {
+            //     modal.style.display = "none";
+            // }
 
             //Function To Display Popup
             function pop(div) {
