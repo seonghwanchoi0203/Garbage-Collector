@@ -133,16 +133,20 @@
                 border-width:1px;
                 border-color:#4da5ff;
                 border-radius:5px;
+                margin-bottom: 5px;
             }
-
+            form{
+                display:inline;
+            }
             #cancelButton {
                 width:120px;
                 height:40px;
-                margin-right:8px;
+                margin-left:8px;
                 border-style:solid;
                 border-width:1px;
                 border-color:lightgrey;
                 border-radius:5px;
+                margin-bottom:20px;
             }
 
             #getLocationButton {
@@ -155,18 +159,20 @@
                 border-width:1px;
                 border-color:#4da5ff;
                 border-radius:5px;
+                margin-bottom: 5px;
             }
             
-            #deleteItem {
-                background-color:#4da5ff;
+            #delete {
+                background-color:red;
                 color:white;
                 width:120px;
                 height:40px;
                 margin-left:8px;
                 border-style:solid;
                 border-width:1px;
-                border-color:#4da5ff;
+                border-color:red;
                 border-radius:5px;
+                
             }
 
             tr.alt{
@@ -181,10 +187,10 @@
 
 
 
-            #buttons{
+            /*#buttons{
               margin-bottom: 20px;
 
-            }
+            } */
             .hideClass
             {display:none;}
 
@@ -345,7 +351,7 @@
                          <input type="text" id="Longitude" name="Longitude" value="">
                          <br>
                 </div>
-                <div id="buttons">
+                <div id="buttons" style="display:inline">
                     <button name="cancel"
                             type="button"
                             id="cancelButton"
@@ -354,7 +360,7 @@
                 {% if sendfrom == "new" %}
                     <input type="button" id="getLocationButton" value="Get Location" onclick="getLocationConstant()" />
                 {% elif sendfrom == "edit" %}
-                    <form action="../delete/" method="POST">
+                    <form action="../delete/" method="POST" style="display:inline">
                          <button name="delete"
                                  class="btn btn-danger"
                                  type="submit"
