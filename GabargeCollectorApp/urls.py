@@ -42,6 +42,7 @@ urlpatterns = [
     url('sell', userprof_views.sell, name='sell'),
     url('rate', userprof_views.rate, name='rate'),
     url('orderComplete', garbage_views.orderComplete, name='orderComplete'),
+    url('delete', garbage_views.delete, name='delete'),
     url('inAppTransaction', garbage_views.inAppTransaction, name='inAppTransaction'),
     url('setting', userprof_views.setting, name='setting'),
     url('buyerMessage', garbage_views.buyerMessage, name='buyerMessage'),

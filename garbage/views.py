@@ -270,6 +270,9 @@ def new_item(request):
 def contact(request):
     return render(request, 'contact.html')
 
+def delete(request):
+
+    return redirect(sell)
 
 def sendEmail(request):
     if request.method == "POST":
