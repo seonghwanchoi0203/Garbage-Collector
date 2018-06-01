@@ -218,6 +218,32 @@
                 margin-left: 5px;
             }
 
+            #titleLimit{
+                color:#A9A9A9;
+            }
+            
+            #titleLimit:before{
+                content: "";
+            }
+
+            #title:focus + #titleLimit:before{
+                content: "Max length 20";
+                margin-left: 5px;
+            }
+            
+            #descriptionLimit{
+                color:#A9A9A9;
+            }
+            
+            #descriptionLimit:before{
+                content: "";
+            }
+
+            #description:focus + #descriptionLimit:before{
+                content: "Max length 500";
+                margin-left: 5px;
+            }
+
         </style>
 
 
@@ -260,7 +286,8 @@
                                 type="text"
                                 name="title"
                                 value="{{form.title.value}}"
-                                required>
+                                maxlength="20"
+                                required><span id="titleLimit"></span>
                     </div>
 
                     <div class="fieldContainers">
@@ -300,14 +327,16 @@
                                         name="description"
                                         style="resize:none"
                                         value = "{{form.description.value}}"
-                                        required>{{form.description.value}}</textarea>
+                                        maxlength="500"
+                                        required>{{form.description.value}}</textarea><span id="descriptionLimit"></span>
                         {% else %}
                             <textarea   id="description"
                                         type="text"
                                         name="description"
                                         style="resize:none"
                                         value = "{{form.description.value}}"
-                                        required></textarea>
+                                        maxlength="500"
+                                        required></textarea><span id="descriptionLimit"></span>
                         {% endif %}
                     </div>
 
@@ -337,14 +366,6 @@
                         {% endif %}
                     </div>
 
-                     <div id="divSample" class="hideClass">Latitude:
-                         <input type="text" id="Latitude" name="Latitude" value="">
-                         <br>
-                         <br>Longitude:
-                         <input type="text" id="Longitude" name="Longitude" value="">
-                         <br>
-                    </div>
-
                     <button name="send"
                             type="submit"
                             id="updateButton"
@@ -352,7 +373,13 @@
                             value="{{pid}}">Confirm</button>
                     {% csrf_token %}
                 </form>
-
+                <div id="divSample" class="hideClass">Latitude:
+                         <input type="text" id="Latitude" name="Latitude" value="">
+                         <br>
+                         <br>Longitude:
+                         <input type="text" id="Longitude" name="Longitude" value="">
+                         <br>
+                </div>
                 <div id="buttons" style="display:inline">
                     <button name="cancel"
                             type="button"
@@ -388,8 +415,7 @@
         function onGeoSuccess(event) {
             document.getElementById("Latitude").value = event.coords.latitude;
             document.getElementById("Longitude").value = event.coords.longitude;
-            console.log(event.coords.latitude);
-            console.log(event.coords.longitude);
+
         }
 
         function onGeoError(event) {
