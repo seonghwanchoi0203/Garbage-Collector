@@ -129,6 +129,19 @@
                 margin-left: 5px;
                 color:red;
             }
+            #bioLimit{
+                color:#A9A9A9;
+            }
+            
+            #bioLimit:before{
+                content: "";
+            }
+
+            #bio:focus + #bioLimit:before{
+                content: "Max length 500";
+                margin-left: 5px;
+            }
+
         </style>
     </head>
 
@@ -188,13 +201,15 @@
                                       name="bio"
                                       value="{{form.bio.value}}"
                                       style="resize:none"
-                                      required>{{form.bio.value}}</textarea>
+                                      maxlength="500"
+                                      required>{{form.bio.value}}</textarea><span id="bioLimit"></span>
                             {% else %}
                                 <textarea  id="bio"
                                            type="text"
                                            name="bio"
                                            style="resize:none"
-                                           required></textarea>
+                                           maxlength="500"
+                                           required></textarea><span id="bioLimit"></span>
                             {% endif %}
                           </div>
                           <hr>
