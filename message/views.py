@@ -81,7 +81,7 @@ def withdraw(request): ## BUYER to SELLER DECLINE AN INQUIRY
         form = WithdrawForm(request.POST)
         if form.is_valid():
             inquiry_out = Inquiry(sender=e_user)
-            garbage = get_object_or_404(Garbage, id=int(form.cleaned_data['garbage_id']))
+            garbage = get_object_or_404(Garbage, id=form.cleaned_data['garbage_id'])
             inquiry_out.receiver = garbage.owner
             inquiry_out.title = "The buyer withdrawed the request"
             inquiry_out.content = "The Inquiry has been withdrawed"
@@ -90,7 +90,7 @@ def withdraw(request): ## BUYER to SELLER DECLINE AN INQUIRY
             inquiry_out.accept = False
             inquiry_out.read = False
             inquiry_out.withdraw = True
-            inquiry_out.negotiate_price = form.cleaned_data['neigotiate_price']
+            inquiry_out.negotiate_price = form.cleaned_data['negotiate_price']
             inquiry_out.save()
     return redirect('/profile')
 
@@ -102,14 +102,17 @@ def decline(request): ## SELLER to BUYER DECLINE AN INQUIRY
     if not request.user.is_authenticated:
         return redirect('/accounts/login')
     current_user = request.user
+    print("??????")
     e_user = ExtendedUser.objects.get(user=current_user)
-    a_user = AdminUser.objects.get(extendeduser=e_user)
+    a_user = AdminUser.objects.get(extended_user=e_user)
     if request.method == 'POST':
-        form = OfferAdd(request.POST)
+        form = DeclineForm(request.POST)
+        print(form)
         if form.is_valid():
-            instance = DeclineForm(sender=a_user)
-            instance.receiver = get_object_or_404(ExtendedUser, id=int(form.cleaned_data['extended_user_id']))
-            inquiry_from_buyer = get_object_or_404(Inquiry, id=int(form.cleaned_data['inqury_id']))
+            print("!!!!!")
+            instance = Offer(sender=a_user)
+            instance.receiver = get_object_or_404(ExtendedUser, id=form.cleaned_data['extended_user_id'])
+            inquiry_from_buyer = get_object_or_404(Inquiry, id=form.cleaned_data['inquiry_id'])
             instance.inquiry = inquiry_from_buyer
             instance.title = "Seller declined the Offer"
             instance.content = "The offer has been declined"
@@ -118,7 +121,7 @@ def decline(request): ## SELLER to BUYER DECLINE AN INQUIRY
             instance.read = False
             instance.continueMessage = False
             instance.decline = True
-            instance.negotiate_price = form.cleaned_data['neigotiate_price']
+            instance.negotiate_price = form.cleaned_data['negotiate_price']
             instance.save()
     return redirect('/profile')
 
