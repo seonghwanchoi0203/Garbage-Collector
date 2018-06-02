@@ -544,18 +544,12 @@
                   <p style="color:black; background-color: #F7F2E8; ">
                     <span style="float:left; margin-bottom:5px">${{i.cost}}</span>
                     <div style=" margin-bottom: 1px;">
-                      <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
-                         <div style="float:right;">
-
-
-                             <!--change need to be done here-->
+                          <div style="float:right;">
                           <button name="edit"
                                   type="submit"
                                   value="{{i.id }}"
-                                  style=" width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">rate</button>
-                        </div>
-                                 {% csrf_token %}
-                        </form>
+                                  style=" width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Rate</button>
+                          </div>
                       </div>
                   </p>
                 </div>
