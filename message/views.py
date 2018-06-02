@@ -65,7 +65,7 @@ def offer(request):
             instance.decline = False
             instance.negotiate_price = form.cleaned_data['negotiate_price']
             instance.save()
-    return redirect('/profile')
+    return redirect('/sell')
 
 #TODO : Front end work
 '''
@@ -123,7 +123,7 @@ def decline(request): ## SELLER to BUYER DECLINE AN INQUIRY
             instance.decline = True
             instance.negotiate_price = form.cleaned_data['negotiate_price']
             instance.save()
-    return redirect('/profile')
+    return redirect('/sell')
 
 #TODO : Front end work
 '''
