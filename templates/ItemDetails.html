@@ -217,7 +217,8 @@
                     <li class="usualLi"><span><b>Description:  </b></span></li>
                     <li class="usualLi" style="height:110px;width: 500px;overflow: scroll"><span style="position: relative;word-break: break-all">{{description}}</span></li>
                 </ul>
-
+                {%if not sold%}
+                  {%if not mine%}
                 <div class="panel-default" style="height: 50px">
                      {% if watched %}
                     <!--<p>lalalala</p>-->
@@ -337,6 +338,8 @@
                         </div>
                     </div>
                 </div>
+                  {%endif%}
+                  {%endif%}
               </div>
           </div>
         </div>

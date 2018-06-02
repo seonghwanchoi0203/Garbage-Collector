@@ -335,32 +335,37 @@ def sendEmail(request):
 
 
 def ItemDetails(request):
+    mine = False;
     pid = request.GET.get('garbage')
     instance = get_object_or_404(Garbage, id=pid)
     seller = instance.owner
     extend_seller = seller.extended_user
-
     current_user = request.user
+    temp_dict = {}
+    temp_dict['latitude'] = instance.location.coords[0]
+    temp_dict['longitude'] = instance.location.coords[1]
+    json_temp = json.dumps(temp_dict)
     try:
         e_user = get_object_or_404(ExtendedUser,user=current_user)
     except:
         context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
                    'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
                    'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate, 'watched': False,
-                   'id': instance.id, 'photo':extend_seller.photos, 'rating':seller.rate*12,
-
+                   'id': instance.id, 'photo':extend_seller.photos, 'rating':seller.rate*12,'sold':instance.sold,
+                    'json_pos':json_temp,
+                    'mine':mine
                    }
         return render(request, 'ItemDetails.html', context)
 
+    a_user = get_object_or_404(AdminUser, extended_user=e_user)
+    if a_user == seller:
+        mine = True
     watch_list = list(Watch.objects.filter(user=e_user,garbage=instance))
     if len(watch_list) == 0:
         watched = False
     else:
         watched = True
-    temp_dict = {}
-    temp_dict['latitude'] = instance.location.coords[0]
-    temp_dict['longitude'] = instance.location.coords[1]
-    json_temp = json.dumps(temp_dict)
+
     context = {
         'title': instance.title,
         'description': instance.description,
@@ -375,7 +380,8 @@ def ItemDetails(request):
         'id': instance.id,
         'photo':extend_seller.photos, 'rating': seller.rate * 12,
         'sold':instance.sold,
-        'json_pos':json_temp
+        'json_pos':json_temp,
+        'mine':mine
     }
     print(context)
     return render(request, 'ItemDetails.html', context)
