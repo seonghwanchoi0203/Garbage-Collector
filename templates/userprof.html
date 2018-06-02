@@ -424,8 +424,17 @@
                                                     <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.extended_user.user.username}}&nbsp&nbsp
                                                     <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
                                                         Accept</button>
-                                                    <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
-                                                        Withdraw</button>&nbsp&nbsp&nbsp
+
+
+
+                                                        <form action="../withdraw/" method="POST" enctype="multipart/form-data">
+                                                            <input class="invisible" type="text"  id="garbage_id" name="garbage_id" value="{{o_m.garbage.id}}" >
+                                                            <input class="invisible" type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}">
+                                                            {% csrf_token %}
+                                                            <button class="btn btn btn-sm" id="declineBtn" type="submit"  style="height:30px; text-align: right;">
+                                                            Withdraw</button>
+                                                            </form>
+
                                                     </h4>
                                                     <hr>
                                                 </div>
