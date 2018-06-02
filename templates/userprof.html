@@ -294,9 +294,6 @@
 
     </head>
 
-
-
-
     <body>
 
      <div class="container">
@@ -359,7 +356,7 @@
                         <li class="active"><a href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">
                         </span>Inbox</a></li>
                         <li><a href="#profile" data-toggle="tab"><span class="glyphicon glyphicon-tags"></span>
-                            OutBox</a></li>
+                            Outbox</a></li>
                         <li><a href="#messages" data-toggle="tab"><span class="glyphicon glyphicon-tags"></span>
                             Declined</a></li>
                         <li><a href="#settings" data-toggle="tab"><span class="glyphicon glyphicon-plus no-margin">
@@ -412,7 +409,6 @@
                                             </div>
 
                                             <div class="modal-footer" >
-                                              <!-- <div class="container-fluid"> -->
 
                                                 <div class="row">
                                                   <h4 style="text-align: left;">&nbsp&nbsp&nbsp<strong>Mesasage received :</strong></h4>
@@ -513,8 +509,8 @@
             <h4>Watching Item</h4>
         </div>
          <div class="horizontal-scroll-wrapper squares" >
-            {%if garbage%}
-            {%for i in garbage%}
+            {%if watch%}
+            {%for i in watch%}
                 <div class="col-sm-5" style="border-radius: 25px; background-color: #F7F2E8; margin-right:15px;margin-left:15px;">
                     <p class="text" style=" background-color: #F7F2E8; text-align:center; font-size:20px; margin-top:15px"><a href='/ItemDetails?garbage={{i.id}}'>{{i.title}}</a></p>
                   <div class="thumbnail" style="padding:5px; height: auto; width: auto">
@@ -534,8 +530,8 @@
             <h4>Order History</h4>
         </div>
         <div class="horizontal-scroll-wrapper1 squares1">
-            {%if garbage%}
-            {%for i in garbage%}
+            {%if history%}
+            {%for i in history%}
                 <div  class="col-sm-5" style="border-radius: 25px; background-color: #F7F2E8; margin-right:15px;margin-left:15px;">
                     <p class="text" style=" background-color: #F7F2E8; text-align:center; font-size:20px; margin-top:15px"><a href='/ItemDetails?garbage={{i.id}}'>{{i.title}}</a></p>
                   <div class="thumbnail" style="padding:5px; height: auto; width: auto">

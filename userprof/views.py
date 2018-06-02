@@ -28,7 +28,7 @@ def rate(request):
             print(rate_gave)
             garbage = get_object_or_404(Garbage, id=garbage_id)
             garbage.isRated = True;
-             seller = garbage.owner
+            seller = garbage.owner
             seller.rate = (seller.rate * seller.numberOfRate + rate_gave)*1.0/(seller.numberOfRate +1)
             seller.numberOfRate = seller.numberOfRate + 1
             seller.save()
@@ -57,39 +57,25 @@ def profile(request):
     now = datetime.datetime.now()
     watch = []
     history =[]
+    watchList = []
     watch = Watch.objects.filter(user=m_user)
-    print(watch)
-    history = Inquiry.objects.filter(sender=m_user, accept=True)
+    for w in  watch:
+        watchList.append(w.garbage)
+    history = Garbage.objects.filter(buyer=m_user, sold=True)
     decline_message = list(Offer.objects.filter(receiver=m_user, decline = True))
     success_message = list(Inquiry.objects.filter(sender=m_user))
     inquiry_out = list(Offer.objects.filter(receiver=m_user,decline = False, continueMessage = True))
     print(inquiry_out)
     context = {
         "garbage": garbage,
-        # "message" : message,
         "decline_message" : decline_message,
         "success_message" : success_message,
-        "watch":watch,
+        "watch":watchList,
         "ongoing_message": inquiry_out,
         "extended_user": m_user,
         "history": history
     }
     return render(request, "userprof.html", context)
-
-
-def admin_page(request, message=None, success=None):
-    if not request.user.is_authenticated():
-        return redirect('/home')
-    current_user = request.user
-    m_user = get_object_or_404(ExtendedUser, user=current_user)
-    try:
-        a_user = get_object_or_404(AdminUser, extended_user=m_user)
-    except:
-        return redirect('/home')
-    garbage = Garbage.objects.filter(owner=a_user)
-    context = dict(garbage=garbage)
-
-    return render(request, "sellerProfile.html", context)
 
 
 def editBio(request):
@@ -149,23 +135,19 @@ def sell(request):
         admin_user = True
     except:
         pass
-    # messages = Message.objects.filter(receiver=current_user, is_reservation=False).order_by('-date')
+    history = Garbage.objects.filter(owner=a_user, sold=True)
     inquiry_received = Inquiry.objects.filter(receiver=a_user, accept=False,withdraw=False)
     send_offer = Offer.objects.filter(sender=a_user)
     withdraw_message = Inquiry.objects.filter(receiver=a_user,withdraw=True)
     garbage = Garbage.objects.filter(owner=a_user)
-    now = datetime.datetime.now()
-    # history = ResMessage.objects.filter(message__sender=current_user, res_date__lte = now, is_approved=True).order_by('res_date')
     context = {
         "garbage": garbage,
-        # "message" : message,
-        # "message_type" : message_type,
         "withdraw_message" : withdraw_message,
         "ongoing_message" : inquiry_received,
         "send_offer"  : send_offer,
         "admin_user": a_user,
         "extended_user": m_user,
-        # "history": history
+        "history": history
     }
     return render(request, "sell.html", context)
 
