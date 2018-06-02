@@ -112,7 +112,7 @@
             }
 
             #zipcode:focus + #zipcodeLimit:before{
-                content: "Example zip-Code: 92037 or 92037-1234";
+                content: "Example zip-Code: 92037";
                 margin-left: 5px;
             }
 
@@ -125,7 +125,7 @@
             }
 
             #zipcode:invalid + #zipcodeLimit1:before{
-                content: "Invild zip-Code. Example zip-Code: 92037 or 92037-1234";
+                content: "Invild zip-Code. Example zip-Code: 92037";
                 margin-left: 5px;
                 color:red;
             }
@@ -162,7 +162,8 @@
                                             type="text"
                                             name="zipcode"
                                             value="{{form.zipcode.value}}"
-                                            pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$"
+                                            pattern="^\s*?\d{5}"
+                                            title="Zip-Code must be length of 5 numbers"
                                             required
                                             ><span id="zipcodeLimit"></span>
                                 </div>
@@ -174,7 +175,8 @@
                                             type="text"
                                             name="zipcode"
                                             value="{{form.zipcode.value}}"
-                                            pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$"
+                                            pattern="^\s*?\d{5}"
+                                            title="Zip-Code must be length of 5 numbers"
                                             required
                                             ><span id="zipcodeLimit"></span>
                                 </div>
@@ -186,7 +188,8 @@
                                 <input  id="zipcode"
                                         type="text"
                                         name="zipcode"
-                                        pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$"
+                                        pattern="^\s*?\d{5}"
+                                        title="Zip-Code must be length of 5 numbers"
                                         required
                                         ><span id="zipcodeLimit1"></span>
                              </div>
