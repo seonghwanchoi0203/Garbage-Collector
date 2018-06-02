@@ -38,7 +38,7 @@ class Garbage(models.Model):
 
     sold = models.BooleanField(default=False)
     watched = models.ManyToManyField(ExtendedUser, blank=True, null=True, through='Watch')
-
+    isRated = models.BooleanField(default=False)
 
     def reserve(self, user, date):
         if self.sold:

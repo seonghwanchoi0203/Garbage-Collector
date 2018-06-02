@@ -424,9 +424,6 @@
                                                     <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.extended_user.user.username}}&nbsp&nbsp
                                                     <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
                                                         Accept</button>
-
-
-
                                                         <form action="../withdraw/" method="POST" enctype="multipart/form-data">
                                                             <input class="invisible" type="text"  id="garbage_id" name="garbage_id" value="{{o_m.garbage.id}}" >
                                                             <input class="invisible" type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}">
@@ -549,10 +546,13 @@
                     <div style=" margin-bottom: 1px;">
                       <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
                          <div style="float:right;">
+
+
+                             <!--change need to be done here-->
                           <button name="edit"
                                   type="submit"
                                   value="{{i.id }}"
-                                  style=" width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Edit</button>
+                                  style=" width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">rate</button>
                         </div>
                                  {% csrf_token %}
                         </form>

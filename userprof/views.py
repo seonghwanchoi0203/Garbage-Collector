@@ -27,7 +27,8 @@ def rate(request):
             rate_gave = float(form.cleaned_data['rate'])
             print(rate_gave)
             garbage = get_object_or_404(Garbage, id=garbage_id)
-            seller = garbage.owner
+            garbage.isRated = True;
+             seller = garbage.owner
             seller.rate = (seller.rate * seller.numberOfRate + rate_gave)*1.0/(seller.numberOfRate +1)
             seller.numberOfRate = seller.numberOfRate + 1
             seller.save()

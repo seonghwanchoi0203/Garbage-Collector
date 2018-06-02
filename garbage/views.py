@@ -370,6 +370,7 @@ def ItemDetails(request):
         'watched': watched,
         'id': instance.id,
         'photo':extend_seller.photos, 'rating': seller.rate * 12,
+        'sold':instance.sold
     }
     print(context)
     return render(request, 'ItemDetails.html', context)
