@@ -523,17 +523,7 @@
                   <div class="thumbnail" style="padding:5px; height: auto; width: auto">
                     <img src="{{i.photos.url}}" style="width: auto;height: 115px">
                   </div>
-                   <div style=" margin-bottom: 1px;">
-                       <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
-                          <div style="float:right;">
-                           <button name="edit"
-                                   type="submit"
-                                   value="{{i.id }}"
-                                   style=" width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Edit</button>
-                         </div>
-                                  {% csrf_token %}
-                         </form>
-                       </div>
+                  <span style="float:right; margin-top:10px">{{i.owner}}</span>
                   <p style="color:black">
                     <span style="float:left; margin-top:10px">${{i.cost}}</span>
                   </p>
@@ -556,7 +546,17 @@
                   </div>
                   <p style="color:black; background-color: #F7F2E8; ">
                     <span style="float:left; margin-bottom:5px">${{i.cost}}</span>
-                    <span style="float:right; margin-bottom:5px">{{i.owner}}</span>
+                    <div style=" margin-bottom: 1px;">
+                      <form method="get"  onsubmit="" action='../edit_item/' enctype="multipart/form-data">
+                         <div style="float:right;">
+                          <button name="edit"
+                                  type="submit"
+                                  value="{{i.id }}"
+                                  style=" width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Edit</button>
+                        </div>
+                                 {% csrf_token %}
+                        </form>
+                      </div>
                   </p>
                 </div>
             {%endfor%}
