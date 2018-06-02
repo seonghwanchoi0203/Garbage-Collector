@@ -357,6 +357,10 @@ def ItemDetails(request):
         watched = False
     else:
         watched = True
+    temp_dict = {}
+    temp_dict['latitude'] = instance.location.coords[0]
+    temp_dict['longitude'] = instance.location.coords[1]
+    json_temp = json.dumps(temp_dict)
     context = {
         'title': instance.title,
         'description': instance.description,
@@ -370,7 +374,8 @@ def ItemDetails(request):
         'watched': watched,
         'id': instance.id,
         'photo':extend_seller.photos, 'rating': seller.rate * 12,
-        'sold':instance.sold
+        'sold':instance.sold,
+        'json_pos':json_temp
     }
     print(context)
     return render(request, 'ItemDetails.html', context)

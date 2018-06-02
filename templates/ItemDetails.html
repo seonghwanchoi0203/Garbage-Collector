@@ -5,6 +5,7 @@
 <html lang="en">
     <head>
         {% include "header.html" %}
+         <title>Item Detail</title>
         <link   rel="stylesheet"
                 href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
         <link rel="stylesheet" href="{% static "bower_components/css/style1.css" %}">
@@ -216,10 +217,6 @@
                     <li class="usualLi"><span><b>Description:  </b></span></li>
                     <li class="usualLi" style="height:110px;width: 500px;overflow: scroll"><span style="position: relative;word-break: break-all">{{description}}</span></li>
                 </ul>
-
-                <!--<div class="panel-default" style="height: 250px;vertical-align: top">-->
-                    <!--<p class="usualLi" style="margin-left: 8%"></p>-->
-                <!--</div>-->
 
                 <div class="panel-default" style="height: 50px">
                      {% if watched %}
