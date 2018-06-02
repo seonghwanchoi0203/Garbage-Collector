@@ -267,7 +267,7 @@
              <!--</form>-->
 
     {% else %}
-    <div class="row profile">
+    <div class="row profile" style="margin-top:20px">
     <div class="col-md-3">
       <div class="profile-sidebar">
         <!-- SIDEBAR USERPIC -->
@@ -321,22 +321,25 @@
         <div class="">
             <center>
                     <img src="{{extended_user.photos.url}}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
-                    <h3 class="media-heading">{{extended_user.user.username}} <small>{{extended_user.city}} {{extended_user.state}} </small></h3>
+                    <h3 class="media-heading" style="margin-top: 2%">{{extended_user.user.username}} </h3>
+                    <small>{{extended_user.city}}</small> 
+                    <small> {{extended_user.state}} </small> <br>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <form method="get"  onsubmit="" action='../editBio/' enctype="multipart/form-data">
-                 <div style="float:right;">
+                    <hr>
+                    <div style="float:right;">
                      <button name="edit"
                              type="submit"
                              style="width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Edit</button>
                  </div>
+                 
                  {% csrf_token %}
              </form>
             </center>
-            <hr>
             <center>
                     <p class="text-left"><strong>Email: </strong><br>{{extended_user.user.email}}</p>
                     <br>
