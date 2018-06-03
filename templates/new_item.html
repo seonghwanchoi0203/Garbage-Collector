@@ -365,7 +365,13 @@
                             />
                         {% endif %}
                     </div>
-
+                    <div id="divSample" class="hideClass">Latitude:
+                        <input type="text" id="Latitude" name="Latitude" value="">
+                        <br>
+                        <br>Longitude:
+                        <input type="text" id="Longitude" name="Longitude" value="">
+                        <br>
+               </div>
                     <button name="send"
                             type="submit"
                             id="updateButton"
@@ -373,13 +379,7 @@
                             value="{{pid}}">Confirm</button>
                     {% csrf_token %}
                 </form>
-                <div id="divSample" class="hideClass">Latitude:
-                         <input type="text" id="Latitude" name="Latitude" value="">
-                         <br>
-                         <br>Longitude:
-                         <input type="text" id="Longitude" name="Longitude" value="">
-                         <br>
-                </div>
+                
                 <div id="buttons" style="display:inline">
                     <button name="cancel"
                             type="button"
@@ -387,7 +387,7 @@
                             onClick="history.go(-1)">Cancel</button>
                 </div>
                 {% if sendfrom == "new" %}
-                    <input type="button" id="getLocationButton" value="Get Location" onclick="getLocationConstant()" />
+                    
                 {% elif sendfrom == "edit" %}
                     <form action="../delete/" method="POST" style="display:inline">
                          <button name="delete"
@@ -409,7 +409,7 @@
             } else {
                 alert("Your browser or device doesn't support Geolocation");
             }
-        }
+        }   
 
         // If we have a successful location update
         function onGeoSuccess(event) {
@@ -436,6 +436,7 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+        getLocationConstant();
 
     </script>
 
