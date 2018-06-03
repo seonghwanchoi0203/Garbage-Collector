@@ -82,7 +82,7 @@ def home(request):
         temp_dict['zipcode'] = x.zipcode
         temp_dict['condition'] = x.condition
         temp_dict['cost'] = x.cost
-        temp_dict['location'] = {'latitude': x.location.coords[0], 'longitude': x.location.coords[1]}
+        temp_dict['location'] = {'latitude': x.latitude, 'longitude': x.longitude}
         temp_dict['photos'] = x.photos.url
         temp_dict['postdate'] = tmp
         ret_list.append(temp_dict)
@@ -137,7 +137,7 @@ def search(request):
         temp_dict['zipcode'] = x.zipcode
         temp_dict['condition'] = x.condition
         temp_dict['cost'] = x.cost
-        temp_dict['location'] = {'latitude': x.location.coords[0], 'longitude': x.location.coords[1]}
+        temp_dict['location'] = {'latitude': x.latitude, 'longitude': x.longitude}
         temp_dict['photos'] = x.photos.url
         temp_dict['postdate'] = tmp
         temp_dict['city'] = x.city
@@ -296,9 +296,13 @@ def new_item(request):
                 search = ZipcodeSearchEngine()
                 res = search.by_city_and_state(e_user.city, e_user.state)
                 instance.location = Point(res[0]["Latitude"],res[0]["Longitude"])
+                instance.latitude = res[0]["Latitude"]
+                instance.longitude = res[0]["Longitude"]
             else:
                 instance.location = Point(form.cleaned_data['Latitude'], form.cleaned_data['Longitude'])
-            instance.city,instance.state = getplace(instance.location.coords[0], instance.location.coords[1])
+                instance.latitude = form.cleaned_data["Latitude"]
+                instance.longitude = form.cleaned_data["Longitude"]
+            instance.city,instance.state = getplace(instance.latitude, instance.longitude)
             instance.save()
             message_type = True
             message = "Item created successfully."

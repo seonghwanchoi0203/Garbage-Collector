@@ -26,6 +26,8 @@ class Garbage(models.Model):
     photos = models.ImageField(default='%sdefault.png' % settings.MEDIA_URL, upload_to=get_image_path)
     zipcode = models.IntegerField(blank=True, null=True)
     condition = models.IntegerField(blank=True, null=True, default=5)
+    latitude = models.FloatField(blank=True,null=True)
+    longitude = models.FloatField(blank=True,null=True)
 
     distance = None
     location = models.PointField(null=True, blank=True)
