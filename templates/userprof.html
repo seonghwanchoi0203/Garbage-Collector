@@ -126,7 +126,7 @@
 
         .modal {
         display: none; /* Hidden by default */
-        position: auto; /* Stay in place */
+        position: fixed; /* Stay in place */
         z-index: 1; /* Sit on top */
         padding-top: 5%; /* Location of the box */
         left: 0;
@@ -369,14 +369,14 @@
                               <!--popup here-->
                               {% if ongoing_message %}
                               {% for o_m in ongoing_message %}
-                                <a href="#" class="list-group-item" id="myBtn">
+                                <a href="#" class="list-group-item" onclick="inboxModalPopup('{{o_m.id}}')">
                                     <span class="name" style="min-width: 120px; display: inline-block;">{{o_m.sender.extended_user.user.username}}</span> <span class="">{{o_m.title}}</span>
                                     <span class="text-muted" style="font-size: 11px;">{{o_m.content}}</span> <span class="badge">{{o_m.res_date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
                                     </span></span>
                                 </a>
 
                                 <!-- this part is pop up of inquiry -->
-                                <div id="myModal" class="modal">
+                                <div id=inbox{{o_m.id}} class="modal">
 
                                           <div class = "modal-content">
                                             <div class="modal-header">
@@ -464,6 +464,13 @@
                               {% endif %}
                             </div>
                         </div>
+
+
+
+
+
+
+
                         <div class="tab-pane fade in" id="profile">
                             <div class="list-group">
                               <!--popup here-->
@@ -488,7 +495,7 @@
                               {% for d_m in decline_message %}
                                 <a href="#" class="list-group-item">
                                     <span class="name" style="min-width: 120px; display: inline-block;">{{d_m.sender.extended_user.user.username}}</span> <span class="">{{d_m.title}}</span>
-                                    <span class="text-muted" style="font-size: 11px;">{{d_m.content}}</span> <span class="badge">{{d_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
+                                    <span class="text-muted" style="font-size: 11px;"> &nbsp&nbsp&nbsp{{d_m.content}}</span> <span class="badge">{{d_m.res_date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
                                     </span></span></a>
                               {% endfor%}
                               {% else %}
@@ -541,14 +548,95 @@
                     <span style="float:left; margin-bottom:5px">${{i.cost}}</span>
                     <div style=" margin-bottom: 1px;">
                           <div style="float:right;">
-                          <button name="edit"
-                                  type="submit"
-                                  value="{{i.id }}"
-                                  style=" width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Rate</button>
+                          <button name="edit" type="submit" value="{{i.id}}" style=" width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform" onclick="rateModalPopup('rate')">
+                                  Rate</button>
                           </div>
                       </div>
                   </p>
                 </div>
+
+                <!-- this part is pop up of inquiry -->
+                <div id=rate class="modal">
+
+                          <div class="modal-content" id="modalcontent{{i.id}}">
+                            <div class="modal-header">
+                              <h2 class="modal-title" id="inquiryModalTitle" style="text-align: center"><strong>Rate Details</strong>
+                                </h2>
+                            </div>
+
+
+                            <div class="modal-body">
+                              <div class="container-fluid">
+                                <div class="row">
+                                  <div class="itemContain">
+
+                                        <div class="col-xs-3">
+                                            <img src="" style="width: 100%; height: 100%; float:right">
+                                        </div>
+
+                                    <div class="col-xs-9">
+                                          <ul style="list-style-type:none">
+                                              <!-- <h2 class="usualLi" style="text-align: center; font-size: 250%; height:20%">{{o_m.garbage.title}}</h2>
+                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Price: </span><span><b>&#36; </b><em style="color: red;font-size: 110%"> {{o_m.negotiate_price}}</em></span></li>
+                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Post date: </span>{{o_m.garbage.postdate}}</li>
+                                              <li class="usualLi" style="font-size: 140%; height:10%"><span>Condition: </span>{{o_m.garbage.condition}}</li>
+                                              <li class="usualLi" style="font-size: 140%; height:5px"><span><b>Description: </b></span>{{o_m.garbage.description}}</li> -->
+                                          </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="modal-footer">
+                              <!-- <div class="row">
+                                  <h4 style="text-align: left;">&nbsp&nbsp&nbsp<strong>Mesasage received :</strong></h4>
+                                </div>
+                                <div class="row">
+                                  <h4 style="text-align: left;">&nbsp&nbsp{{o_m.content}}</h4>
+                                </div>
+                                <div class="row">
+                                    <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.user.username}}&nbsp&nbsp
+                                        <form action="../decline/" method="POST" enctype="multipart/form-data">
+                                        <input class="invisible" type="text"  id="inquiry_id" name="inquiry_id" value="{{o_m.id}}" >
+                                        <input class="invisible" type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}">
+                                        <input class="invisible" type="text" id="extended_user_id"  name="extended_user_id" value="{{o_m.sender.id}}">
+                                        {% csrf_token %}
+                                        <button class="btn btn btn-sm" id="declineBtn" type="submit"  style="height:30px; text-align: right;">
+                                        Decline</button>
+                                        </form>
+                                    <button class="btn btn-warning btn-sm" id="{{o_m.id}}" style="height:30px; text-align: right;" onclick="editpricePopup('{{o_m.id}}')">
+                                        Edit Price</button>&nbsp&nbsp&nbsp
+                                    </h4>
+                                    <hr>
+                                </div>
+                                <div class="row">
+                                  <div class="input-group" style="margin: auto; float: left; width:70%">
+                                    <form action="../offer/" method="POST" enctype="multipart/form-data" style="width:143%;">
+                                      <div class="row" style="width:100%; text-align:right">
+                                        <p id="priceEditInst{{o_m.id}}" style="display:none;">&#8251; Once you change the price, send it with your message. Then, changed price will be sent. &nbsp&nbsp&nbsp&nbsp&nbsp
+                                          <strong style="text-align:right">Edit Price: $</strong></p>
+                                        <input type="text" id="negotiate_price{{o_m.id}}" name="negotiate_price" value="{{o_m.negotiate_price}}" style="display:none; height:35px; width:80px" >
+                                      </div>
+                                      <br id="priceEditBr{{o_m.id}}" style="display:none">
+                                      <input type="text" id="content" name="content" value="" class="form-control input-lg" placeholder="Type your message here..." style="height:46.2px; width:90%; border-top-left-radius: 4px; border-bottom-left-radius: 4px;">
+                                      <button class="btn btn-success btn-lg" id="btn-chat" type="submit" style="float: right; height:46.2px; width:10%; border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
+                                        Send</button>
+                                      <div id="divSample">
+                                        <input class="invisible" type="text" id="inquiry_id" name="inquiry_id" value="{{o_m.id}}" >
+                                        <input class="invisible" type="text" id="title" name="title" value="Inquiry about {{o_m.title}}">
+                                        <input class="invisible" type="text" id="extended_user_id" name="extended_user_id" value="{{o_m.sender.id}}" >
+                                        {% csrf_token %}
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div> -->
+                            </div>
+
+                          </div>
+                      </div>
+                      <!-- end of pop up of inquiry part -->
+
             {%endfor%}
             {%endif%}
         </div>
@@ -577,7 +665,7 @@
             }
 
             // Get the modal
-            var modal = document.getElementById('myModal');
+            var modal;// = document.getElementById('myModal');
 
             // Get the button that opens the modal
             var btn = document.getElementById("myBtn");
@@ -591,6 +679,22 @@
 
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
+
+
+            function inboxModalPopup(id){
+              rawId = id.toString();
+              stringID = "inbox" + rawId;
+              modal = document.getElementById(stringID);
+              modal.style.display = "block";
+            }
+
+            function rateModalPopup(id){
+              // rawId = id.toString();
+              // stringID = "rate" + rawId;
+              modal = document.getElementById(id);
+              modal.style.display = "block";
+            }
+
 
             // When 'esc' key pressed, also close modal
             document.addEventListener('keyup', function(e) {
@@ -606,10 +710,10 @@
               }
             }
 
-            // When the user clicks the button, open the modal
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
+            // // When the user clicks the button, open the modal
+            // btn.onclick = function() {
+            //     modal.style.display = "block";
+            // }
             // When the user clicks on <span> (x), close the modal
             span.onclick = function() {
                 modal.style.display = "none";

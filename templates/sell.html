@@ -157,8 +157,8 @@
           margin: auto;
           padding: 20px;
           border: 1px solid #888;
-          width: 80%;
-          height: 642px;
+          width: 1200px;
+          height: 655px;
          }
 
          /* Modal Header */
@@ -174,18 +174,18 @@
 
           /* Modal Body */
           .modal-body {
-            height: 308px;
+            height: 290px;
             overflow-y: auto;
           }
 
           /* Modal Footer */
           .modal-footer {
-            background-color: #fafafa;
+            /* background-color: #fafafa; */
             /* -webkit-border-bottom-left-radius: 4px;
             -webkit-border-bottom-right-radius: 4px;
             -moz-border-radius-bottomleft: 4px;
             -moz-border-radius-bottomright: 4px; */
-            height: 155px;
+            height: 30%;
             /* max-height: auto; */
           }
 
@@ -376,9 +376,10 @@
                               {% if ongoing_message %}
                               {% for o_m in ongoing_message %}
                                 <a href="#" class="list-group-item" onclick="modalPopup('{{o_m.id}}')">
-                                    <span class="name" style="min-width: 120px; display: inline-block;">{{o_m.sender.user.username}}</span> <span class="">{{o_m.title}}</span>
-                                    <span class="text-muted" style="font-size: 11px;">{{o_m.content}}</span> <span class="badge">{{o_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
+                                    <span class="name" style="min-width: 120px; display: inline-block;">{{o_m.sender.user.username}}</span> <span class="">{{o_m.title}}</span><span class="badge">{{o_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
                                     </span></span>
+                                    <span class="text-muted" style="font-size: 11px; display:block; width:200px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">{{o_m.content}}</span>
+
                                     <!-- this part is pop up of inquiry -->
                                     <div id={{o_m.id}} class="modal">
 
@@ -420,19 +421,21 @@
                                                       <h4 style="text-align: left;">&nbsp&nbsp{{o_m.content}}</h4>
                                                     </div>
                                                     <div class="row">
-                                                        <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.user.username}}&nbsp&nbsp
-                                                            <form action="../decline/" method="POST" enctype="multipart/form-data">
-                                                            <input class="invisible" type="text"  id="inquiry_id" name="inquiry_id" value="{{o_m.id}}" >
-                                                            <input class="invisible" type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}">
-                                                            <input class="invisible" type="text" id="extended_user_id"  name="extended_user_id" value="{{o_m.sender.id}}">
-                                                            {% csrf_token %}
-                                                            <button class="btn btn btn-sm" id="declineBtn" type="submit"  style="height:30px; text-align: right;">
-                                                            Decline</button>
+                                                      <h4 style="text-align: right;">
+                                                        <div style="height:31px">
+                                                        <strong>Reply will be sent to: </strong> {{o_m.sender.user.username}}&nbsp&nbsp</div>
+                                                            <form action="../decline/" method="POST" enctype="multipart/form-data" style="float:right; margin-right: 10px; width:600px; height:0px">
+                                                              <input class="invisible" type="text"  id="inquiry_id" name="inquiry_id" value="{{o_m.id}}" style="height:0px; width:0px">
+                                                              <input class="invisible" type="text" id="extended_user_id"  name="extended_user_id" value="{{o_m.sender.id}}" style="height:0px; width:0px">
+                                                              <input class="invisible" type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}" style="height:0px; width:0px">
+                                                              {% csrf_token %}
+                                                              <button class="btn btn btn-sm" id="declineBtn" type="submit"  style="height:30px; text-align: center;">
+                                                              Decline</button>
                                                             </form>
-                                                        <button class="btn btn-warning btn-sm" id="{{o_m.id}}" style="height:30px; text-align: right;" onclick="editpricePopup('{{o_m.id}}')">
+                                                        <button class="btn btn-warning btn-sm" id="{{o_m.id}}" style="height:30px; margin-right:70px; text-align: center;" onclick="editpricePopup('{{o_m.id}}')">
                                                             Edit Price</button>&nbsp&nbsp&nbsp
+                                                            <hr>
                                                         </h4>
-                                                        <hr>
                                                     </div>
                                                     <div class="row">
                                                       <div class="input-group" style="margin: auto; float: left; width:70%">
@@ -670,14 +673,14 @@
                 nego_price.style.display = "none";
                 pirceEditBox.style.display = "none";
                 priceEditbr.style.display = "none";
-                modal_content.style.height = "642px";
+                modal_content.style.height = "655px";
               }
               else{ // currently invisible
                 editPriceBtnFlag = 1;
                 nego_price.style.display = "inline-block";
                 pirceEditBox.style.display = "inline";
                 priceEditbr.style.display = "inline";
-                modal_content.style.height = "697px";
+                modal_content.style.height = "709px";
               }
             }
 
@@ -707,7 +710,7 @@
                 nego_price.style.display = "none";
                 pirceEditBox.style.display = "none";
                 priceEditbr.style.display = "none";
-                modal_content.style.height = "642px";
+                modal_content.style.height = "655px";
                 editPriceBtnFlag = 0;
               }
             });
@@ -719,7 +722,7 @@
                 nego_price.style.display = "none";
                 pirceEditBox.style.display = "none";
                 priceEditbr.style.display = "none";
-                modal_content.style.height = "642px";
+                modal_content.style.height = "655px";
                 editPriceBtnFlag = 0;
               }
             }
@@ -734,7 +737,7 @@
                 nego_price.style.display = "none";
                 pirceEditBox.style.display = "none";
                 priceEditbr.style.display = "none";
-                modal_content.style.height = "642px";
+                modal_content.style.height = "655px";
                 editPriceBtnFlag = 0;
             }
             // When the user clicks the button, op en the modal
