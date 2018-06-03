@@ -95,7 +95,7 @@
                     <p class = text style="color:red; text-align:center; font-size:20px; margin-top:15px"><a href='/ItemDetails?garbage={{i.id}}'>{{i.title}}</a></p>
                       <a href="javascript:
                       id = '{{i.title}}';
-                      google.maps.event.trigger(markers[id],'click');" class="button3">Location 3</a>
+                      google.maps.event.trigger(markers[id],'click');" class="button3">{{i.city}} {{i.state}}</a>
                   <div class="thumbnail" style="height:200px; width:auto; padding:10px;">
                     <img src="{{i.photos.url}}" style="height:180px; width:auto;">
                   </div>
@@ -124,7 +124,7 @@
         <!-- <a href="/about"><i class="glyphicon glyphicon-question-sign"></i> &nbsp;About</a> -->
         {% endif %}
       </div>
-      < <nav id="footer_main_page" class="navbar navbar-default navbar-static-top">
+      <nav id="footer_main_page" class="navbar navbar-default navbar-static-top">
         {% include "footer.html" %}
       </nav> 
     </body>

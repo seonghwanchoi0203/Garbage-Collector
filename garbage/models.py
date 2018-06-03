@@ -36,6 +36,9 @@ class Garbage(models.Model):
     postdate = models.DateField(auto_now_add=True)
     soldDate = models.DateField(blank=True, null=True)
 
+    city = models.CharField(blank=True,null=True,max_length=30,)
+    state = models.CharField(blank=True,null=True,max_length=30,)
+
     sold = models.BooleanField(default=False)
     watched = models.ManyToManyField(ExtendedUser, blank=True, null=True, through='Watch')
     isRated = models.BooleanField(default=False)

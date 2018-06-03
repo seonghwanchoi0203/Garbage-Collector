@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import SearchVector
-
+from urllib.request import urlopen
 import datetime
 from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -16,7 +16,7 @@ from datetime import date
 from django.contrib.gis.geos import Point
 from django.urls import reverse
 from datetime import date
-
+import stripe
 
 # from django.contrib.gis.measure import D #
 # from django.contrib.gis.geos import Point
@@ -246,7 +246,6 @@ def edit_item(request):
             instance.title = form.cleaned_data['title']
             instance.condition = form.cleaned_data['condition']
             instance.description = form.cleaned_data['description']
-            instance.zipcode = form.cleaned_data['zipcode']
             print(form.cleaned_data['photos'])
             instance.photos = form.cleaned_data['photos']
             instance.save(force_update=True)
@@ -285,7 +284,6 @@ def new_item(request):
             instance.title = form.cleaned_data['title']
             instance.condition = form.cleaned_data['condition']
             instance.description = form.cleaned_data['description']
-            instance.zipcode =form.cleaned_data['zipcode']
             instance.photos = form.cleaned_data['photos']
             if(form.cleaned_data['Latitude'] == None or form.cleaned_data['Longitude'] == None):
                 search = ZipcodeSearchEngine()
@@ -293,6 +291,7 @@ def new_item(request):
                 instance.location = Point(res[0]["Latitude"],res[0]["Longitude"])
             else:
                 instance.location = Point(form.cleaned_data['Latitude'], form.cleaned_data['Longitude'])
+            instance.city,instance.state = getplace(instance.location.coords[0], instance.location.coords[1])
             instance.save()
             message_type = True
             message = "Item created successfully."
@@ -303,6 +302,24 @@ def new_item(request):
         form = GarbageAdd()
         sendfrom ="new"
     return render(request, "new_item.html", {'sendfrom':sendfrom})
+
+
+
+
+def getplace(lat, lon):
+    url = "http://maps.googleapis.com/maps/api/geocode/json?"
+    url += "latlng=%s,%s&sensor=false" % (lat, lon)
+    v = urlopen(url).read()
+    j = json.loads(v)
+    print(j)
+    components = j['results'][0]['address_components']
+    city = state = None
+    for c in components:
+        if "administrative_area_level_1" in c['types']:
+            state = c['short_name']
+        if "sublocality" in c['types']:
+            city = c['long_name']
+    return city, state
 
 
 def contact(request):
@@ -385,3 +402,14 @@ def ItemDetails(request):
     }
     print(context)
     return render(request, 'ItemDetails.html', context)
+
+def pay(request):
+
+    stripe.api_key = "sk_test_BQokikJOvBiI2HlWgH4olfQ2"
+
+    token = request.form['stripeToken']  # Using Flask
+
+    charge = stripe.Charge.create(amount=999,
+                                  currency='usd',
+                                  description='Example charge',
+                                  source=token, )

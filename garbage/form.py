@@ -6,7 +6,7 @@ from django.forms import ModelForm
 class GarbageEdit(ModelForm):
     class Meta:
         model = Garbage
-        fields = ['title', 'description', 'cost','zipcode','condition','photos']
+        fields = ['title', 'description', 'cost','zipcode','condition','photos' ]
 
 
 class ImageUploadForm(forms.Form):
