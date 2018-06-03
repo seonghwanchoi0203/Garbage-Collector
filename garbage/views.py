@@ -156,6 +156,11 @@ def about(request):
 def orderComplete(request):
     return render(request, 'orderComplete.html')
 
+def ratepage(request):
+    if request.method == 'POST':
+        pid = request.POST['edit']
+        garbage = get_object_or_404(Garbage, id=pid)
+    return render(request, 'rate.html',{'garbage':garbage})
 
 def about(request):
     return render(request, 'about.html')
@@ -307,7 +312,6 @@ def new_item(request):
 
 
 
-
 def getplace(lat, lon):
     url = "http://maps.googleapis.com/maps/api/geocode/json?"
     url += "latlng=%s,%s&sensor=false" % (lat, lon)
@@ -319,7 +323,7 @@ def getplace(lat, lon):
     for c in components:
         if "administrative_area_level_1" in c['types']:
             state = c['short_name']
-        if "sublocality" in c['types']:
+        if "administrative_area_level_2" in c['types']:
             city = c['long_name']
     return city, state
 

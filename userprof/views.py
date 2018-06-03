@@ -12,7 +12,7 @@ from uszipcode import ZipcodeSearchEngine
 
 
 # Create your views here.
-def rate(request):
+def rating(request):
     if not request.user.is_authenticated:
         return redirect('/home')
 
@@ -21,18 +21,19 @@ def rate(request):
 
     if request.method == 'POST':
         form = ScoreAdd(request.POST)
-        garbage_id = request.POST['edit']
-        print(garbage_id)
         if form.is_valid():
+            garbage_id = request.POST['edit']
+            print(garbage_id)
             rate_gave = float(form.cleaned_data['rate'])
             print(rate_gave)
             garbage = get_object_or_404(Garbage, id=garbage_id)
-            garbage.isRated = True;
+            garbage.isRated = True
+            garbage.save(force_update = True)
             seller = garbage.owner
             seller.rate = (seller.rate * seller.numberOfRate + rate_gave)*1.0/(seller.numberOfRate +1)
             seller.numberOfRate = seller.numberOfRate + 1
             seller.save()
-            return render(request, "userprof.html")
+    return redirect('/profile')
 
 
 def profile(request):
