@@ -66,7 +66,6 @@ def profile(request):
     decline_message = list(Offer.objects.filter(receiver=m_user, decline = True))
     success_message = list(Inquiry.objects.filter(sender=m_user))
     inquiry_out = list(Offer.objects.filter(receiver=m_user,decline = False, continueMessage = True))
-    print(inquiry_out)
     context = {
         "garbage": garbage,
         "decline_message" : decline_message,
@@ -158,7 +157,8 @@ def userinfo(request):
         return redirect('/accounts/login')
     current_user = request.user
     e_user = ExtendedUser.objects.get(user=current_user)
-    return render(request, 'userinfo.html',{'extended_user': e_user})
+    a_user = get_object_or_404(AdminUser, extended_user=e_user)
+    return render(request, 'userinfo.html',{'extended_user': e_user,'admin': a_user})
 
 
 def setting(request):
