@@ -114,8 +114,8 @@ def decline(request): ## SELLER to BUYER DECLINE AN INQUIRY
             instance.receiver = get_object_or_404(ExtendedUser, id=form.cleaned_data['extended_user_id'])
             inquiry_from_buyer = get_object_or_404(Inquiry, id=form.cleaned_data['inquiry_id'])
             instance.inquiry = inquiry_from_buyer
-            instance.title = "Seller declined the Offer"
-            instance.content = "The offer has been declined"
+            instance.title = "Seller declined the inquiry"
+            instance.content = "The inquiry has been declined"
             instance.garbage = inquiry_from_buyer.garbage
             instance.res_date = datetime.date.today()
             instance.read = False
