@@ -140,6 +140,8 @@ def search(request):
         temp_dict['location'] = {'latitude': x.location.coords[0], 'longitude': x.location.coords[1]}
         temp_dict['photos'] = x.photos.url
         temp_dict['postdate'] = tmp
+        temp_dict['city'] = x.city
+        temp_dict['state'] = x.state
         ret_list.append(temp_dict)
     json_garbage = json.dumps(ret_list,cls=UUIDEncoder)
     search_res = {'garbage': garbages ,
