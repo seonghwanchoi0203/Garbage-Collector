@@ -191,7 +191,7 @@ def buyerMessage(request):
 def inAppTransaction(request):
     return render(request, 'inAppTransaction.html')
 
-@login_required
+
 def watch(request):
     if not request.user.is_authenticated:
         print("no is_authenticated")
@@ -199,9 +199,7 @@ def watch(request):
     current_user = request.user
     e_user = get_object_or_404(ExtendedUser, user=current_user)
     pid = request.POST['edit']
-    print(pid)
     instance = get_object_or_404(Garbage, id=pid)
-    print('------')
     w = Watch(user=e_user, garbage=instance, date_watch=date.today())
     print(w)
     w.save()
@@ -251,7 +249,7 @@ def unwatch(request):
 
     redirect("/accounts/login")
 
-
+@login_required
 def edit_item(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login')
