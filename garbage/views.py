@@ -65,8 +65,16 @@ def home(request):
     nltk.download('averaged_perceptron_tagger')
     nltk.download('wordnet')
 
-    garbages = Garbage.objects.all()
-    print(type(garbages))
+    try:
+        current_user = request.user
+        e_user = get_object_or_404(ExtendedUser, user=current_user)
+        a_user = get_object_or_404(AdminUser, extended_user=e_user)
+        garbages = Garbage.objects
+        garbages = garbages.exclude(owner=a_user)
+    except:
+        garbages = Garbage.objects.all()
+
+    garbages = garbages.exclude(sold=True)
     ret_list = []
     for index, x in enumerate(garbages):
         # some fields with object points need manual translation for json
@@ -85,6 +93,8 @@ def home(request):
         temp_dict['location'] = {'latitude': x.latitude, 'longitude': x.longitude}
         temp_dict['photos'] = x.photos.url
         temp_dict['postdate'] = tmp
+        temp_dict['city'] = x.city
+        temp_dict['state'] = x.state
         ret_list.append(temp_dict)
     json_garbage = json.dumps(ret_list,cls=UUIDEncoder)
 
@@ -123,6 +133,16 @@ def search(request):
         ).filter(search = str(q))
         garbages |= res_q
     ret_list = []
+
+    try:
+        current_user = request.user
+        e_user = get_object_or_404(ExtendedUser, user=current_user)
+        a_user = get_object_or_404(AdminUser, extended_user=e_user)
+        garbages = garbages.exclude(owner=a_user)
+    except:
+        garbages = garbages
+
+    garbages = garbages.exclude(sold=True)
     for index, x in enumerate(garbages):
         # some fields with object points need manual translation for json
         # also some additional fields are necessary.
@@ -300,8 +320,8 @@ def new_item(request):
                 instance.longitude = res[0]["Longitude"]
             else:
                 instance.location = Point(form.cleaned_data['Latitude'], form.cleaned_data['Longitude'])
-                instance.latitude = form.cleaned_data["Latitude"]
-                instance.longitude = form.cleaned_data["Longitude"]
+                instance.latitude = instance.location.coords[0]
+                instance.longitude = instance.location.coords[1]
             instance.city,instance.state = getplace(instance.latitude, instance.longitude)
             instance.save()
             message_type = True
@@ -369,8 +389,8 @@ def ItemDetails(request):
     extend_seller = seller.extended_user
     current_user = request.user
     temp_dict = {}
-    temp_dict['latitude'] = instance.location.coords[0]
-    temp_dict['longitude'] = instance.location.coords[1]
+    temp_dict['latitude'] = instance.latitude
+    temp_dict['longitude'] = instance.longitude
     json_temp = json.dumps(temp_dict)
     try:
         e_user = get_object_or_404(ExtendedUser,user=current_user)
