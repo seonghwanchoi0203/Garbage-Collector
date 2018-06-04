@@ -179,6 +179,21 @@
           font-weight: bold;
         }
 
+        /* show star rating */
+        #bg{
+            width: 60px;
+            height: 16px;
+            background: url(static/media/star_gray.png);
+        }
+        #over{
+            height:16px;
+            background:url(static/media/star_org.png) no-repeat;
+        }
+        .ele {
+	        position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
 
 
@@ -235,7 +250,7 @@
 
           <div class="inner cover">
             <h1 class="cover-heading">Please update your information</h1>
-            <p class="lead">Your information is important and necessary for our community. We encourage you to update it as soon as possible.</p>
+            <p class="lead">Your information is important and necessary for making transactions. We encourage you to update it as soon as possible.</p>
             <p class="lead" >
                 <form method="get"  onsubmit="" action='../editBio/' enctype="multipart/form-data">
                  <div >
@@ -317,29 +332,31 @@
       </div>
     </div>
     <div class="col-md-9 col-md-10">
-        {%if extended_user.first%}
+        <!--{%if extended_user.first%}-->
         <div class="">
             <center>
                     <img src="{{extended_user.photos.url}}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                     <h3 class="media-heading" style="margin-top: 2%">{{extended_user.user.username}} </h3>
                     <small>{{extended_user.city}}</small> 
-                    <small> {{extended_user.state}} </small> <br>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
+                    <small> {{extended_user.state}} </small>
+
+
                     <form method="get"  onsubmit="" action='../editBio/' enctype="multipart/form-data">
-                    <hr>
+
                     <div style="float:right;">
                      <button name="edit"
                              type="submit"
                              style="width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Edit</button>
-                 </div>
-                 
-                 {% csrf_token %}
-             </form>
+                    </div>
+
+                    {% csrf_token %}
+                    </form>
             </center>
+
+            <!--See this line!!!!! width can be modified!!-->
+            <div class="ele" id="bg" style="margin-top: 1%;"><div id="over" style="width:44px"></div></div>
+            <hr style="margin-top: 5%">
+
             <center>
                     <p class="text-left"><strong>Email: </strong><br>{{extended_user.user.email}}</p>
                     <br>
@@ -349,20 +366,23 @@
                     <br>
             </center>
         </div>
-        {%else%}
-        <p>Please update your information</p>
-             <form method="get"  onsubmit="" action='../editBio/' enctype="multipart/form-data">
-                 <div style="float:right;">
-                     <button name="edit"
-                             type="submit"
-                             style="width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Edit</button>
-                 </div>
-                 {% csrf_token %}
-             </form>
-        {%endif%}
+        <!--{%else%}-->
+        <!--<p>Please update your information</p>-->
+             <!--<form method="get"  onsubmit="" action='../editBio/' enctype="multipart/form-data">-->
+                 <!--<div style="float:right;">-->
+                     <!--<button name="edit"-->
+                             <!--type="submit"-->
+                             <!--style="width: 5.5em; height: 2.5em;color: #0099CC;background-color: transparent;border: 2px solid #0099CC; border-radius: 5px; text-transform">Edit</button>-->
+                 <!--</div>-->
+                 <!--{% csrf_token %}-->
+             <!--</form>-->
+        <!--{%endif%}-->
     </div>
     </div>
 {% endif %}
+    </div>
+
+
 
       <script>
             // function for pushing bar feature
