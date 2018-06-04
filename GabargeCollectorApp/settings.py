@@ -22,6 +22,12 @@ PROJECT_DIRECTORY = os.getcwd()
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '*(hvoxi*6$s-u(_vf(o73ppyehff&d(k#_&5)(1z8okwk$rrz9'
 
+TEST_PUBLIC_KEY = 'pk_test_9nWiHIjMQU5ZwazecEqWV4vI'
+TEST_SECRET_KEY = 'sk_test_nkDPc9o26NqQ17rxVQilW3ax'
+
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_SECRET_KEY", "TEST_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "TEST_SECRET_KEY")
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
