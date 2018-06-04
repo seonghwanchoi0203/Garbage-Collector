@@ -420,6 +420,7 @@
                                                     <div class="row">
                                                       <h4 style="text-align: left;">&nbsp&nbsp{{o_m.content}}</h4>
                                                     </div>
+                                                    {%if not o_m.garbage.sold%}
                                                     <div class="row">
                                                       <h4 style="text-align: right;">
                                                         <div style="height:31px">
@@ -458,6 +459,9 @@
                                                         </form>
                                                       </div>
                                                     </div>
+                                                    {%else%}
+                                                  <strong>  <h3 style="text-align: center; color:#FFAF0A">THIS ITEM IS SOLD</h3></strong>
+                                                    {%endif%}
                                                 </div>
 
                                               </div>

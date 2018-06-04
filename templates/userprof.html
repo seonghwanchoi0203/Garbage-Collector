@@ -418,7 +418,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <h4 style="text-align: right;"><strong>Reply will be sent to: </strong> {{o_m.sender.extended_user.user.username}}&nbsp&nbsp
-
+                                                        {% if not o_m.garbage.sold %}
                                                         <form action="../buyer_accept/" method="POST" enctype="multipart/form-data">
                                                             <input  class="invisible" type="text" id="transaction_id" name="transaction_id" value="{{0}}" >
                                                             <input  class="invisible" type="text" id="garbage_id" name="garbage_id" value="{{o_m.garbage.id}}" >
@@ -428,6 +428,7 @@
                                                            <button class="btn btn-warning btn-sm" id="btn-chat" style="height:30px; text-align: right;">
                                                         Accept</button>
                                                             </form>
+
                                                         <form action="../withdraw/" method="POST" enctype="multipart/form-data">
                                                             <input class="invisible" type="text"  id="garbage_id" name="garbage_id" value="{{o_m.garbage.id}}" >
                                                             <input class="invisible" type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}">
@@ -435,7 +436,10 @@
                                                             <button class="btn btn btn-sm" id="declineBtn" type="submit"  style="height:30px; text-align: right;">
                                                             Withdraw</button>
                                                             </form>
-
+                                                        {% else %}
+                                                         <button class="btn btn-info btn-sm" id="btn-chat" style="height:30px; text-align: right;">
+                                                        Accepted</button>
+                                                        {%endif%}
                                                     </h4>
                                                     <hr>
                                                 </div>
