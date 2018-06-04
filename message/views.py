@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from userprof.models import ExtendedUser, AdminUser
 from message.models import Inquiry, Offer
-from message.form import InquiryAdd, OfferAdd,WithdrawForm,DeclineForm
+from message.form import InquiryAdd, OfferAdd,WithdrawForm,DeclineForm,AcceptForm
 from django.shortcuts import redirect
 import datetime
 from garbage.models import Garbage
@@ -145,18 +145,21 @@ def decline(request): ## SELLER to BUYER DECLINE AN INQUIRY
     decline = models.BooleanField(blank=True,default=False)
     read = models.BooleanField(default=False)
 '''
-def buyer_accepet(request):
+
+
+def buyer_accept(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login')
     current_user = request.user
     e_user = ExtendedUser.objects.get(user=current_user)
     if request.method == 'POST':
-        form = InquiryAdd(request.POST)
-        if form.is_valid():
+        form = AcceptForm(request.POST)
 
+        if form.is_valid():
             ## Get data from form
-            garbage = get_object_or_404(Garbage, id=int(form.cleaned_data['garbage_id']))
-            inquiry_from_buyer = get_object_or_404(Inquiry, id=int(form.cleaned_data['inqury_id']))
+            garbage = get_object_or_404(Garbage, id=form.cleaned_data['garbage_id'])
+            print(garbage)
+            inquiry_from_buyer = get_object_or_404(Inquiry, id=form.cleaned_data['inquiry_id'])
             transaction_id = form.cleaned_data['transaction_id']
             negotiate_price = form.cleaned_data['negotiate_price']
 
@@ -177,7 +180,6 @@ def buyer_accepet(request):
                 return redirect('/profile')
             else:
                 ## another If here to do actual payment
-
                 garbage.sold = True
                 garbage.buyer = e_user
                 offer_out.title = "Success"

@@ -52,6 +52,7 @@ urlpatterns = [
     url('offer', message_views.offer, name='offer'),
     url('decline', message_views.decline, name='decline'),
     url('withdraw', message_views.withdraw, name='withdraw'),
+    url('buyer_accept', message_views.buyer_accept, name='buyer_accept'),
 ]
 
 if settings.DEBUG:

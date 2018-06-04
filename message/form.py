@@ -28,3 +28,8 @@ class DeclineForm(forms.Form):
     inquiry_id = forms.CharField()
     negotiate_price = forms.FloatField()
 
+class AcceptForm(forms.Form):
+    garbage_id = forms.CharField()
+    transaction_id = forms.CharField()
+    negotiate_price = forms.FloatField()
+    inquiry_id = forms.CharField()
