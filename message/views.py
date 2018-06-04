@@ -182,6 +182,7 @@ def buyer_accept(request):
                 ## another If here to do actual payment
                 garbage.sold = True
                 garbage.buyer = e_user
+                garbage.save()
                 offer_out.title = "Success"
                 offer_out.content = "The Item has been successfully reserved"
                 offer_out.negotiate_price = negotiate_price
@@ -198,6 +199,7 @@ def buyer_accept(request):
                 inquiry_out.title = "Successfully Sold"
                 inquiry_out.content = "The Item has been successfully reserved"
                 inquiry_out.save()
+
         return redirect('/profile')
 
 
