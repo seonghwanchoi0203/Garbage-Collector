@@ -139,7 +139,7 @@ def sell(request):
     inquiry_received = Inquiry.objects.filter(receiver=a_user, accept=False,withdraw=False)
     send_offer = Offer.objects.filter(sender=a_user)
     withdraw_message = Inquiry.objects.filter(receiver=a_user,withdraw=True)
-    garbage = Garbage.objects.filter(owner=a_user)
+    garbage = Garbage.objects.filter(owner=a_user,sold=False)
     context = {
         "garbage": garbage,
         "withdraw_message" : withdraw_message,
