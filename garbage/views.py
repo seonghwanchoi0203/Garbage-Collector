@@ -441,3 +441,6 @@ def pay(request):
                                   currency='usd',
                                   description='Example charge',
                                   source=token, )
+
+def welcome(request):
+    return render(request,'welcome.html')

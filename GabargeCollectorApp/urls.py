@@ -26,7 +26,7 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     #url('accounts/', include('django.contrib.auth.urls')),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^$', garbage_views.home, name='home'),
+    url(r'^$', garbage_views.welcome, name='welcome'),
 	url('home/', garbage_views.home, name='home'),
 	url('about',garbage_views.about,name = 'about'),
 	url('profile',userprof_views.profile,name = 'profile'),
@@ -52,6 +52,7 @@ urlpatterns = [
     url('offer', message_views.offer, name='offer'),
     url('decline', message_views.decline, name='decline'),
     url('withdraw', message_views.withdraw, name='withdraw'),
+    url('welcome', garbage_views.welcome, name='welcome'),
     url('buyer_accept', message_views.buyer_accept, name='buyer_accept'),
 ]
 
