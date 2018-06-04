@@ -201,6 +201,11 @@ def watch(request):
     pid = request.POST['edit']
     instance = get_object_or_404(Garbage, id=pid)
     w = Watch(user=e_user, garbage=instance, date_watch=date.today())
+    temp_dict = {}
+    temp_dict['latitude'] = instance.latitude
+    temp_dict['longitude'] = instance.longitude
+    json_temp = json.dumps(temp_dict)
+    mine = False
     print(w)
     w.save()
     try:
@@ -208,7 +213,9 @@ def watch(request):
             context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
                        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
                        'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
-                       'watched': True, 'id': instance.id}
+                       'watched': True, 'id': instance.id,'sold':instance.sold,
+                        'json_pos':json_temp,
+                         'mine':mine}
             return render(request, 'ItemDetails.html', context)
             #redirect(ItemDetails,context)
             #reverse('ItemDetails', kwargs={'garbage': instance.id})
@@ -229,11 +236,18 @@ def unwatch(request):
         if request.method == 'POST':
             pid = request.POST['unwatch']
             print(pid)
-            instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+            instance = get_object_or_404(Garbage, id=pid)
+            temp_dict = {}
+            temp_dict['latitude'] = instance.latitude
+            temp_dict['longitude'] = instance.longitude
+            json_temp = json.dumps(temp_dict)
+            mine = False
             context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
                        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
                        'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
-                       'watched': False, 'id': instance.id,'garbage':instance.id}
+                       'watched': False, 'id': instance.id,'garbage':instance.id,'sold':instance.sold,
+                        'json_pos':json_temp,
+                        'mine':mine}
             try:
                 watch_list = Watch.objects.filter(user=e_user, garbage=instance)
                 watch_list.delete()
@@ -298,9 +312,6 @@ def new_item(request):
     if request.method == 'POST':
         instance = Garbage(owner=a_user)
         form = GarbageAdd(request.POST, request.FILES, instance=instance)
-        #form = GarbageAdd(request.POST)
-        #imageForm = ImageUploadForm(request.POST, request.FILES)
-        #print(form)
         sendfrom = "new"
         if form.is_valid():
             print("lalal")
@@ -320,7 +331,7 @@ def new_item(request):
                 instance.location = Point(form.cleaned_data['Latitude'], form.cleaned_data['Longitude'])
                 instance.latitude = instance.location.coords[0]
                 instance.longitude = instance.location.coords[1]
-            instance.city,instance.state = getplace(instance.latitude, instance.longitude)
+            instance.city,instance.state = getplace(instance.latitude, instance.longitude,e_user.city,e_user.state)
             instance.save()
             message_type = True
             message = "Item created successfully."
@@ -334,19 +345,21 @@ def new_item(request):
 
 
 
-def getplace(lat, lon):
-    url = "http://maps.googleapis.com/maps/api/geocode/json?"
-    url += "latlng=%s,%s&sensor=false" % (lat, lon)
-    v = urlopen(url).read()
-    j = json.loads(v)
-    print(j)
-    components = j['results'][0]['address_components']
-    city = state = None
-    for c in components:
-        if "administrative_area_level_1" in c['types']:
-            state = c['short_name']
-        if "administrative_area_level_2" in c['types']:
-            city = c['long_name']
+def getplace(lat, lon, city, state):
+    try:
+        url = "http://maps.googleapis.com/maps/api/geocode/json?"
+        url += "latlng=%s,%s&sensor=false" % (lat, lon)
+        v = urlopen(url).read()
+        j = json.loads(v)
+        print(j)
+        components = j['results'][0]['address_components']
+        for c in components:
+            if "administrative_area_level_1" in c['types']:
+                state = c['short_name']
+            if "administrative_area_level_2" in c['types']:
+                city = c['long_name']
+    except:
+        return city, state
     return city, state
 
 
