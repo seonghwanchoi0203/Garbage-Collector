@@ -320,7 +320,7 @@ def new_item(request):
                 instance.location = Point(form.cleaned_data['Latitude'], form.cleaned_data['Longitude'])
                 instance.latitude = instance.location.coords[0]
                 instance.longitude = instance.location.coords[1]
-            instance.city,instance.state = getplace(instance.latitude, instance.longitude)
+            instance.city,instance.state = getplace(instance.latitude, instance.longitude,e_user.city,e_user.state)
             instance.save()
             message_type = True
             message = "Item created successfully."
@@ -334,19 +334,21 @@ def new_item(request):
 
 
 
-def getplace(lat, lon):
-    url = "http://maps.googleapis.com/maps/api/geocode/json?"
-    url += "latlng=%s,%s&sensor=false" % (lat, lon)
-    v = urlopen(url).read()
-    j = json.loads(v)
-    print(j)
-    components = j['results'][0]['address_components']
-    city = state = None
-    for c in components:
-        if "administrative_area_level_1" in c['types']:
-            state = c['short_name']
-        if "administrative_area_level_2" in c['types']:
-            city = c['long_name']
+def getplace(lat, lon, city, state):
+    try:
+        url = "http://maps.googleapis.com/maps/api/geocode/json?"
+        url += "latlng=%s,%s&sensor=false" % (lat, lon)
+        v = urlopen(url).read()
+        j = json.loads(v)
+        print(j)
+        components = j['results'][0]['address_components']
+        for c in components:
+            if "administrative_area_level_1" in c['types']:
+                state = c['short_name']
+            if "administrative_area_level_2" in c['types']:
+                city = c['long_name']
+    except:
+        return city, state
     return city, state
 
 
