@@ -201,6 +201,11 @@ def watch(request):
     pid = request.POST['edit']
     instance = get_object_or_404(Garbage, id=pid)
     w = Watch(user=e_user, garbage=instance, date_watch=date.today())
+    temp_dict = {}
+    temp_dict['latitude'] = instance.latitude
+    temp_dict['longitude'] = instance.longitude
+    json_temp = json.dumps(temp_dict)
+    mine = False
     print(w)
     w.save()
     try:
@@ -208,7 +213,9 @@ def watch(request):
             context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
                        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
                        'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
-                       'watched': True, 'id': instance.id}
+                       'watched': True, 'id': instance.id,'sold':instance.sold,
+                        'json_pos':json_temp,
+                         'mine':mine}
             return render(request, 'ItemDetails.html', context)
             #redirect(ItemDetails,context)
             #reverse('ItemDetails', kwargs={'garbage': instance.id})
@@ -229,11 +236,18 @@ def unwatch(request):
         if request.method == 'POST':
             pid = request.POST['unwatch']
             print(pid)
-            instance = get_object_or_404(Garbage, id=pid)  # TODO, switch to ID
+            instance = get_object_or_404(Garbage, id=pid)
+            temp_dict = {}
+            temp_dict['latitude'] = instance.latitude
+            temp_dict['longitude'] = instance.longitude
+            json_temp = json.dumps(temp_dict)
+            mine = False
             context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
                        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
                        'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
-                       'watched': False, 'id': instance.id,'garbage':instance.id}
+                       'watched': False, 'id': instance.id,'garbage':instance.id,'sold':instance.sold,
+                        'json_pos':json_temp,
+                        'mine':mine}
             try:
                 watch_list = Watch.objects.filter(user=e_user, garbage=instance)
                 watch_list.delete()
@@ -298,9 +312,6 @@ def new_item(request):
     if request.method == 'POST':
         instance = Garbage(owner=a_user)
         form = GarbageAdd(request.POST, request.FILES, instance=instance)
-        #form = GarbageAdd(request.POST)
-        #imageForm = ImageUploadForm(request.POST, request.FILES)
-        #print(form)
         sendfrom = "new"
         if form.is_valid():
             print("lalal")
