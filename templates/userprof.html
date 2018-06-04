@@ -423,7 +423,7 @@
                                                 <div class="row">
                                                         {% if not o_m.garbage.sold %}
                                                         <!-- <div class="col-xs-11"> -->
-                                                          <form action="../buyer_accept/" method="POST" enctype="multipart/form-data" style="float:right; margin-right: 20px; width:75px; height:50px">
+                                                          <form action="../buyer_accept/" method="POST" enctype="multipart/form-data" style="float:right; margin-right: 20px; ">
                                                             <input  class="invisible" type="text" id="transaction_id" name="transaction_id" value="{{0}}" style="float:left; width:0px; height:0px">
                                                             <input  class="invisible" type="text" id="garbage_id" name="garbage_id" value="{{o_m.garbage.id}}" style="float:left; width:0px; height:0px">
                                                             <input  class="invisible" type="text" id="inquiry_id" name="inquiry_id" value="{{o_m.inquiry.id}}" style="float:left; width:0px; height:0px">
@@ -434,7 +434,7 @@
                                                           </form>
                                                         <!-- </div> -->
                                                         <!-- <div class="col-xs-1"> -->
-                                                          <form action="../withdraw/" method="POST" enctype="multipart/form-data" style="float:right; margin-right: 75px; width:0px; height:0px">
+                                                          <form action="../withdraw/" method="POST" enctype="multipart/form-data" style="float:right; margin-right: 75px; width:0px; height:10px">
                                                             <input class="invisible" type="text"  id="garbage_id" name="garbage_id" value="{{o_m.garbage.id}}" style="float:left; width:0px; height:0px">
                                                             <input class="invisible" type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}" style="float:left; width:0px; height:0px">
                                                             {% csrf_token %}
