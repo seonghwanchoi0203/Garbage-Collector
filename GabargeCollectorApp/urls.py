@@ -54,6 +54,7 @@ urlpatterns = [
     url('withdraw', message_views.withdraw, name='withdraw'),
     url('welcome', garbage_views.welcome, name='welcome'),
     url('buyer_accept', message_views.buyer_accept, name='buyer_accept'),
+    url(r"^checkout$", userprof_views.checkout, name="checkout_page"),
 ]
 
 if settings.DEBUG:
