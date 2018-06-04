@@ -8,7 +8,11 @@ from message.models import Inquiry, Offer
 from django.shortcuts import get_object_or_404
 import datetime
 from uszipcode import ZipcodeSearchEngine
-# import stripe
+from django.conf import settings
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 
 # Create your views here.
@@ -164,3 +168,42 @@ def userinfo(request):
 
 def setting(request):
     return render(request, 'setting.html')
+
+def payment_form(request):
+    context = { "stripe_key": settings.STRIPE_PUBLIC_KEY }
+    return render(request, "userprof.html", context)
+
+def checkout(request):
+    return redirect("profile")
+    '''
+    new_user = ExtendedUser(
+        #model = "Honda Civic",
+        #year  = 2017
+    )
+
+    if request.method == "POST":
+        print("???????")
+        token = request.POST.get("stripeToken")
+
+
+
+    try:
+        charge  = stripe.Charge.create(
+            amount      = 2000,
+            currency    = "usd",
+            source      = token,
+        )
+
+        print("ajsdkaskdjjk")
+
+        #new_user.charge_id   = charge.id
+
+    except stripe.error.CardError as ce:
+        return False, ce
+
+    else:
+        new_user.save()
+        return redirect("profile")
+        # The payment was successfully processed, the user's card was charged.
+        # You can now redirect the user to another page or whatever you want
+    '''

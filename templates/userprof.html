@@ -443,7 +443,7 @@
                                                           </form>
                                                         <!-- </div> -->
                                                         {% else %}
-                                                         <button class="btn btn-info btn-sm" id="btn-chat" style="margin-right: 20px; height:30px; text-align: right;">
+                                                         <button class="btn btn-info btn-sm" id="btn-chat2" style="margin-right: 20px; height:30px; text-align: right;">
                                                         Accepted</button>
                                                         {%endif%}
                                                       <hr style="width:1255px">
@@ -701,6 +701,43 @@
                  </div>
         </div>
 -->
+
+
+        <form action="../buyer_accept/" method="POST">
+          <script src="https://checkout.stripe.com/checkout.js"></script>
+
+          <script>
+          var handler = StripeCheckout.configure({
+            key: 'pk_test_9nWiHIjMQU5ZwazecEqWV4vI',
+            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            token: function(token) {
+              token = token.id
+              // You can access the token ID with `token.id`.
+              // Get the token ID to your server-side code for use.
+            }
+          });
+
+          document.getElementById('btn-chat').addEventListener('click', function(e) {
+            // Open Checkout with further options:
+            handler.open({
+              name: 'Garbage-Collector',
+              description: '',
+              zipCode: true,
+              amount: ''
+            });
+            e.preventDefault();
+          });
+
+          // Close Checkout on page navigation:
+          window.addEventListener('popstate', function() {
+
+              handler.close();
+
+          });
+
+          </script>
+        </form>
 
 
         <script>
