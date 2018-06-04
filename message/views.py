@@ -169,7 +169,7 @@ def buyer_accept(request):
             offer_out.inquiry = inquiry_from_buyer
             offer_out.garbage = inquiry_from_buyer.garbage
             offer_out.read = False
-            offer_out.decline = True
+            offer_out.decline = False
             offer_out.continueMessage = False
             if garbage.sold:
                 offer_out.title = "It is Sold"

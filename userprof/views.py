@@ -63,9 +63,9 @@ def profile(request):
     for w in  watch:
         watchList.append(w.garbage)
     history = Garbage.objects.filter(buyer=m_user, sold=True)
-    decline_message = list(Offer.objects.filter(receiver=m_user, decline = True))
+    decline_message = list(Offer.objects.filter(receiver=m_user, decline=True,continueMessage=False))
     success_message = list(Inquiry.objects.filter(sender=m_user))
-    inquiry_out = list(Offer.objects.filter(receiver=m_user,decline = False, continueMessage = True))
+    inquiry_out = list(Offer.objects.filter(receiver=m_user,decline = False))
     context = {
         "garbage": garbage,
         "decline_message" : decline_message,
@@ -136,7 +136,7 @@ def sell(request):
     except:
         pass
     history = Garbage.objects.filter(owner=a_user, sold=True)
-    inquiry_received = Inquiry.objects.filter(receiver=a_user, accept=False,withdraw=False)
+    inquiry_received = Inquiry.objects.filter(receiver=a_user,withdraw=False)
     send_offer = Offer.objects.filter(sender=a_user)
     withdraw_message = Inquiry.objects.filter(receiver=a_user,withdraw=True)
     garbage = Garbage.objects.filter(owner=a_user,sold=False)

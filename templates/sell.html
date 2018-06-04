@@ -438,7 +438,7 @@
                               {% if send_offer %}
                               {% for o_s in send_offer %}
                                 <a href="#" class="list-group-item">
-                                    <span class="name" style="min-width: 120px; display: inline-block;">{{o_s.sender.extended_user.user.username}}</span> <span class="">{{o_s.title}}</span>
+                                    <span class="name" style="min-width: 120px; display: inline-block;">To: {{o_s.receiver.user.username}}</span> <span class="">{{o_s.title}}</span>
                                     <span class="text-muted" style="font-size: 11px;">{{o_s.content}}</span> <span class="badge">{{o_s.res_date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
                                     </span></span></a>
                               {% endfor%}
