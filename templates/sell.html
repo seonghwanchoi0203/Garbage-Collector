@@ -16,14 +16,11 @@
             background-color: #00bfff; /* Nave blue */
             border: none;
             color: white;
-
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 6px;
-
         }
-
         .ele {
 	        position: absolute;
             left: 50%;
@@ -33,13 +30,11 @@
         .profile {
           margin: 20px 0;
         }
-
         /* Profile sidebar */
         .profile-sidebar {
           padding: 20px 0 10px 0;
           background: #fff;
         }
-
         .profile-userpic img {
           float: none;
           margin: 0 auto;
@@ -49,19 +44,16 @@
           -moz-border-radius: 50% !important;
           border-radius: 50% !important;
         }
-
         .profile-usertitle {
           text-align: center;
           margin-top: 20px;
         }
-
         .profile-usertitle-name {
           color: #5a7391;
           font-size: 16px;
           font-weight: 600;
           margin-bottom: 7px;
         }
-
         .profile-usertitle-job {
           text-transform: uppercase;
           color: #5b9bd1;
@@ -69,12 +61,10 @@
           font-weight: 600;
           margin-bottom: 15px;
         }
-
         .profile-userbuttons {
           text-align: center;
           margin-top: 10px;
         }
-
         .profile-userbuttons .btn {
           text-transform: uppercase;
           font-size: 11px;
@@ -82,59 +72,47 @@
           padding: 6px 15px;
           margin-right: 5px;
         }
-
         .profile-userbuttons .btn:last-child {
           margin-right: 0px;
         }
-
         .profile-usermenu {
           margin-top: 30px;
         }
-
         .profile-usermenu ul li {
           border-bottom: 1px solid #f0f4f7;
         }
-
         .profile-usermenu ul li:last-child {
           border-bottom: none;
         }
-
         .profile-usermenu ul li a {
           color: #93a3b5;
           font-size: 14px;
           font-weight: 400;
         }
-
         .profile-usermenu ul li a i {
           margin-right: 8px;
           font-size: 14px;
         }
-
         .profile-usermenu ul li a:hover {
           background-color: #fafcfd;
           color: #5b9bd1;
         }
-
         .profile-usermenu ul li.active {
           border-bottom: none;
         }
-
         .profile-usermenu ul li.active a {
           color: #5b9bd1;
           background-color: #f6f9fb;
           border-left: 2px solid #5b9bd1;
           margin-left: -2px;
         }
-
         /* Profile Content */
         .profile-content {
           padding: 20px;
           background: #fff;
           min-height: 460px;
         }
-
         body {font-family: Arial, Helvetica, sans-serif;}
-
         .modal {
         display: none; /* Hidden by default */
         position: auto; /* Stay in place */
@@ -148,7 +126,6 @@
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
       }
-
         /* Modal Content */
         .modal-content {
           border: '0';
@@ -160,7 +137,6 @@
           width: 1200px;
           height: 655px;
          }
-
          /* Modal Header */
           .modal-header {
             background-color: #fafafa;
@@ -171,13 +147,11 @@
             -moz-border-radius-topleft: 4px;
             -moz-border-radius-topright: 4px;
           }
-
           /* Modal Body */
           .modal-body {
             height: 290px;
             overflow-y: auto;
           }
-
           /* Modal Footer */
           .modal-footer {
             /* background-color: #fafafa; */
@@ -188,7 +162,6 @@
             height: 30%;
             /* max-height: auto; */
           }
-
          /* The Close Button */
         .close {
           color: #A9A9A9;
@@ -196,7 +169,6 @@
          font-size: 40px;
          font-weight: bold;
         }
-
          .close:hover,
          .close:focus {
             color: #000;
@@ -205,25 +177,19 @@
           }
            .like { font-size:66px;  color:#ccc; cursor:pointer;}
            .cs{font-size:66px;color:#f00;cursor:pointer;}
-
            /*horizontal display:*/
            ::-webkit-scrollbar {
               width: 1px;
               height: 1px;
                display:none;
             }
-
             ::-webkit-scrollbar-button {
               width: 1px;
               height: 1px;
-
             }
-
-
             div {
               box-sizing: border-box;
             }
-
             .horizontal-scroll-wrapper {
               /*position: absolute;*/
               display: block;
@@ -246,20 +212,15 @@
               -webkit-transform-origin: right top;
                       transform-origin: right top;
             }
-
             .squares {
               padding: 250px 0 0 0;
-
             }
             .squares > div {
               width: 250px;
               height: 250px;
               margin: 10px 0;
-
             }
-
           .horizontal-scroll-wrapper1 {
-
               display: block;
               width: 251px;
               height: 750px;
@@ -280,21 +241,14 @@
               -webkit-transform-origin: right top;
                       transform-origin: right top;
             }
-
             .squares1 {
               padding: 250px 0 0 0;
-
             }
             .squares1 > div {
               width: 250px;
               height: 250px;
               margin: 10px 0;
-
             }
-
-
-
-
       </style>
 
     </head>
@@ -378,7 +332,7 @@
                                 <a href="#" class="list-group-item" onclick="modalPopup('{{o_m.id}}')">
                                     <span class="name" style="min-width: 120px; display: inline-block;">{{o_m.sender.user.username}}</span> <span class="">{{o_m.title}}</span><span class="badge">{{o_m.date}}</span> <span class="pull-right"><span class="glyphicon glyphicon-time">&nbsp
                                     </span></span>
-                                    <span class="text-muted" style="font-size: 11px; display:block; width:200px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">{{o_m.content}}</span>
+                                    <span class="text-muted" style="margin-left: 125px; text-align: left; font-size: 11px; display:block; width:150px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">{{o_m.content}}</span>
 
                                     <!-- this part is pop up of inquiry -->
                                     <div id={{o_m.id}} class="modal">
@@ -430,7 +384,7 @@
                                                               <input class="invisible" type="text" id="extended_user_id"  name="extended_user_id" value="{{o_m.sender.id}}" style="height:0px; width:0px">
                                                               <input class="invisible" type="text" id="negotiate_price" name="negotiate_price" value="{{o_m.negotiate_price}}" style="height:0px; width:0px">
                                                               {% csrf_token %}
-                                                              <button class="btn btn btn-sm" id="declineBtn" type="submit"  style="height:30px; text-align: center;">
+                                                              <button class="btn btn-danger btn-sm" id="declineBtn" type="submit"  style="height:30px; text-align: center;">
                                                               Decline</button>
                                                             </form>
                                                         <button class="btn btn-warning btn-sm" id="{{o_m.id}}" style="height:30px; margin-right:70px; text-align: center;" onclick="editpricePopup('{{o_m.id}}')">
@@ -571,7 +525,7 @@
                   </div>
                   <p style="color:black; background-color: #F7F2E8; ">
                     <span style="float:left; margin-bottom:5px">${{i.cost}}</span>
-                    <span style="float:right; margin-bottom:5px">{{i.owner}}</span>
+                    <span style="float:right; margin-bottom:5px">Sold to: {{i.buyer}}</span>
                   </p>
                 </div>
             {%endfor%}
@@ -591,47 +545,36 @@
               document.getElementById("mySidenav").style.width = "250px";
               document.getElementById("main").style.marginLeft = "250px";
             }
-
             // function for closing side bar feature
             function closeNav() {
               document.getElementById("mySidenav").style.width = "0";
               document.getElementById("main").style.marginLeft = "0";
             }
-
-
             // Get the modal
             var modals = document.getElementsByClassName("modal");
-
             var modal;// = modals[1];// = document.getElementById('myModal');
             var modal_content;// = document.getElementById("modalcontent");
             // Get the button that opens the modal
             var btn = document.getElementById("myBtn");
             // var modal = document.getElementById('popmodal');
-
             // Get the button that opens the modal
             var btnInq = document.getElementById("inquiry");
-
             var btnSub = document.getElementById("submit");
             var btnCan = document.getElementById("cancel");
-
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
             var closing = document.getElementById("closeModal");
-
             // Get negotiate_price element
             var nego_price;// = document.getElementsByName("negotiate_price");
             var pirceEditBox;// = document.getElementById("priceEditText");
             var priceEditbr;// = document.getElementById("priceEditBr");
-
             // Get edit price element
             var editPriceBtns = document.getElementsByClassName("btn btn-warning btn-sm");
             var editPriceBtn;
-
             // editprice butten flag
             // 0; currently invisible
             // 1; currently visible
             var editPriceBtnFlag = 0;
-
             // set all modals unique id
             var totalModals = modals.length;
             for(var j = 0; j < totalModals; j++){
@@ -640,7 +583,6 @@
               newId = curId.toString();
               modal.id = ("modal" + newId);
             }
-
             // set all editprice buttons unique id
             var totalEPBtns = editPriceBtns.length;
             for(var b = 0; b < totalEPBtns; b++){
@@ -649,8 +591,6 @@
               newId_epBtn = currId.toString();
               editPriceBtn.id = ("edit_priceBtn" + newId_epBtn);
             }
-
-
             function modalPopup(id){
               // console.log(id);
               rawId = id.toString();
@@ -658,8 +598,6 @@
               modal = document.getElementById(stringID);
               modal.style.display = "block";
             }
-
-
             function editpricePopup(id){
               rawId_epbtn = id.toString();
               newbtnID = "edit_priceBtn"+rawId_epbtn;
@@ -687,8 +625,6 @@
                 modal_content.style.height = "709px";
               }
             }
-
-
             // editPrice.onclick = function() {
             //   if(editPriceBtnFlag){ // currently visible
             //     editPriceBtnFlag = 0;
@@ -706,7 +642,6 @@
             //   }
             //   // secondModal.style.display = "block";
             // }
-
             // When 'esc' key pressed, also close modal
             document.addEventListener('keyup', function(e) {
               if (e.keyCode == 27){
@@ -718,7 +653,6 @@
                 editPriceBtnFlag = 0;
               }
             });
-
             // When the user clicks outside of modal, close it
             window.onclick = function(event) {
               if (event.target == modal) {
@@ -730,7 +664,6 @@
                 editPriceBtnFlag = 0;
               }
             }
-
             // // When the user clicks the button, open the modal
             // btn.onclick = function() {
             //     modal.style.display = "block";
@@ -748,24 +681,20 @@
             // btnInq.onclick = function() {
             //     modal.style.display = "block";
             // }
-
             // btnSub.onclick = function() {
             //     modal.style.display = "none";
             // }
             // btnCan.onclick = function() {
             //     modal.style.display = "none";
             // }
-
             //Function To Display Popup
             function pop(div) {
                 document.getElementById(div).style.display = 'block';
             }
-
             //Function to close popup
             function hide(div) {
                 document.getElementById(div).style.display = 'none';
             }
-
             //To detect escape button
             // document.onkeydown = function(evt) {
             //     evt = evt || window.event;
@@ -773,7 +702,6 @@
             //         hide('popDiv');
             //     }
             // };
-
         </script>
 
     </body>
