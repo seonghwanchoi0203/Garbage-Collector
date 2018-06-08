@@ -200,6 +200,8 @@ def watch(request):
     e_user = get_object_or_404(ExtendedUser, user=current_user)
     pid = request.POST['edit']
     instance = get_object_or_404(Garbage, id=pid)
+    seller = instance.owner
+    extend_seller = seller.extended_user
     w = Watch(user=e_user, garbage=instance, date_watch=date.today())
     temp_dict = {}
     temp_dict['latitude'] = instance.latitude
@@ -213,8 +215,8 @@ def watch(request):
             context = {'title': instance.title, 'description': instance.description, 'cost': instance.cost,
                        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
                        'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
-                       'watched': True, 'id': instance.id,'sold':instance.sold,
-                        'json_pos':json_temp,
+                       'watched': True, 'id': instance.id,'sold':instance.sold,'rating': instance.owner.rate*12,
+                        'json_pos':json_temp,'photo':extend_seller.photos,
                          'mine':mine}
             return render(request, 'ItemDetails.html', context)
             #redirect(ItemDetails,context)
@@ -233,10 +235,13 @@ def unwatch(request):
     current_user = request.user
     try:
         e_user = get_object_or_404(ExtendedUser,user=current_user)
+
         if request.method == 'POST':
             pid = request.POST['unwatch']
             print(pid)
             instance = get_object_or_404(Garbage, id=pid)
+            seller = instance.owner
+            extend_seller = seller.extended_user
             temp_dict = {}
             temp_dict['latitude'] = instance.latitude
             temp_dict['longitude'] = instance.longitude
@@ -246,7 +251,7 @@ def unwatch(request):
                        'photos': instance.photos, 'zipcode': instance.zipcode, 'condition': instance.condition,
                        'distance': instance.distance, 'owner': instance.owner, 'postdate': instance.postdate,
                        'watched': False, 'id': instance.id,'garbage':instance.id,'sold':instance.sold,
-                        'json_pos':json_temp,
+                        'json_pos':json_temp,'rating': instance.owner.rate*12, 'photo':extend_seller.photos,
                         'mine':mine}
             try:
                 watch_list = Watch.objects.filter(user=e_user, garbage=instance)

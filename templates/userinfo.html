@@ -256,7 +256,7 @@
                  <div >
                      <button class="btn btn-lg btn-default"
                              name="edit"
-                             type="submit">Edit</button>
+                             type="submit">UPDATE</button>
                  </div>
                  {% csrf_token %}
              </form>
@@ -337,10 +337,8 @@
             <center>
                     <img src="{{extended_user.photos.url}}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                     <h3 class="media-heading" style="margin-top: 2%">{{extended_user.user.username}} </h3>
-                    <small>{{extended_user.city}}</small> 
-                    <small> {{extended_user.state}} </small>
-
-
+                    <small>{{extended_user.city}}</small>
+                    <small> {{extended_user.state}} </small> <br>
                     <form method="get"  onsubmit="" action='../editBio/' enctype="multipart/form-data">
 
                     <div style="float:right;">
