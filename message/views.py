@@ -182,7 +182,6 @@ def buyer_accept(request):
                 ## another If here to do actual payment
                 garbage.sold = True
                 garbage.buyer = e_user
-                garbage.cost = negotiate_price
                 garbage.save(force_update=True)
                 offer_out.title = "Success"
                 offer_out.content = "The Item has been successfully reserved"

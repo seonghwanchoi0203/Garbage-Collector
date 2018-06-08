@@ -64,9 +64,8 @@ def profile(request):
     history =[]
     watchList = []
     watch = Watch.objects.filter(user=m_user)
-    for w in watch:
-        if not w.garbage.sold:
-            watchList.append(w.garbage)
+    for w in  watch:
+        watchList.append(w.garbage)
     history = Garbage.objects.filter(buyer=m_user, sold=True)
     decline_message = list(Offer.objects.filter(receiver=m_user, decline=True,continueMessage=False))
     success_message = list(Inquiry.objects.filter(sender=m_user))
